@@ -1,3 +1,3 @@
 {
-    "tailwindCSS.experimental.configFile": "./src/styles.css"
+    "tailwindCSS.experimental.configFile": "./src/styles.sass"
 }

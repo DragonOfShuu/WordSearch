@@ -1,2 +1,11 @@
-/* You can add global styles to this file, and also import other style files */
 @import "tailwindcss"
+
+:root
+    box-sizing: border-box
+
+@layer base
+    h1
+        @apply text-4xl
+
+@theme
+    --spacing-nav-margin: 3.5rem

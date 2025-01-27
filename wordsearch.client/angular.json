@@ -18,7 +18,7 @@
       },
       "root": "",
       "sourceRoot": "src",
-      "prefix": "app",
+      "prefix": "shuu",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:application",
@@ -39,6 +39,11 @@
             "styles": [
               "src/styles.sass"
             ],
+            "stylePreprocessorOptions": {
+              "sass": {
+                "silenceDeprecations": ["import"]
+              }
+            },
             "scripts": []
           },
           "configurations": {

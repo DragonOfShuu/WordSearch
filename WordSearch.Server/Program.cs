@@ -1,4 +1,6 @@
 
+using WordSearch.Server.Controllers.Hubs;
+
 namespace WordSearch.Server
 {
     public class Program
@@ -13,6 +15,7 @@ namespace WordSearch.Server
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+            builder.Services.AddSignalR();
 
             var app = builder.Build();
 
@@ -26,11 +29,14 @@ namespace WordSearch.Server
                 app.UseSwaggerUI();
             }
 
+
             app.UseHttpsRedirection();
 
             app.UseAuthorization();
 
 
+            // HUBS
+            app.MapHub<MultiplayerHub>("/multiplayer");
             app.MapControllers();
 
             app.MapFallbackToFile("/index.html");

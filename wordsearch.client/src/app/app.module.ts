@@ -4,10 +4,20 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { HowToComponent } from './pages/howto/how-to.component';
+import { ForecastTestComponent } from './test-components/forecast-test/forecast-test.component';
+import { NavBarComponent } from './navigation/nav-bar/nav-bar.component';
+import { MultiplayerMessagerComponent } from './test-components/multiplayer-messager/multiplayer-messager.component';
+import { PlayComponent } from './pages/play/play.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HowToComponent,
+    ForecastTestComponent,
+    NavBarComponent,
+    MultiplayerMessagerComponent,
+    PlayComponent
   ],
   imports: [
     BrowserModule, HttpClientModule,

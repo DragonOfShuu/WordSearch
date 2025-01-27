@@ -1,0 +1,17 @@
+<div class="pointer-events-none">
+    <div class="h-nav-margin pointer-events-auto flex items-center px-2 py-1">
+        <div class="text-green-700 font-bold text-4xl mr-4">
+            WordSearch
+        </div>
+        <nav class="grow flex gap-2">
+            @for (navLink of navLinks; track $index) {
+                <a class="uppercase text-green-700 text-xl block" href="{{navLink.href}}">
+                    {{ navLink.name }}
+                </a>
+            }
+        </nav>
+    </div>
+</div>
+<div>
+    <ng-content/>
+</div>
