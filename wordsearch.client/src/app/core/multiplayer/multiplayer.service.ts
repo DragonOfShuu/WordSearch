@@ -10,7 +10,7 @@ export class MultiplayerService {
 
   constructor() { 
     this.hubConnection = new signalR.HubConnectionBuilder()
-      .withUrl('/multiplayer')
+      .withUrl('/hubs/multiplayer')
       .build();
   }
 

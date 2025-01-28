@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, effect, ElementRef, inject, OnInit, Signal, signal, viewChild, ViewChild, viewChildren, WritableSignal } from '@angular/core';
 import { MultiplayerService } from '../../core/multiplayer/multiplayer.service';
 
 type LoadingState = 
@@ -17,7 +17,7 @@ export class MultiplayerMessagerComponent implements OnInit {
   private multiplayerService = inject(MultiplayerService)
   error: Error|null = null;
   loadingState: LoadingState = 'AwaitConnection'
-  messages: string[] = []
+  messages: WritableSignal<string[]> = signal([])
 
   constructor() {}
   
@@ -26,9 +26,10 @@ export class MultiplayerMessagerComponent implements OnInit {
       .subscribe({
         complete: () => {
           this.loadingState = 'Connected';
-  
+          
+          console.log("Multiplayer connected!")
+          this.multiplayerService.receiveMessage().subscribe((message) => this.receiveMessage(message))
           this.multiplayerService.sendMessage("User Connected")
-          this.multiplayerService.receiveMessage().subscribe(this.receiveMessage)
         },
         error: (error) => {
           this.loadingState = 'Failed';
@@ -37,11 +38,12 @@ export class MultiplayerMessagerComponent implements OnInit {
       })
   }
 
-  private receiveMessage(message: string) {
-    this.messages.push(message)
+  receiveMessage(message: string) {
+    this.messages.update((collection) => [message, ...collection])
   }
 
   sendMessage(message: string) {
+    console.log(`Sending message: ${message}`)
     this.multiplayerService.sendMessage(message)
   }
 }

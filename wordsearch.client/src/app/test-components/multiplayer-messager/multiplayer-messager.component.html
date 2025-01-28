@@ -2,8 +2,8 @@
     @if (error) {
         <p>AN ERROR OCCURRED TRYING TO CONNECT TO THE SERVER</p>
     }
-    <div class="overflow-y-auto h-52">
-        @for (message of messages; track $index) {
+    <div class="overflow-y-auto h-52 flex flex-col-reverse">
+        @for (message of messages(); track $index) {
             <div class="px-2 py-4">
                 {{ message }}
             </div>
@@ -11,6 +11,6 @@
     </div>
     <div class="p-2 flex">
         <input type="text" class="grow rounded-full" placeholder="Message..." #messageInput />
-        <button (click)="sendMessage(messageInput.value)">Submit</button>
+        <button (click)="sendMessage(messageInput.value)" type="button" [disabled]="loadingState!=='Connected'" class="button">Submit</button>
     </div>
 </div>

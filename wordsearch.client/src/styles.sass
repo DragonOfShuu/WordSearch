@@ -7,5 +7,12 @@
     h1
         @apply text-4xl
 
+@layer components
+    .button
+        @apply block border-b-2 border-green-700 bg-green-500 p-2 rounded-lg
+
+        &:disabled
+            @apply bg-gray-500 border-gray-700 text-white
+
 @theme
     --spacing-nav-margin: 3.5rem
