@@ -32,6 +32,7 @@ namespace WordSearch.Server
 
             app.UseHttpsRedirection();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
 
