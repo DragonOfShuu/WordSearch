@@ -1,15 +1,17 @@
 <div class="pointer-events-none">
     <div class="h-nav-margin pointer-events-auto flex items-center px-2 py-1">
-        <div class="text-green-700 font-bold text-4xl mr-4">
+        <div class="dark:text-primary-500 font-bold text-4xl mr-4">
             WordSearch
         </div>
         <nav class="grow flex gap-2">
             @for (navLink of navLinks; track $index) {
-                <a class="uppercase text-green-700 text-xl block" href="{{navLink.href}}">
+                <a class="uppercase dark:text-green-500 text-xl block" href="{{navLink.href}}">
                     {{ navLink.name }}
                 </a>
             }
         </nav>
+        <div class="grow"></div>
+        <shuu-theme-toggle />
     </div>
 </div>
 <div>

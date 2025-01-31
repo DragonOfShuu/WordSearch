@@ -1,21 +1,29 @@
-@import "tailwindcss"
+@tailwind base
+@tailwind components
+@tailwind utilities
 
-:root
+:root 
     box-sizing: border-box
+    @apply dark:text-white
 
-@layer base
-    h1
+
+@layer base 
+    h1 
         @apply text-4xl
+    
 
-@layer components
-    .button
-        @apply block border-b-2 border-green-700 bg-green-500 p-2 rounded-lg
 
-        &:disabled
+@layer components 
+    .button 
+        @apply block border-b-2 border-primary-700 bg-primary-500 dark:bg-primary-600 p-2 rounded-lg
+    
+        &:disabled 
             @apply bg-gray-500 border-gray-700 text-white
+    
 
-@theme
-    --spacing-nav-margin: 3.5rem
+
+
+@theme 
     --color-primary-50: oklch(0.982 0.018 155.826)
     --color-primary-100: oklch(0.962 0.044 156.743)
     --color-primary-200: oklch(0.925 0.084 155.995)

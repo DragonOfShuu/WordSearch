@@ -9,6 +9,8 @@ import { ForecastTestComponent } from './test-components/forecast-test/forecast-
 import { NavBarComponent } from './navigation/nav-bar/nav-bar.component';
 import { MultiplayerMessagerComponent } from './test-components/multiplayer-messager/multiplayer-messager.component';
 import { PlayComponent } from './pages/play/play.component';
+import { ThemeToggleComponent } from './shared/theme-toggle/theme-toggle.component';
+import { WordsearchComponent } from './core/wordsearch-box/wordsearch/wordsearch.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +19,9 @@ import { PlayComponent } from './pages/play/play.component';
     ForecastTestComponent,
     NavBarComponent,
     MultiplayerMessagerComponent,
-    PlayComponent
+    PlayComponent,
+    ThemeToggleComponent,
+    WordsearchComponent,
   ],
   imports: [
     BrowserModule, HttpClientModule,
