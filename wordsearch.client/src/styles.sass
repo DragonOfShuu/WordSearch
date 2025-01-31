@@ -4,26 +4,6 @@
 
 :root 
     box-sizing: border-box
-    @apply dark:text-white
-
-
-@layer base 
-    h1 
-        @apply text-4xl
-    
-
-
-@layer components 
-    .button 
-        @apply block border-b-2 border-primary-700 bg-primary-500 dark:bg-primary-600 p-2 rounded-lg
-    
-        &:disabled 
-            @apply bg-gray-500 border-gray-700 text-white
-    
-
-
-
-@theme 
     --color-primary-50: oklch(0.982 0.018 155.826)
     --color-primary-100: oklch(0.962 0.044 156.743)
     --color-primary-200: oklch(0.925 0.084 155.995)
@@ -47,3 +27,18 @@
     --color-secondary-800: oklch(0.444 0.177 26.899)
     --color-secondary-900: oklch(0.396 0.141 25.723)
     --color-secondary-950: oklch(0.258 0.092 26.042)
+    @apply dark:text-white
+
+@layer base 
+    h1 
+        @apply text-4xl
+    
+
+
+@layer components 
+    .button 
+        @apply block border-b-2 border-primary-700 bg-primary-500 dark:bg-primary-600 p-2 rounded-lg
+    
+        &:disabled 
+            @apply bg-gray-500 border-gray-700 text-white
+    
