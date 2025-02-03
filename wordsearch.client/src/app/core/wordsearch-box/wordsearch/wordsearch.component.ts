@@ -10,4 +10,5 @@ import { Component, input } from '@angular/core';
 export class WordsearchComponent {
   searchableText = input.required<string[]>();
   
+  
 }

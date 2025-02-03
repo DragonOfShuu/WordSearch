@@ -11,6 +11,7 @@ import { MultiplayerMessagerComponent } from './test-components/multiplayer-mess
 import { PlayComponent } from './pages/play/play.component';
 import { ThemeToggleComponent } from './shared/theme-toggle/theme-toggle.component';
 import { WordsearchComponent } from './core/wordsearch-box/wordsearch/wordsearch.component';
+import { SingleplayerUiComponent } from './core/wordsearch-box/singleplayer-ui/singleplayer-ui.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { WordsearchComponent } from './core/wordsearch-box/wordsearch/wordsearch
     PlayComponent,
     ThemeToggleComponent,
     WordsearchComponent,
+    SingleplayerUiComponent,
   ],
   imports: [
     BrowserModule, HttpClientModule,
