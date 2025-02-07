@@ -2649,8 +2649,8 @@
     },
     {
       "type": "rectangle",
-      "version": 302,
-      "versionNonce": 1353219324,
+      "version": 303,
+      "versionNonce": 738981458,
       "isDeleted": false,
       "id": "D0ZjTyCPKLz2cKl7SoCcM",
       "fillStyle": "solid",
@@ -2679,20 +2679,16 @@
         {
           "id": "D6LyvgM7SeEllSUxjNC1i",
           "type": "arrow"
-        },
-        {
-          "id": "HP_dAUTXzAz5xPBxZa7X9",
-          "type": "arrow"
         }
       ],
-      "updated": 1738564980690,
+      "updated": 1738914372795,
       "link": null,
       "locked": false
     },
     {
       "type": "text",
-      "version": 153,
-      "versionNonce": 1426554236,
+      "version": 176,
+      "versionNonce": 262774030,
       "isDeleted": false,
       "id": "l7q3oggQrueVW3x0dIzjW",
       "fillStyle": "solid",
@@ -2701,29 +2697,29 @@
       "roughness": 1,
       "opacity": 100,
       "angle": 0,
-      "x": -518.208831888528,
-      "y": 843.2431397627449,
+      "x": -507.8288270057155,
+      "y": 830.7431397627449,
       "strokeColor": "#1e1e1e",
       "backgroundColor": "transparent",
-      "width": 130.23989868164062,
-      "height": 25,
+      "width": 109.47988891601562,
+      "height": 50,
       "seed": 591327556,
       "groupIds": [],
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1738564980690,
+      "updated": 1738914371617,
       "link": null,
       "locked": false,
       "fontSize": 20,
       "fontFamily": 1,
-      "text": "Game Service",
+      "text": "Singleplayer\nService",
       "textAlign": "center",
       "verticalAlign": "middle",
       "containerId": "D0ZjTyCPKLz2cKl7SoCcM",
-      "originalText": "Game Service",
+      "originalText": "Singleplayer\nService",
       "lineHeight": 1.25,
-      "baseline": 21
+      "baseline": 43
     },
     {
       "type": "arrow",
@@ -2854,62 +2850,6 @@
       "originalText": "Singleplayer Component",
       "lineHeight": 1.25,
       "baseline": 46
-    },
-    {
-      "type": "arrow",
-      "version": 861,
-      "versionNonce": 701341508,
-      "isDeleted": false,
-      "id": "HP_dAUTXzAz5xPBxZa7X9",
-      "fillStyle": "solid",
-      "strokeWidth": 2,
-      "strokeStyle": "solid",
-      "roughness": 1,
-      "opacity": 100,
-      "angle": 0,
-      "x": -329.37806118979375,
-      "y": 859.8273133487522,
-      "strokeColor": "#1e1e1e",
-      "backgroundColor": "transparent",
-      "width": 26.397862922891306,
-      "height": 12.341805720352454,
-      "seed": 318844868,
-      "groupIds": [],
-      "frameId": null,
-      "roundness": {
-        "type": 2
-      },
-      "boundElements": [],
-      "updated": 1738565366480,
-      "link": null,
-      "locked": false,
-      "startBinding": {
-        "elementId": "D0ZjTyCPKLz2cKl7SoCcM",
-        "focus": -0.7858577024152237,
-        "gap": 7.631796003964439
-      },
-      "endBinding": {
-        "elementId": "0nRgRw77OrxFnpdIBTmvK",
-        "focus": 0.19280410748277946,
-        "gap": 12.916042961008884
-      },
-      "lastCommittedPoint": null,
-      "startArrowhead": null,
-      "endArrowhead": "arrow",
-      "points": [
-        [
-          0,
-          0
-        ],
-        [
-          9.307076052425884,
-          12.341805720352454
-        ],
-        [
-          26.397862922891306,
-          8.814877590209562
-        ]
-      ]
     },
     {
       "type": "rectangle",
@@ -3550,8 +3490,8 @@
     },
     {
       "type": "line",
-      "version": 353,
-      "versionNonce": 754180676,
+      "version": 354,
+      "versionNonce": 265061326,
       "isDeleted": false,
       "id": "C7sEt76aB5InxD0HUroI-",
       "fillStyle": "solid",
@@ -3562,7 +3502,7 @@
       "angle": 0,
       "x": -571.9743409764477,
       "y": 858.4312052352617,
-      "strokeColor": "#f08c00",
+      "strokeColor": "#2f9e44",
       "backgroundColor": "transparent",
       "width": 59.0216851032294,
       "height": 26.742109692276358,
@@ -3573,7 +3513,7 @@
         "type": 2
       },
       "boundElements": [],
-      "updated": 1738566249517,
+      "updated": 1738909284819,
       "link": null,
       "locked": false,
       "startBinding": null,
@@ -3594,8 +3534,8 @@
     },
     {
       "type": "rectangle",
-      "version": 347,
-      "versionNonce": 1882465165,
+      "version": 349,
+      "versionNonce": 1519700498,
       "isDeleted": false,
       "id": "RkUeA23MoA_XWIObao6u9",
       "fillStyle": "solid",
@@ -3606,7 +3546,7 @@
       "angle": 0,
       "x": -1087.7913903846215,
       "y": 608.0582771539957,
-      "strokeColor": "#f08c00",
+      "strokeColor": "#2f9e44",
       "backgroundColor": "transparent",
       "width": 451.5570725245603,
       "height": 585,
@@ -3624,16 +3564,20 @@
         {
           "id": "JYnHokRTXANIe0hK2XcI4",
           "type": "arrow"
+        },
+        {
+          "id": "HkhQ77LEmexRyyph1GO4P",
+          "type": "arrow"
         }
       ],
-      "updated": 1738825157400,
+      "updated": 1738917463056,
       "link": null,
       "locked": false
     },
     {
       "type": "text",
-      "version": 1006,
-      "versionNonce": 407787309,
+      "version": 1187,
+      "versionNonce": 1354838862,
       "isDeleted": false,
       "id": "pCZ2wP1krpvep5D60JHfN",
       "fillStyle": "solid",
@@ -3644,32 +3588,32 @@
       "angle": 0,
       "x": -1082.7913903846215,
       "y": 613.0582771539957,
-      "strokeColor": "#f08c00",
+      "strokeColor": "#2f9e44",
       "backgroundColor": "transparent",
-      "width": 440.83966064453125,
+      "width": 440.57965087890625,
       "height": 575,
       "seed": 274372548,
       "groupIds": [],
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1738825159270,
+      "updated": 1738918787065,
       "link": null,
       "locked": false,
       "fontSize": 20,
       "fontFamily": 1,
-      "text": "Game Service\nCarries out the game logic, and provides \npublic methods for managing the game. Talks\nwith the server.\n\n+ newGameBoardCallback(gen: (newLevel: \nnumber) => GameBoardType)\n- Allows lower services to hook in new game \ngeneration, instead of the game service \ngenerating it.\n\n+ getLevel() => number\n- Gets the current level number\n\n+ getWords() => string[]\n- Gets all the words on the current board\n\n+ getFoundWords() => WordType[]\n\n+ findWord(start: Position, direction: \nRotation, count: number): boolean\n- Finds the word that was marked, and \nreturns true if that was a word",
+      "text": "Singleplayer Service\nCarries out the singleplayer game logic, and \nprovides public methods for managing the \ngame. Talks with the server.\n\n+ newGameBoard() -> string[][]\n- Creates a new game and returns the \nboard.\n\n+ getLevel() => number\n- Gets the current level number\n\n+ getBoard() => string[]\n- Gets all the words on the current board\n\n+ getFindableWords() => string[]\n\n+ getFoundWords() => WordDictionary\n\n+ findWord(start: Position, direction: \nRotation, count: number): boolean\n- Finds the word that was marked, and \nreturns true if that was a word",
       "textAlign": "left",
       "verticalAlign": "top",
       "containerId": "RkUeA23MoA_XWIObao6u9",
-      "originalText": "Game Service\nCarries out the game logic, and provides public methods for managing the game. Talks with the server.\n\n+ newGameBoardCallback(gen: (newLevel: number) => GameBoardType)\n- Allows lower services to hook in new game generation, instead of the game service generating it.\n\n+ getLevel() => number\n- Gets the current level number\n\n+ getWords() => string[]\n- Gets all the words on the current board\n\n+ getFoundWords() => WordType[]\n\n+ findWord(start: Position, direction: Rotation, count: number): boolean\n- Finds the word that was marked, and returns true if that was a word",
+      "originalText": "Singleplayer Service\nCarries out the singleplayer game logic, and provides public methods for managing the game. Talks with the server.\n\n+ newGameBoard() -> string[][]\n- Creates a new game and returns the board.\n\n+ getLevel() => number\n- Gets the current level number\n\n+ getBoard() => string[]\n- Gets all the words on the current board\n\n+ getFindableWords() => string[]\n\n+ getFoundWords() => WordDictionary\n\n+ findWord(start: Position, direction: Rotation, count: number): boolean\n- Finds the word that was marked, and returns true if that was a word",
       "lineHeight": 1.25,
-      "baseline": 571
+      "baseline": 568
     },
     {
       "type": "rectangle",
-      "version": 179,
-      "versionNonce": 684437572,
+      "version": 180,
+      "versionNonce": 1872583698,
       "isDeleted": false,
       "id": "0nRgRw77OrxFnpdIBTmvK",
       "fillStyle": "solid",
@@ -3692,10 +3636,6 @@
       },
       "boundElements": [
         {
-          "id": "HP_dAUTXzAz5xPBxZa7X9",
-          "type": "arrow"
-        },
-        {
           "type": "text",
           "id": "o5xmPf61OhVvdLkm_mSpM"
         },
@@ -3704,14 +3644,14 @@
           "type": "arrow"
         }
       ],
-      "updated": 1738565376672,
+      "updated": 1738914372795,
       "link": null,
       "locked": false
     },
     {
       "type": "text",
-      "version": 27,
-      "versionNonce": 1556039164,
+      "version": 28,
+      "versionNonce": 744487566,
       "isDeleted": false,
       "id": "o5xmPf61OhVvdLkm_mSpM",
       "fillStyle": "solid",
@@ -3731,7 +3671,7 @@
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1738565374063,
+      "updated": 1738914373662,
       "link": null,
       "locked": false,
       "fontSize": 20,
@@ -3742,7 +3682,7 @@
       "containerId": "0nRgRw77OrxFnpdIBTmvK",
       "originalText": "Multiplayer\nService",
       "lineHeight": 1.25,
-      "baseline": 46
+      "baseline": 43
     },
     {
       "type": "arrow",
@@ -3798,8 +3738,8 @@
     },
     {
       "type": "rectangle",
-      "version": 371,
-      "versionNonce": 2088674500,
+      "version": 372,
+      "versionNonce": 763488978,
       "isDeleted": false,
       "id": "EVEInrUojGPg-qENInd1f",
       "fillStyle": "solid",
@@ -3828,16 +3768,20 @@
         {
           "id": "JYnHokRTXANIe0hK2XcI4",
           "type": "arrow"
+        },
+        {
+          "id": "9mb9zcrHDow2jv-0Mf84l",
+          "type": "arrow"
         }
       ],
-      "updated": 1738566240784,
+      "updated": 1738918672575,
       "link": null,
       "locked": false
     },
     {
       "type": "text",
-      "version": 438,
-      "versionNonce": 307588164,
+      "version": 490,
+      "versionNonce": 1497704014,
       "isDeleted": false,
       "id": "2EIOfD9dLNtfTDG7hIh9F",
       "fillStyle": "solid",
@@ -3851,29 +3795,29 @@
       "strokeColor": "#1971c2",
       "backgroundColor": "transparent",
       "width": 227.6398162841797,
-      "height": 125,
+      "height": 100,
       "seed": 772254204,
       "groupIds": [],
       "frameId": null,
       "roundness": null,
       "boundElements": [],
-      "updated": 1738566240784,
+      "updated": 1738918763123,
       "link": null,
       "locked": false,
       "fontSize": 20,
       "fontFamily": 1,
-      "text": "GameBoardType\n\nwords: {[word: string]: \nWordType}\nmatrix: string[][]",
+      "text": "WordDictionary\n\nwords: {[word: string]: \nWordType}",
       "textAlign": "left",
       "verticalAlign": "top",
       "containerId": "EVEInrUojGPg-qENInd1f",
-      "originalText": "GameBoardType\n\nwords: {[word: string]: WordType}\nmatrix: string[][]",
+      "originalText": "WordDictionary\n\nwords: {[word: string]: WordType}",
       "lineHeight": 1.25,
-      "baseline": 121
+      "baseline": 93
     },
     {
       "type": "rectangle",
-      "version": 420,
-      "versionNonce": 1038353539,
+      "version": 421,
+      "versionNonce": 42203790,
       "isDeleted": false,
       "id": "RAyKuFzn0zZZcm0LRBzeG",
       "fillStyle": "solid",
@@ -3910,9 +3854,13 @@
         {
           "id": "d7xYWCgsAF-3OoXavkYCq",
           "type": "arrow"
+        },
+        {
+          "id": "9mb9zcrHDow2jv-0Mf84l",
+          "type": "arrow"
         }
       ],
-      "updated": 1738824963499,
+      "updated": 1738918731928,
       "link": null,
       "locked": false
     },
@@ -4299,6 +4247,701 @@
           68.14927066589948
         ]
       ]
+    },
+    {
+      "id": "8mKXoI_mAZXOZRo0Z89au",
+      "type": "rectangle",
+      "x": -1702.9500001657361,
+      "y": 784.2167031291481,
+      "width": 553.750114440918,
+      "height": 310.9467012886364,
+      "angle": 0,
+      "strokeColor": "#f08c00",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3
+      },
+      "seed": 1033548430,
+      "version": 258,
+      "versionNonce": 1959186702,
+      "isDeleted": false,
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "DF1mdwbt71AYprShsmdy0"
+        }
+      ],
+      "updated": 1738909211508,
+      "link": null,
+      "locked": false
+    },
+    {
+      "id": "DF1mdwbt71AYprShsmdy0",
+      "type": "text",
+      "x": -1697.9500001657361,
+      "y": 789.2167031291481,
+      "width": 529.9995727539062,
+      "height": 275,
+      "angle": 0,
+      "strokeColor": "#f08c00",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "seed": 1494722770,
+      "version": 349,
+      "versionNonce": 1774242386,
+      "isDeleted": false,
+      "boundElements": null,
+      "updated": 1738909209521,
+      "link": null,
+      "locked": false,
+      "text": "State Management\n\n- State management for games will be handled by \nSignalR Hubs, and using the ITEMS context provided \nwithin a hook. \n\n-> Refer to https://learn.microsoft.com/en-\nus/aspnet/core/signalr/hubs?view=aspnetcore-9.0\n\nGame logic for the most part will be handled on the \nserver side for singleplayer AND multiplayer games.",
+      "fontSize": 20,
+      "fontFamily": 1,
+      "textAlign": "left",
+      "verticalAlign": "top",
+      "baseline": 268,
+      "containerId": "8mKXoI_mAZXOZRo0Z89au",
+      "originalText": "State Management\n\n- State management for games will be handled by SignalR Hubs, and using the ITEMS context provided within a hook. \n\n-> Refer to https://learn.microsoft.com/en-us/aspnet/core/signalr/hubs?view=aspnetcore-9.0\n\nGame logic for the most part will be handled on the server side for singleplayer AND multiplayer games.",
+      "lineHeight": 1.25
+    },
+    {
+      "id": "U0fEAi8E1BqB07Imyw7te",
+      "type": "rectangle",
+      "x": -1716.036611441529,
+      "y": 1214.5569106236546,
+      "width": 441.6114076386871,
+      "height": 396.5151992422477,
+      "angle": 0,
+      "strokeColor": "#e03131",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 4,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3
+      },
+      "seed": 20603662,
+      "version": 380,
+      "versionNonce": 1723486734,
+      "isDeleted": false,
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "iPJF-vFC_YvJkQf44emZ9"
+        },
+        {
+          "id": "HkhQ77LEmexRyyph1GO4P",
+          "type": "arrow"
+        },
+        {
+          "id": "PaCE7Tn242XwwSCSMmBa4",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1738918197181,
+      "link": null,
+      "locked": false
+    },
+    {
+      "id": "iPJF-vFC_YvJkQf44emZ9",
+      "type": "text",
+      "x": -1711.036611441529,
+      "y": 1219.5569106236546,
+      "width": 390.13970947265625,
+      "height": 100,
+      "angle": 0,
+      "strokeColor": "#e03131",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 4,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "seed": 1339735118,
+      "version": 287,
+      "versionNonce": 733872590,
+      "isDeleted": false,
+      "boundElements": null,
+      "updated": 1738918222401,
+      "link": null,
+      "locked": false,
+      "text": "Singleplayer Hub\n\n- Inside of the Items.Context, we can \nstore the game state.",
+      "fontSize": 20,
+      "fontFamily": 1,
+      "textAlign": "left",
+      "verticalAlign": "top",
+      "baseline": 93,
+      "containerId": "U0fEAi8E1BqB07Imyw7te",
+      "originalText": "Singleplayer Hub\n\n- Inside of the Items.Context, we can store the game state.",
+      "lineHeight": 1.25
+    },
+    {
+      "type": "rectangle",
+      "version": 527,
+      "versionNonce": 634820430,
+      "isDeleted": false,
+      "id": "-NvbSPPOOOGVdxNkswmBM",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": -1085.7772358312827,
+      "y": 1280.350384371386,
+      "strokeColor": "#2f9e44",
+      "backgroundColor": "transparent",
+      "width": 451.5570725245603,
+      "height": 685,
+      "seed": 514412110,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "WBwkjt1NNlirEZh8j8k6_"
+        },
+        {
+          "id": "9yFQunKvZjOdVaTew5YZ6",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1738917723434,
+      "link": null,
+      "locked": false
+    },
+    {
+      "type": "text",
+      "version": 1449,
+      "versionNonce": 1828746898,
+      "isDeleted": false,
+      "id": "WBwkjt1NNlirEZh8j8k6_",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "angle": 0,
+      "x": -1080.7772358312827,
+      "y": 1285.350384371386,
+      "strokeColor": "#2f9e44",
+      "backgroundColor": "transparent",
+      "width": 440.57965087890625,
+      "height": 675,
+      "seed": 692475022,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "boundElements": [],
+      "updated": 1738917449964,
+      "link": null,
+      "locked": false,
+      "fontSize": 20,
+      "fontFamily": 1,
+      "text": "Multiplayer Service\nCarries out the singleplayer game logic, and \nprovides public methods for managing the \ngame. Talks with the server.\n\n-- I NEED TO GET \nAUTH(ENTICATION|ORIZATION) SETUP \nFIRST BEFORE CONTINUING\n\n+ newGameBoard() -> string[][]\n- Creates a new game and returns the \nboard.\n\n+ getLevel() => number\n- Gets the current level number\n\n+ getBoard() => string[]\n- Gets all the words on the current board\n\n+ getFindableWords() => string[]\n\n+ getFoundWords() => FoundWords\n\n+ findWord(start: Position, direction: \nRotation, count: number): boolean\n- Finds the word that was marked, and \nreturns true if that was a word",
+      "textAlign": "left",
+      "verticalAlign": "top",
+      "containerId": "-NvbSPPOOOGVdxNkswmBM",
+      "originalText": "Multiplayer Service\nCarries out the singleplayer game logic, and provides public methods for managing the game. Talks with the server.\n\n-- I NEED TO GET AUTH(ENTICATION|ORIZATION) SETUP FIRST BEFORE CONTINUING\n\n+ newGameBoard() -> string[][]\n- Creates a new game and returns the board.\n\n+ getLevel() => number\n- Gets the current level number\n\n+ getBoard() => string[]\n- Gets all the words on the current board\n\n+ getFindableWords() => string[]\n\n+ getFoundWords() => FoundWords\n\n+ findWord(start: Position, direction: Rotation, count: number): boolean\n- Finds the word that was marked, and returns true if that was a word",
+      "lineHeight": 1.25,
+      "baseline": 668
+    },
+    {
+      "id": "IoOal4pWSlMfa7mu09x_L",
+      "type": "line",
+      "x": -293.8231739138487,
+      "y": 874.961307013207,
+      "width": 333.820881889067,
+      "height": 453.7106267767167,
+      "angle": 0,
+      "strokeColor": "#2f9e44",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "seed": 1995412430,
+      "version": 204,
+      "versionNonce": 147154258,
+      "isDeleted": false,
+      "boundElements": null,
+      "updated": 1738917408409,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          -289.5497356365429,
+          107.51561692298594
+        ],
+        [
+          -333.820881889067,
+          453.7106267767167
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": null,
+      "endBinding": null,
+      "startArrowhead": null,
+      "endArrowhead": null
+    },
+    {
+      "id": "HkhQ77LEmexRyyph1GO4P",
+      "type": "arrow",
+      "x": -1266.450618811622,
+      "y": 1299.293837920881,
+      "width": 169.42290234771326,
+      "height": 184.06008221751904,
+      "angle": 0,
+      "strokeColor": "#e03131",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 4,
+      "strokeStyle": "dashed",
+      "roughness": 1,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "seed": 990205518,
+      "version": 292,
+      "versionNonce": 1359193294,
+      "isDeleted": false,
+      "boundElements": null,
+      "updated": 1738918197181,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          169.42290234771326,
+          -184.06008221751904
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "U0fEAi8E1BqB07Imyw7te",
+        "focus": 0.3071195753372029,
+        "gap": 7.974584991219899
+      },
+      "endBinding": {
+        "elementId": "RkUeA23MoA_XWIObao6u9",
+        "focus": 0.07557550647368753,
+        "gap": 9.23632607928721
+      },
+      "startArrowhead": "arrow",
+      "endArrowhead": "arrow"
+    },
+    {
+      "id": "tjmPOuiQFF7p6UYxA5ZX8",
+      "type": "rectangle",
+      "x": -2450.058994413744,
+      "y": 1221.913592021521,
+      "width": 574.6135339903947,
+      "height": 455.0852548258906,
+      "angle": 0,
+      "strokeColor": "#e03131",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 4,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3
+      },
+      "seed": 820941970,
+      "version": 700,
+      "versionNonce": 1713825870,
+      "isDeleted": false,
+      "boundElements": [
+        {
+          "id": "PaCE7Tn242XwwSCSMmBa4",
+          "type": "arrow"
+        },
+        {
+          "id": "9mb9zcrHDow2jv-0Mf84l",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1738919132291,
+      "link": null,
+      "locked": false
+    },
+    {
+      "id": "PaCE7Tn242XwwSCSMmBa4",
+      "type": "arrow",
+      "x": -1863.896520476606,
+      "y": 1400.1424168493468,
+      "width": 135.21129706853935,
+      "height": 2.253600294164926,
+      "angle": 0,
+      "strokeColor": "#e03131",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 4,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "seed": 1940502350,
+      "version": 1343,
+      "versionNonce": 1128770766,
+      "isDeleted": false,
+      "boundElements": null,
+      "updated": 1738919132291,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          135.21129706853935,
+          -2.253600294164926
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "tjmPOuiQFF7p6UYxA5ZX8",
+        "gap": 11.548939946743303,
+        "focus": -0.19079300355209589
+      },
+      "endBinding": {
+        "elementId": "U0fEAi8E1BqB07Imyw7te",
+        "gap": 12.648611966537374,
+        "focus": 0.0931808340772895
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow"
+    },
+    {
+      "id": "ZFi1NQaFvXFBf9yueAaIv",
+      "type": "rectangle",
+      "x": -2480.90432807922,
+      "y": 1120.2396446492162,
+      "width": 1287.0852501171712,
+      "height": 988.2636233906278,
+      "angle": 0,
+      "strokeColor": "#e03131",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 4,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3
+      },
+      "seed": 34888206,
+      "version": 691,
+      "versionNonce": 190533646,
+      "isDeleted": false,
+      "boundElements": null,
+      "updated": 1738919028896,
+      "link": null,
+      "locked": false
+    },
+    {
+      "id": "Qwaph95uWoULiABZjv3RB",
+      "type": "text",
+      "x": -2460.0253491336966,
+      "y": 1137.5149334895425,
+      "width": 111.05995178222656,
+      "height": 45,
+      "angle": 0,
+      "strokeColor": "#e03131",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 4,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "seed": 350032210,
+      "version": 62,
+      "versionNonce": 1721484754,
+      "isDeleted": false,
+      "boundElements": null,
+      "updated": 1738919030544,
+      "link": null,
+      "locked": false,
+      "text": "Server",
+      "fontSize": 36,
+      "fontFamily": 1,
+      "textAlign": "left",
+      "verticalAlign": "top",
+      "baseline": 31,
+      "containerId": null,
+      "originalText": "Server",
+      "lineHeight": 1.25
+    },
+    {
+      "id": "KMBZ-7ij11rmikXZj44cl",
+      "type": "text",
+      "x": -2433.8220375254496,
+      "y": 1250.0047620073988,
+      "width": 527.4395751953125,
+      "height": 300,
+      "angle": 0,
+      "strokeColor": "#e03131",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 4,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "seed": 1484432338,
+      "version": 920,
+      "versionNonce": 150058574,
+      "isDeleted": false,
+      "boundElements": null,
+      "updated": 1738919248667,
+      "link": null,
+      "locked": false,
+      "text": "WordSearch Game\nAn object that can be created to store\nand manipulate the state of the game.\n\n* Level: int (gettable not settable)\n* FoundWords: WordDictionary (gettable not settable\n- findableWords: WordDictionary\n- board: string[][]\n\nFindWord(start: Position, direction: Rotation, count: \nint) -> boolean\n- Looks to see if word exists. If so, return true.",
+      "fontSize": 20,
+      "fontFamily": 1,
+      "textAlign": "left",
+      "verticalAlign": "top",
+      "baseline": 293,
+      "containerId": null,
+      "originalText": "WordSearch Game\nAn object that can be created to store\nand manipulate the state of the game.\n\n* Level: int (gettable not settable)\n* FoundWords: WordDictionary (gettable not settable\n- findableWords: WordDictionary\n- board: string[][]\n\nFindWord(start: Position, direction: Rotation, count: \nint) -> boolean\n- Looks to see if word exists. If so, return true.",
+      "lineHeight": 1.25
+    },
+    {
+      "id": "xwOJ7mHdjPIHonKeIp3j5",
+      "type": "rectangle",
+      "x": -1713.7988752987258,
+      "y": 1638.2945452349388,
+      "width": 441.8865262553295,
+      "height": 403.38976606017377,
+      "angle": 0,
+      "strokeColor": "#e03131",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 4,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 3
+      },
+      "seed": 2119479310,
+      "version": 126,
+      "versionNonce": 1560823438,
+      "isDeleted": false,
+      "boundElements": [
+        {
+          "id": "9yFQunKvZjOdVaTew5YZ6",
+          "type": "arrow"
+        },
+        {
+          "type": "text",
+          "id": "xp8uJMyckR6oFkmOO4svz"
+        }
+      ],
+      "updated": 1738917728332,
+      "link": null,
+      "locked": false
+    },
+    {
+      "id": "xp8uJMyckR6oFkmOO4svz",
+      "type": "text",
+      "x": -1708.7988752987258,
+      "y": 1643.2945452349388,
+      "width": 147.53985595703125,
+      "height": 25,
+      "angle": 0,
+      "strokeColor": "#e03131",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 4,
+      "strokeStyle": "dashed",
+      "roughness": 1,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "seed": 785380242,
+      "version": 20,
+      "versionNonce": 1680086798,
+      "isDeleted": false,
+      "boundElements": null,
+      "updated": 1738918529465,
+      "link": null,
+      "locked": false,
+      "text": "Multiplayer Hub",
+      "fontSize": 20,
+      "fontFamily": 1,
+      "textAlign": "left",
+      "verticalAlign": "top",
+      "baseline": 18,
+      "containerId": "xwOJ7mHdjPIHonKeIp3j5",
+      "originalText": "Multiplayer Hub",
+      "lineHeight": 1.25
+    },
+    {
+      "id": "9yFQunKvZjOdVaTew5YZ6",
+      "type": "arrow",
+      "x": -1255.1389665665579,
+      "y": 1768.0833155715086,
+      "width": 162.5108088103441,
+      "height": 100.36630911043176,
+      "angle": 0,
+      "strokeColor": "#e03131",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 4,
+      "strokeStyle": "dashed",
+      "roughness": 1,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "seed": 132479186,
+      "version": 73,
+      "versionNonce": 1438149202,
+      "isDeleted": false,
+      "boundElements": null,
+      "updated": 1738917725797,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          162.5108088103441,
+          -100.36630911043176
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "xwOJ7mHdjPIHonKeIp3j5",
+        "focus": 0.22152117563778748,
+        "gap": 16.77338247683838
+      },
+      "endBinding": {
+        "elementId": "-NvbSPPOOOGVdxNkswmBM",
+        "focus": 0.20501461222123327,
+        "gap": 6.850921924931072
+      },
+      "startArrowhead": "arrow",
+      "endArrowhead": "arrow"
+    },
+    {
+      "id": "9mb9zcrHDow2jv-0Mf84l",
+      "type": "arrow",
+      "x": -1509.6701506060194,
+      "y": 588.852979383424,
+      "width": 768.3298981037374,
+      "height": 613.6790915360058,
+      "angle": 0,
+      "strokeColor": "#1971c2",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 4,
+      "strokeStyle": "dashed",
+      "roughness": 1,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": {
+        "type": 2
+      },
+      "seed": 1395523534,
+      "version": 778,
+      "versionNonce": 395633422,
+      "isDeleted": false,
+      "boundElements": null,
+      "updated": 1738919132291,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          -315.39720729239116,
+          254.35284639503504
+        ],
+        [
+          -768.3298981037374,
+          613.6790915360058
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "EVEInrUojGPg-qENInd1f",
+        "focus": 0.538916021697169,
+        "gap": 15.307644039039587
+      },
+      "endBinding": {
+        "elementId": "tjmPOuiQFF7p6UYxA5ZX8",
+        "gap": 19.381521102091142,
+        "focus": -0.742863824267584
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow"
     }
   ],
   "appState": {

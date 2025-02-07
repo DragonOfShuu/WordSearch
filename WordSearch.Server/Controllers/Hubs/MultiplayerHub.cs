@@ -6,7 +6,7 @@ namespace WordSearch.Server.Controllers.Hubs
     {
         public async Task SendMessage(string message)
         {
-            await Clients.All.SendAsync("ReceiveMessage", message);
+            await Clients.Caller.SendAsync("ReceiveMessage", message);
         }
     }
 }
