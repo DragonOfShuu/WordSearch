@@ -1,5 +1,6 @@
 
 using WordSearch.Server.Controllers.Hubs;
+using WordSearch.Server.Services;
 
 namespace WordSearch.Server
 {
@@ -16,6 +17,8 @@ namespace WordSearch.Server
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
             builder.Services.AddSignalR();
+
+            builder.Services.AddTransient<ISingleplayerGame, SingleplayerGameService>();
 
             var app = builder.Build();
 
