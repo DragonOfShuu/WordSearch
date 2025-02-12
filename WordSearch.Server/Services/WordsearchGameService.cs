@@ -4,7 +4,7 @@ namespace WordSearch.Server.Services
 {
     public class WordsearchGameService : IGameService
     {
-        public GameBoard? FindWord(GameBoard gameBoard, (int, int) position, (int, int) direction, int count)
+        public FindWordResults? FindWord(GameBoard gameBoard, (int, int) position, (int, int) direction, int count)
         {
             throw new NotImplementedException();
         }

@@ -17,10 +17,10 @@ namespace WordSearch.Server.Controllers.Hubs
 
         public async Task<WordDictionary> GetFoundWords()
         {
-
+            string? indentifier = Context.UserIdentifier;
         }
 
-        public async Task<Board?> FindWord((int, int) position, (int, int) rotation, int count)
+        public async Task<FindWordResultsForClient?> FindWord((int, int) position, (int, int) rotation, int count)
         {
 
         }

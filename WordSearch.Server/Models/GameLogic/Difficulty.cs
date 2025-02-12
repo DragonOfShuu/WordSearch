@@ -2,9 +2,11 @@
 {
     public class Difficulty
     {
-        int Level { get; set; }
-        string Intensity { get; set; } // medium
-        (int, int) Size { get; set; }
-        int Time { get; set; } // in seconds
+        public int Level { get; set; }
+        public string Intensity { get; set; } = string.Empty; // medium
+        public (int, int) Size { get; set; }
+        public int Time { get; set; } // in seconds
+
+        public static Difficulty Empty { get {  return new Difficulty(); } }
     }
 }

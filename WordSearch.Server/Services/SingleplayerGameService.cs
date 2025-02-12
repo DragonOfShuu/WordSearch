@@ -5,12 +5,12 @@ namespace WordSearch.Server.Services
 {
     public class SingleplayerGameService : WordsearchGameService, ISingleplayerGame
     {
-        public GameBoard? FindWord(HubCallerContext context, (int, int) start, (int, int) direction, int count)
+        public FindWordResultsForClient? FindWord(GameBoard gameBoard, string? userIdentifier, (int, int) start, (int, int) direction, int count)
         {
             throw new NotImplementedException();
         }
 
-        public Board GetBoard(HubCallerContext context)
+        public Board GetBoard(GameBoard gameBoard)
         {
             throw new NotImplementedException();
         }

@@ -2,24 +2,24 @@
 {
     public class GameBoard
     {
-        Difficulty Difficulty { get; set; }
-        string[][] BoardCharacters { get; set; }
-        WordDictionary Findable { get; set; }
-        string[] Found {  get; set; }
-        int Started { get; } // milliseconds
+        public Difficulty Difficulty { get; set; } = Difficulty.Empty;
+        public string[][] BoardCharacters { get; set; } = [];
+        public WordDictionary Findable { get; set; } = [];
+        public string[] Found { get; set; } = [];
+        public int Started { get; set; } // milliseconds
 
         public static Board toBoard(GameBoard gameBoard)
         {
-
+            throw new NotImplementedException();
         }
     }
 
     public class Board
     {
-        Difficulty Difficulty { get; set; }
-        string[][] BoardCharacters { get; set; }
-        string[][] Findable { get; set; }
-        WordDictionary Found { get; set; }
-        int Started { get; set; }
+        public Difficulty Difficulty { get; set; } = Difficulty.Empty;
+        public string[][] BoardCharacters { get; set; } = [];
+        public string[][] Findable { get; set; } = [];
+        public WordDictionary Found { get; set; } = [];
+        public int Started { get; set; }
     }
 }
