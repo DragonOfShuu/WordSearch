@@ -41,6 +41,7 @@ namespace WordSearch.Server
 
             // HUBS
             app.MapHub<MultiplayerHub>("/hubs/multiplayer");
+            app.MapHub<SingleplayerHub>("/hubs/singleplayer");
             app.MapControllers();
 
             app.MapFallbackToFile("/index.html");
