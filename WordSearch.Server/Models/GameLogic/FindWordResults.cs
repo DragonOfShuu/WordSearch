@@ -6,8 +6,10 @@
         public string[] WordsFound { get; set; } = [];
     }
 
-    public class FindWordResultsForClient : FindWordResults
+    public class FindWordResultsForClient
     {
+        public Board Board { get; set; } = new Board();
+        public string[] WordsFound { get; set; } = [];
         public int XpGain { get; set; }
     }
 }
