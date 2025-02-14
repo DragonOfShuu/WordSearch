@@ -1,8 +1,10 @@
+import { Vector2D } from "./vector.types";
+
 type Difficulty = {
-    Level: number,
-    Intensity: 'medium'
-    Size: [number, number]
-    Time: number
+    level: number,
+    intensity: 'medium'
+    size: Vector2D
+    time: number
 }
 
 export default Difficulty;

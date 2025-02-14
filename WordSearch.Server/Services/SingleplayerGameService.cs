@@ -15,7 +15,7 @@ namespace WordSearch.Server.Services
             throw new NotImplementedException();
         }
 
-        public GameBoard NewGame(Difficulty difficulty)
+        public Board NewGame(Difficulty difficulty)
         {
             throw new NotImplementedException();
         }

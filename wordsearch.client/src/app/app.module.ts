@@ -12,6 +12,7 @@ import { PlayComponent } from './pages/play/play.component';
 import { ThemeToggleComponent } from './shared/theme-toggle/theme-toggle.component';
 import { WordsearchComponent } from './core/wordsearch-box/wordsearch/wordsearch.component';
 import { SingleplayerUiComponent } from './core/wordsearch-box/singleplayer-ui/singleplayer-ui.component';
+import { SingleplayerCommsComponent } from './test-components/singleplayer-comms/singleplayer-comms.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { SingleplayerUiComponent } from './core/wordsearch-box/singleplayer-ui/s
     ThemeToggleComponent,
     WordsearchComponent,
     SingleplayerUiComponent,
+    SingleplayerCommsComponent,
   ],
   imports: [
     BrowserModule, HttpClientModule,

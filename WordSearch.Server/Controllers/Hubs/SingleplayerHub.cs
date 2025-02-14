@@ -5,9 +5,23 @@ namespace WordSearch.Server.Controllers.Hubs
 {
     public class SingleplayerHub : Hub
     {
+        private readonly ILogger _logger;
+
+        public SingleplayerHub(ILogger<SingleplayerHub> logger)
+        {
+            _logger = logger;
+        }
+
         public async Task<Board> NewGame(Difficulty difficulty)
         {
-            throw new NotImplementedException();
+            return new Board
+            {
+                BoardCharacters = [],
+                Difficulty = difficulty,
+                Findable = ["Hello", "World"],
+                Found = [],
+                Started = 0
+            };
         }
 
         public async Task<Board> GetBoard()

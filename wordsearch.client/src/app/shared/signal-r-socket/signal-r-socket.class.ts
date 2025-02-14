@@ -1,4 +1,4 @@
-import signalR from "@microsoft/signalr";
+import * as signalR from "@microsoft/signalr";
 import { Observable } from "rxjs";
 
 
@@ -11,7 +11,7 @@ class SignalRSocket {
             .build();
     }
     
-    startConnection(url: string): Observable<void> {
+    startConnection(): Observable<void> {
         return new Observable((observer) => {
             if (this.hubConnection === null)
             throw new Error("Hub connection has not been initiated.")

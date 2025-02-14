@@ -1,9 +1,11 @@
+import { Vector2D } from "./vector.types"
+
 export type WordDictionary = {
     [word: string]: WordType
 }
 
 export type WordType = {
-    Word: string,
-    Position: [number, number]
-    Rotation: [number, number]
+    word: string,
+    position: Vector2D
+    rotation: Vector2D
 }

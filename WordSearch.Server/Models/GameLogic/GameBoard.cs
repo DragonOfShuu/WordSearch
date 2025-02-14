@@ -6,7 +6,7 @@
         public string[][] BoardCharacters { get; set; } = [];
         public WordDictionary Findable { get; set; } = [];
         public string[] Found { get; set; } = [];
-        public int Started { get; set; } // milliseconds
+        public long Started { get; set; } // milliseconds
 
         public static Board toBoard(GameBoard gameBoard)
         {
@@ -18,8 +18,8 @@
     {
         public Difficulty Difficulty { get; set; } = Difficulty.Empty;
         public string[][] BoardCharacters { get; set; } = [];
-        public string[][] Findable { get; set; } = [];
+        public string[] Findable { get; set; } = [];
         public WordDictionary Found { get; set; } = [];
-        public int Started { get; set; }
+        public long Started { get; set; } // milliseconds
     }
 }
