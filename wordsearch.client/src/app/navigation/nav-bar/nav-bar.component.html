@@ -1,11 +1,11 @@
-<div class="pointer-events-none z-50">
+<div class="pointer-events-none z-50 absolute inset-0">
     <div class="h-nav-margin pointer-events-auto flex items-center px-2 py-1">
-        <div class="dark:text-primary-500 font-bold text-4xl mr-4">
+        <div class="text-secondary-500 font-extrabold text-4xl mr-6">
             WordSearch
         </div>
-        <nav class="grow flex gap-2">
+        <nav class="grow flex gap-3">
             @for (navLink of navLinks; track $index) {
-                <a class="uppercase dark:text-green-500 text-xl block" href="{{navLink.href}}">
+                <a class="uppercase transition-colors hover:text-ternary-700 dark:hover:text-ternary-500 text-xl font-bold block" href="{{navLink.href}}">
                     {{ navLink.name }}
                 </a>
             }

@@ -4,29 +4,42 @@
 
 :root 
     box-sizing: border-box
-    --color-primary-50: oklch(0.982 0.018 155.826)
-    --color-primary-100: oklch(0.962 0.044 156.743)
-    --color-primary-200: oklch(0.925 0.084 155.995)
-    --color-primary-300: oklch(0.871 0.15 154.449)
-    --color-primary-400: oklch(0.792 0.209 151.711)
-    --color-primary-500: oklch(0.723 0.219 149.579)
-    --color-primary-600: oklch(0.627 0.194 149.214)
-    --color-primary-700: oklch(0.527 0.154 150.069)
-    --color-primary-800: oklch(0.448 0.119 151.328)
-    --color-primary-900: oklch(0.393 0.095 152.535)
-    --color-primary-950: oklch(0.266 0.065 152.934)
+    /** Majority colors, like the background **/
+    --color-primary-50: #eae8f6
+    --color-primary-100: #d6d2ee
+    --color-primary-200: #ada4dc
+    --color-primary-300: #8377cb
+    --color-primary-400: #5a49b9
+    --color-primary-500: #311ca8
+    --color-primary-600: #271686
+    --color-primary-700: #1d1165
+    --color-primary-800: #140b43
+    --color-primary-900: #0a0622
 
-    --color-secondary-50: oklch(0.971 0.013 17.38)
-    --color-secondary-100: oklch(0.936 0.032 17.717)
-    --color-secondary-200: oklch(0.885 0.062 18.334)
-    --color-secondary-300: oklch(0.808 0.114 19.571)
-    --color-secondary-400: oklch(0.704 0.191 22.216)
-    --color-secondary-500: oklch(0.637 0.237 25.331)
-    --color-secondary-600: oklch(0.577 0.245 27.325)
-    --color-secondary-700: oklch(0.505 0.213 27.518)
-    --color-secondary-800: oklch(0.444 0.177 26.899)
-    --color-secondary-900: oklch(0.396 0.141 25.723)
-    --color-secondary-950: oklch(0.258 0.092 26.042)
+    /** Secondary color; like the text and maybe some icons **/
+    --color-secondary-50: #fde7f1
+    --color-secondary-100: #fad0e3
+    --color-secondary-200: #f5a1c7
+    --color-secondary-300: #f071ab
+    --color-secondary-400: #eb428f
+    --color-secondary-500: #e61373
+    --color-secondary-600: #b80f5c
+    --color-secondary-700: #8a0b45
+    --color-secondary-800: #5c082e
+    --color-secondary-900: #2e0417
+
+    /** Used as a sub if another color is needed **/
+    --color-ternary-50: #e7fdfa
+    --color-ternary-100: #d0faf5
+    --color-ternary-200: #a1f5eb
+    --color-ternary-300: #71f0e0
+    --color-ternary-400: #42ebd6
+    --color-ternary-500: #13e6cc
+    --color-ternary-600: #0fb8a3
+    --color-ternary-700: #0b8a7a
+    --color-ternary-800: #085c52
+    --color-ternary-900: #042e29
+
     @apply dark:text-white
 
 @layer base 
@@ -37,8 +50,8 @@
 
 @layer components 
     .button 
-        @apply block border-b-2 border-primary-700 bg-primary-500 dark:bg-primary-600 p-2 rounded-lg
+        @apply block border-b-4 transition-colors border-primary-700 bg-primary-400 hover:bg-secondary-400 hover:border-secondary-700 dark:bg-primary-600 text-white p-2 rounded-lg
     
         &:disabled 
-            @apply bg-gray-500 border-gray-700 text-white
+            @apply bg-gray-500 border-gray-700 hover:bg-gray-500 text-white
     

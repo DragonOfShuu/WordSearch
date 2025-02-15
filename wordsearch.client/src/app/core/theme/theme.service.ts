@@ -6,6 +6,11 @@ type ThemeBrowserData = {
   colorScheme: 'classicGreen'
 }
 
+export const defaultTheme: ThemeBrowserData = {
+  colorScheme: 'classicGreen',
+  dark: false
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -35,13 +40,6 @@ export class ThemeService {
   }
 
   addMissingData(oldData: Partial<ThemeBrowserData>): ThemeBrowserData {
-    const newData: Partial<ThemeBrowserData> = oldData;
-
-    if (oldData.dark===undefined)
-      newData.dark = false;
-    if (oldData.colorScheme===undefined)
-      newData.colorScheme = "classicGreen"
-
-    return newData as ThemeBrowserData
+    return {...defaultTheme, ...oldData}
   }
 }

@@ -4,16 +4,13 @@ const getCorrespondingNumber = (index: number): number => {
   if (index===0) {
     return 50
   }
-  if (index === 10) {
-    return 950;
-  }
 
   return index * 100
 }
 
 const createMultiColor = (name: string) => {
   let varProperties = {};
-  for (let i = 0; i < 11; i++) {
+  for (let i = 0; i < 10; i++) {
     const varIndex = getCorrespondingNumber(i);
     varProperties = {...varProperties, [varIndex]: (`var(--color-${name}-${varIndex})`)}
   }
@@ -31,7 +28,8 @@ module.exports = {
       },
       colors: {
         primary: createMultiColor('primary'),
-        secondary: createMultiColor('secondary')
+        secondary: createMultiColor('secondary'),
+        ternary: createMultiColor('ternary')
       }
     },
   },
