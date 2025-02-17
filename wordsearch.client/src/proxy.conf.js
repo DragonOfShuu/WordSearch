@@ -1,11 +1,9 @@
 const PROXY_CONFIG = [
   {
-    context: [
-      "/api",
-    ],
+    context: ["/api"],
     target: "https://localhost:7023",
-    pathRewrite: { '^/api': '' },
-    secure: false
+    pathRewrite: { "^/api": "" },
+    secure: false,
   },
   {
     context: () => true,
@@ -14,13 +12,11 @@ const PROXY_CONFIG = [
     ws: true,
   },
   {
-    context: [
-      "/hubs",
-    ],
+    context: ["/hubs"],
     target: "https://localhost:7023",
     secure: false,
     ws: true,
-  }
-]
+  },
+];
 
 module.exports = PROXY_CONFIG;

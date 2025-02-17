@@ -12,7 +12,7 @@ interface WeatherForecast {
   selector: 'shuu-forecast-test',
   standalone: false,
   templateUrl: './forecast-test.component.html',
-  styleUrl: './forecast-test.component.sass'
+  styleUrl: './forecast-test.component.sass',
 })
 export class ForecastTestComponent implements OnInit {
   public forecasts: WeatherForecast[] = [];
@@ -30,7 +30,7 @@ export class ForecastTestComponent implements OnInit {
       },
       (error) => {
         console.error(error);
-      }
+      },
     );
   }
 }

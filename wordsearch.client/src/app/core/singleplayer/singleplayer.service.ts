@@ -8,25 +8,24 @@ import { FindWordResults } from '../../shared/types/find-word-results.types';
   providedIn: 'root',
 })
 export class SingleplayerService {
-  socket: SignalRSocket
-  currentBoard = signal<Board|null>(null);
-  
-  constructor() { 
-    this.socket = new SignalRSocket("/hubs/singleplayer");
-    this.socket.startConnection()
-      .subscribe({
-        complete() {
-            console.log("Singleplayer connection success!")
-        },
-        error(err) {
-            console.log(`Connection failed because of ${err}`)
-        },
-      });
+  socket: SignalRSocket;
+  currentBoard = signal<Board | null>(null);
+
+  constructor() {
+    this.socket = new SignalRSocket('/hubs/singleplayer');
+    this.socket.startConnection().subscribe({
+      complete() {
+        console.log('Singleplayer connection success!');
+      },
+      error(err) {
+        console.log(`Connection failed because of ${err}`);
+      },
+    });
   }
 
   async newGame(difficulty: Difficulty) {
-    const newBoard: Board = await this.socket.invoke('NewGame', difficulty)
-    console.log(`Board received: ${JSON.stringify(newBoard)}`)
+    const newBoard: Board = await this.socket.invoke('NewGame', difficulty);
+    console.log(`Board received: ${JSON.stringify(newBoard)}`);
     this.currentBoard.update(() => newBoard);
     return newBoard;
   }
@@ -40,24 +39,32 @@ export class SingleplayerService {
   }
 
   getFindableWords() {
-    return this.$verifyBoard(this.currentBoard()).findable
+    return this.$verifyBoard(this.currentBoard()).findable;
   }
 
   getFoundWords() {
-    return this.$verifyBoard(this.currentBoard()).found
+    return this.$verifyBoard(this.currentBoard()).found;
   }
 
-  async findWord(start: [number, number], direction: [number, number], count: number): Promise<FindWordResults|null> {
-    const results: null|FindWordResults = await this.socket.invoke('findWord', start, direction, count);
+  async findWord(
+    start: [number, number],
+    direction: [number, number],
+    count: number,
+  ): Promise<FindWordResults | null> {
+    const results: null | FindWordResults = await this.socket.invoke(
+      'findWord',
+      start,
+      direction,
+      count,
+    );
     if (!results) return null;
 
     this.currentBoard.update(() => results.board);
     return results;
   }
 
-  $verifyBoard(board: Board|undefined|null): Board {
-    if (!board)
-      throw new Error("Board has not been initialized");
+  $verifyBoard(board: Board | undefined | null): Board {
+    if (!board) throw new Error('Board has not been initialized');
     return board;
   }
 }

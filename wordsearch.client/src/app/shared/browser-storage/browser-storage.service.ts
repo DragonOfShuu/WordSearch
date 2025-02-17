@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class BrowserStorageService {
-  constructor() { }
+  constructor() {}
 
-  getData<T>(key: string): T|null {
+  getData<T>(key: string): T | null {
     const rawData = localStorage.getItem(key);
-    if (rawData===null) return null;
+    if (rawData === null) return null;
     return JSON.parse(rawData);
   }
 

@@ -6,7 +6,7 @@ import { SingleplayerService } from '../../../core/singleplayer/singleplayer.ser
   standalone: false,
   providers: [SingleplayerService],
   templateUrl: './singleplayer-ui.component.html',
-  styleUrl: './singleplayer-ui.component.sass'
+  styleUrl: './singleplayer-ui.component.sass',
 })
 export class SingleplayerUiComponent {
   singleplayerService = inject(SingleplayerService);

@@ -8,9 +8,8 @@ describe('SingleplayerCommsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [SingleplayerCommsComponent]
-    })
-    .compileComponents();
+      declarations: [SingleplayerCommsComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(SingleplayerCommsComponent);
     component = fixture.componentInstance;

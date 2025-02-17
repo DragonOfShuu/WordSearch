@@ -27,11 +27,8 @@ import { SingleplayerCommsComponent } from './test-components/singleplayer-comms
     SingleplayerUiComponent,
     SingleplayerCommsComponent,
   ],
-  imports: [
-    BrowserModule, HttpClientModule,
-    AppRoutingModule
-  ],
+  imports: [BrowserModule, HttpClientModule, AppRoutingModule],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

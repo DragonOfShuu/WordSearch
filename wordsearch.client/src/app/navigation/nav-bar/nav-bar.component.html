@@ -1,19 +1,22 @@
-<div class="pointer-events-none z-50 absolute inset-0">
-    <div class="h-nav-margin pointer-events-auto flex items-center px-2 py-1">
-        <div class="text-secondary-500 font-extrabold text-4xl mr-6">
-            WordSearch
-        </div>
-        <nav class="grow flex gap-3">
-            @for (navLink of navLinks; track $index) {
-                <a class="uppercase transition-colors hover:text-ternary-700 dark:hover:text-ternary-500 text-xl font-bold block" href="{{navLink.href}}">
-                    {{ navLink.name }}
-                </a>
-            }
-        </nav>
-        <div class="grow"></div>
-        <shuu-theme-toggle />
+<div class="pointer-events-none absolute inset-0 z-50">
+  <div class="pointer-events-auto flex h-nav-margin items-center px-2 py-1">
+    <div class="mr-6 text-4xl font-extrabold text-secondary-500">
+      WordSearch
     </div>
+    <nav class="flex grow gap-3">
+      @for (navLink of navLinks; track $index) {
+        <a
+          class="block text-xl font-bold uppercase transition-colors hover:text-ternary-700 dark:hover:text-ternary-500"
+          href="{{ navLink.href }}"
+        >
+          {{ navLink.name }}
+        </a>
+      }
+    </nav>
+    <div class="grow"></div>
+    <shuu-theme-toggle />
+  </div>
 </div>
 <div class="relative z-0">
-    <ng-content/>
+  <ng-content />
 </div>

@@ -8,9 +8,8 @@ describe('MultiplayerMessagerComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [MultiplayerMessagerComponent]
-    })
-    .compileComponents();
+      declarations: [MultiplayerMessagerComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(MultiplayerMessagerComponent);
     component = fixture.componentInstance;

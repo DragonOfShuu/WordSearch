@@ -1,16 +1,28 @@
 <div class="rounded-md border-2 border-red-500">
-    @if (error) {
-        <p>AN ERROR OCCURRED TRYING TO CONNECT TO THE SERVER</p>
+  @if (error) {
+    <p>AN ERROR OCCURRED TRYING TO CONNECT TO THE SERVER</p>
+  }
+  <div class="flex h-52 flex-col-reverse overflow-y-auto">
+    @for (message of messages(); track $index) {
+      <div class="px-2 py-4">
+        {{ message }}
+      </div>
     }
-    <div class="overflow-y-auto h-52 flex flex-col-reverse">
-        @for (message of messages(); track $index) {
-            <div class="px-2 py-4">
-                {{ message }}
-            </div>
-        }
-    </div>
-    <div class="p-2 flex">
-        <input type="text" class="grow rounded-full" placeholder="Message..." #messageInput />
-        <button (click)="sendMessage(messageInput.value)" type="button" [disabled]="loadingState!=='Connected'" class="button">Submit</button>
-    </div>
+  </div>
+  <div class="flex p-2">
+    <input
+      type="text"
+      class="grow rounded-full"
+      placeholder="Message..."
+      #messageInput
+    />
+    <button
+      (click)="sendMessage(messageInput.value)"
+      type="button"
+      [disabled]="loadingState !== 'Connected'"
+      class="button"
+    >
+      Submit
+    </button>
+  </div>
 </div>
