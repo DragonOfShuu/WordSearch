@@ -2,7 +2,7 @@
 @tailwind components
 @tailwind utilities
 
-:root 
+:root
     box-sizing: border-box
     /** Majority colors, like the background **/
     --color-primary-50: #eae8f6
@@ -42,16 +42,16 @@
 
     @apply dark:text-white
 
-@layer base 
-    h1 
+@layer base
+    h1
         @apply text-4xl
-    
 
-
-@layer components 
-    .button 
+@layer components
+    .button
         @apply block border-b-4 transition-colors border-primary-700 bg-primary-400 hover:bg-secondary-400 hover:border-secondary-700 dark:bg-primary-600 text-white p-2 rounded-lg
-    
-        &:disabled 
+
+        &:disabled
             @apply bg-gray-500 border-gray-700 hover:bg-gray-500 text-white
-    
+
+    .frame
+        @apply dark:bg-primary-800 bg-primary-200 rounded-lg

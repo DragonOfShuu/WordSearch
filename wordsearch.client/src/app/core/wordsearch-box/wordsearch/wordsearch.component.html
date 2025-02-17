@@ -1,1 +1,9 @@
-<div class=""></div>
+<div class="grid aspect-square grid-element" style="grid-template-columns: repeat({{searchableText().length}}, minmax(0, 1fr));" >
+    @for (row of searchableText(); track $index; let y = $index) {
+        @for (char of row; track $index; let x = $index) {
+            <div class="flex justify-center items-center text-size-adjust">
+                {{char}}
+            </div>
+        }
+    }
+</div>

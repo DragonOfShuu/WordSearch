@@ -8,5 +8,5 @@ import { Component, input } from '@angular/core';
   styleUrl: './wordsearch.component.sass',
 })
 export class WordsearchComponent {
-  searchableText = input.required<string[]>();
+  searchableText = input.required<string[][]>();
 }

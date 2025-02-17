@@ -3,17 +3,21 @@ import SignalRSocket from '../../shared/signal-r-socket/signal-r-socket.class';
 import Difficulty from '../../shared/types/difficulty.type';
 import { Board } from '../../shared/types/boards.types';
 import { FindWordResults } from '../../shared/types/find-word-results.types';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class SingleplayerService {
   socket: SignalRSocket;
+  connectionObservaboo: Observable<void>;
   currentBoard = signal<Board | null>(null);
 
   constructor() {
     this.socket = new SignalRSocket('/hubs/singleplayer');
-    this.socket.startConnection().subscribe({
+    this.connectionObservaboo = this.socket.startConnection()
+
+    this.connectionObservaboo.subscribe({
       complete() {
         console.log('Singleplayer connection success!');
       },
@@ -28,6 +32,10 @@ export class SingleplayerService {
     console.log(`Board received: ${JSON.stringify(newBoard)}`);
     this.currentBoard.update(() => newBoard);
     return newBoard;
+  }
+
+  getConnectionState(): signalR.HubConnectionState {
+    return this.socket.getConnectionState()
   }
 
   getDifficulty() {

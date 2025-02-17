@@ -57,6 +57,10 @@ class SignalRSocket {
 
     return this.hubConnection.invoke(methodName, ...args);
   }
+
+  getConnectionState(): signalR.HubConnectionState {
+    return this.hubConnection.state;
+  }
 }
 
 export default SignalRSocket;
