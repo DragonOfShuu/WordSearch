@@ -1,5 +1,5 @@
 import * as signalR from '@microsoft/signalr';
-import { Observable } from 'rxjs';
+import { Observable, ReplaySubject } from 'rxjs';
 
 class SignalRSocket {
   private hubConnection: signalR.HubConnection;
@@ -10,8 +10,8 @@ class SignalRSocket {
       .build();
   }
 
-  startConnection(): Observable<void> {
-    return new Observable((observer) => {
+  startConnection(): ReplaySubject<void> {
+    const connectionObserver = new Observable<void>((subscriber) => {
       if (this.hubConnection === null)
         throw new Error('Hub connection has not been initiated.');
 
@@ -19,17 +19,21 @@ class SignalRSocket {
         .start()
         .then(() => {
           // Connection Established
-          observer.next();
-          observer.complete();
+          subscriber.next();
+          subscriber.complete();
         })
         .catch((error) => {
           console.error(
             'An error occurred when connecting to the multiplayer hub: ',
             error,
           );
-          observer.error(error);
+          subscriber.error(error);
         });
     });
+
+    const replayableSubject = new ReplaySubject<void>();
+    connectionObserver.subscribe(replayableSubject)
+    return replayableSubject
   }
 
   registerOnMethod<T extends Array<any>>(

@@ -5,19 +5,19 @@ namespace WordSearch.Server.Services
 {
     public class SingleplayerGameService : WordsearchGameService, ISingleplayerGame
     {
-        public FindWordResultsForClient? FindWord(GameBoard gameBoard, string? userIdentifier, (int, int) start, (int, int) direction, int count)
+        public FindWordResultsForClient? FindWord(GameBoard gameBoard, (int, int) start, (int, int) direction, int count, string? userIdentifier)
         {
             throw new NotImplementedException();
         }
 
-        public Board GetBoard(GameBoard gameBoard)
-        {
-            throw new NotImplementedException();
-        }
+        //public Board GetBoard(GameBoard gameBoard)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
-        public Board NewGame(Difficulty difficulty)
+        public GameBoard NewGame(Difficulty difficulty, string? userIdentifier)
         {
-            throw new NotImplementedException();
+            return generateGameBoard(difficulty);
         }
     }
 }

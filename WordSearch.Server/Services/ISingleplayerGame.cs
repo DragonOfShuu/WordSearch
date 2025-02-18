@@ -5,8 +5,8 @@ namespace WordSearch.Server.Services
 {
     public interface ISingleplayerGame : IGameService
     {
-        public FindWordResultsForClient? FindWord(GameBoard gameBoard, string? userIdentifier, (int, int) start, (int, int) direction, int count);
-        public Board NewGame(Difficulty difficulty);
-        public Board GetBoard(GameBoard gameBoard);
+        public FindWordResultsForClient? FindWord(GameBoard gameBoard, (int, int) start, (int, int) direction, int count, string? userIdentifier);
+        public GameBoard NewGame(Difficulty difficulty, string? userIdentifier = null);
+        //public GameBoard GetBoard(GameBoard gameBoard);
     }
 }

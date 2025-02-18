@@ -1,27 +1,23 @@
 ﻿using Microsoft.AspNetCore.SignalR;
 using WordSearch.Server.Models.GameLogic;
+using WordSearch.Server.Services;
 
 namespace WordSearch.Server.Controllers.Hubs
 {
     public class SingleplayerHub : Hub
     {
         private readonly ILogger _logger;
+        private readonly ISingleplayerGame _singleplayerService;
 
-        public SingleplayerHub(ILogger<SingleplayerHub> logger)
+        public SingleplayerHub(ILogger<SingleplayerHub> logger, ISingleplayerGame singleplayerGameService)
         {
             _logger = logger;
+            _singleplayerService = singleplayerGameService;
         }
 
         public async Task<Board> NewGame(Difficulty difficulty)
         {
-            return new Board
-            {
-                BoardCharacters = [],
-                Difficulty = difficulty,
-                Findable = ["Hello", "World"],
-                Found = [],
-                Started = 0
-            };
+            return this._singleplayerService.NewGame(difficulty).ToBoard();
         }
 
         public async Task<Board> GetBoard()

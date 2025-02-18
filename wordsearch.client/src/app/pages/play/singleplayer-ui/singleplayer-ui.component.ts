@@ -1,4 +1,4 @@
-import { Component, inject, input, OnInit } from '@angular/core';
+import { Component, computed, inject, input, OnInit } from '@angular/core';
 import { SingleplayerService } from '../../../core/singleplayer/singleplayer.service';
 
 @Component({
@@ -11,9 +11,8 @@ import { SingleplayerService } from '../../../core/singleplayer/singleplayer.ser
 export class SingleplayerUiComponent implements OnInit {
   singleplayerService = inject(SingleplayerService);
   leaveFunction = input<() => void>();
-  currentBoard = this.singleplayerService.currentBoard()
-  boardCharacters =
-    this.currentBoard?.boardCharacters ?? Array(5).fill(Array(5).fill('A'));
+  currentBoard = this.singleplayerService.currentBoard
+  boardCharacters = computed(() => this.currentBoard()?.boardCharacters ?? Array(5).fill(Array(5).fill('A')))
 
   ngOnInit(): void {
     // Cause ✨ JavaScript ✨

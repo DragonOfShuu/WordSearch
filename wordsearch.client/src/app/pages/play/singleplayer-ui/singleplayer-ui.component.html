@@ -6,7 +6,7 @@
               Words to Find
             </h1>
             <ul>
-              @for (word of currentBoard?.findable; track $index) {
+              @for (word of currentBoard()?.findable; track $index) {
                 <li>
                   {{word}}
                 </li>
@@ -15,7 +15,7 @@
         </div>
     </div>
     <div class="">
-        <shuu-wordsearch [searchableText]="boardCharacters" />
+        <shuu-wordsearch [searchableText]="boardCharacters()" />
     </div>
     <div class="">
         

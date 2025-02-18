@@ -3,14 +3,14 @@ import SignalRSocket from '../../shared/signal-r-socket/signal-r-socket.class';
 import Difficulty from '../../shared/types/difficulty.type';
 import { Board } from '../../shared/types/boards.types';
 import { FindWordResults } from '../../shared/types/find-word-results.types';
-import { Observable } from 'rxjs';
+import { Observable, ReplaySubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class SingleplayerService {
   socket: SignalRSocket;
-  connectionObservaboo: Observable<void>;
+  connectionObservaboo: ReplaySubject<void>;
   currentBoard = signal<Board | null>(null);
 
   constructor() {
