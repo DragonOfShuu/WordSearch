@@ -16,13 +16,14 @@ namespace WordSearch.Server.Services
         /// <returns></returns>
         public GameBoard generateGameBoard(Difficulty difficulty)
         {
-            //throw new NotImplementedException();
-            
             return new GameBoard()
             {
                 Difficulty = difficulty,
-                
-            }
+                BoardCharacters = [],
+                Findable = new WordDictionary(),
+                Found = [],
+                Started = (new DateTimeOffset(DateTime.UtcNow)).ToUnixTimeMilliseconds()
+            };
         }
     }
 }
