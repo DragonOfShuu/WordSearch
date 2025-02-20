@@ -16,7 +16,7 @@
         /// Get a random word of a specified length
         /// </summary>
         /// <param name="length"></param>
-        /// <returns></returns>
-        public string getRandomWord(int length);
+        /// <returns>The word, or null if that length does not exist.</returns>
+        public string? getRandomWord(int length);
     }
 }

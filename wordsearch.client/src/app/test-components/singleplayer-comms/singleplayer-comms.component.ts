@@ -2,11 +2,10 @@ import { Component, inject } from '@angular/core';
 import { SingleplayerService } from '../../core/singleplayer/singleplayer.service';
 
 @Component({
-  selector: 'shuu-singleplayer-comms',
-  standalone: false,
-  providers: [SingleplayerService],
-  templateUrl: './singleplayer-comms.component.html',
-  styleUrl: './singleplayer-comms.component.sass',
+    selector: 'shuu-singleplayer-comms',
+    providers: [SingleplayerService],
+    templateUrl: './singleplayer-comms.component.html',
+    styleUrl: './singleplayer-comms.component.sass',
 })
 export class SingleplayerCommsComponent {
   singleplayerService = inject(SingleplayerService);

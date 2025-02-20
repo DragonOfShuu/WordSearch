@@ -3,24 +3,29 @@ using WordSearch.Server.Shared.JSONFileReader;
 
 namespace WordSearch.Server.Services.WordSelector
 {
-    public class WordGenerator : IWordGenerator
+    public class WordGeneratorService : IWordGenerator
     {
-        private readonly ILogger<WordGenerator> _logger;
+        private readonly ILogger<WordGeneratorService> _logger;
         public Dictionary<int, string[]> AllWords { get; set; }
 
-        public WordGenerator(ILogger<WordGenerator> logger)
+        public WordGeneratorService(ILogger<WordGeneratorService> logger)
         {
             _logger = logger;
 
-            var words = JSONFileReader.Read<Dictionary<int, string[]>>("./words.json");
+            // Hard coded for now, but I will most likely provide
+            // some sort of language filter in the future if 
+            // I ever decide to make multi-language support
+            var words = JSONFileReader.Read<Dictionary<int, string[]>>("./Assets/WordLists/enWords.json");
             if (words == null)
             {
                 throw new InvalidOperationException("Words.json is inaccessible; cannot generate words.");
             }
             AllWords = words;
+
+            _logger.LogInformation("Successfully digested words.");
         }
 
-        public string getRandomWord(int length)
+        public string? getRandomWord(int length)
         {
             throw new NotImplementedException();
         }

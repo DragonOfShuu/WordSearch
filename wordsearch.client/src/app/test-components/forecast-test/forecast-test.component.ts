@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { NgFor } from '@angular/common';
 
 interface WeatherForecast {
   date: string;
@@ -9,10 +10,10 @@ interface WeatherForecast {
 }
 
 @Component({
-  selector: 'shuu-forecast-test',
-  standalone: false,
-  templateUrl: './forecast-test.component.html',
-  styleUrl: './forecast-test.component.sass',
+    selector: 'shuu-forecast-test',
+    templateUrl: './forecast-test.component.html',
+    styleUrl: './forecast-test.component.sass',
+    imports: [NgFor],
 })
 export class ForecastTestComponent implements OnInit {
   public forecasts: WeatherForecast[] = [];

@@ -1,6 +1,8 @@
 
 using WordSearch.Server.Controllers.Hubs;
 using WordSearch.Server.Services;
+using WordSearch.Server.Services.WordGenerator;
+using WordSearch.Server.Services.WordSelector;
 
 namespace WordSearch.Server
 {
@@ -13,6 +15,7 @@ namespace WordSearch.Server
             // Add logging providers
             builder.Logging.ClearProviders();
             builder.Logging.AddConsole();
+            builder.Logging.SetMinimumLevel(LogLevel.Debug);
 
             // Add services to the container.
             builder.Services.AddControllers();
@@ -22,6 +25,7 @@ namespace WordSearch.Server
             builder.Services.AddSignalR();
 
             builder.Services.AddTransient<ISingleplayerGame, SingleplayerGameService>();
+            builder.Services.AddSingleton<IWordGenerator, WordGeneratorService>();
 
             var app = builder.Build();
 

@@ -1,12 +1,13 @@
 import { Component, computed, inject, input, OnInit } from '@angular/core';
 import { SingleplayerService } from '../../../core/singleplayer/singleplayer.service';
+import { WordsearchComponent } from '../../../core/wordsearch-box/wordsearch/wordsearch.component';
 
 @Component({
-  selector: 'shuu-singleplayer-ui',
-  standalone: false,
-  providers: [SingleplayerService],
-  templateUrl: './singleplayer-ui.component.html',
-  styleUrl: './singleplayer-ui.component.sass',
+    selector: 'shuu-singleplayer-ui',
+    providers: [SingleplayerService],
+    templateUrl: './singleplayer-ui.component.html',
+    styleUrl: './singleplayer-ui.component.sass',
+    imports: [WordsearchComponent],
 })
 export class SingleplayerUiComponent implements OnInit {
   singleplayerService = inject(SingleplayerService);

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ThemeToggleComponent } from '../../shared/theme-toggle/theme-toggle.component';
 
 type NavLink = {
   name: string;
@@ -6,11 +7,10 @@ type NavLink = {
 };
 
 @Component({
-  selector: 'shuu-nav-bar',
-  standalone: false,
-
-  templateUrl: './nav-bar.component.html',
-  styleUrl: './nav-bar.component.sass',
+    selector: 'shuu-nav-bar',
+    templateUrl: './nav-bar.component.html',
+    styleUrl: './nav-bar.component.sass',
+    imports: [ThemeToggleComponent],
 })
 export class NavBarComponent {
   navLinks: NavLink[] = [

@@ -8,8 +8,8 @@ describe('SingleplayerUiComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [SingleplayerUiComponent],
-    }).compileComponents();
+    imports: [SingleplayerUiComponent],
+}).compileComponents();
 
     fixture = TestBed.createComponent(SingleplayerUiComponent);
     component = fixture.componentInstance;
