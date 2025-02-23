@@ -11,12 +11,20 @@
         /// plus the count
         /// </param>
         /// <returns></returns>
-        public string[] getRandomWords(params (int, int)[] words);
+        public string[] GetRandomWords(KeyValuePair<int, int>[] words);
+        /// <summary>
+        /// Get a list of words that have the corresponding
+        /// quantity and length.
+        /// </summary>
+        /// <param name="count"></param>
+        /// <param name="length"></param>
+        /// <returns></returns>
+        public string[]? GetRandomWords(int count, int length);
         /// <summary>
         /// Get a random word of a specified length
         /// </summary>
         /// <param name="length"></param>
         /// <returns>The word, or null if that length does not exist.</returns>
-        public string? getRandomWord(int length);
+        public string? GetRandomWord(int length);
     }
 }

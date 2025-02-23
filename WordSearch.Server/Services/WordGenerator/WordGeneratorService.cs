@@ -7,6 +7,8 @@ namespace WordSearch.Server.Services.WordSelector
     {
         private readonly ILogger<WordGeneratorService> _logger;
         public Dictionary<int, string[]> AllWords { get; set; }
+        
+        private readonly Random random = new Random();
 
         public WordGeneratorService(ILogger<WordGeneratorService> logger)
         {
@@ -25,14 +27,47 @@ namespace WordSearch.Server.Services.WordSelector
             _logger.LogInformation("Successfully digested words.");
         }
 
-        public string? getRandomWord(int length)
+        public string? GetRandomWord(int length)
         {
-            throw new NotImplementedException();
+            var words = AllWords[length];
+            if (words == null) return null;
+
+            var randomIndex = this.random.Next(words.Length);
+            return words[randomIndex];
         }
 
-        public string[] getRandomWords(params (int, int)[] words)
+        public string[] GetRandomWords(KeyValuePair<int, int>[] wordParameters)
         {
-            throw new NotImplementedException();
+            List<string> result = [];
+            
+            foreach (var item in wordParameters)
+            {
+                (int count, int length) = item;
+
+                string[]? words = GetRandomWords(count, length);
+
+                if (words == null) continue;
+
+                result.AddRange(words);
+            }
+
+            return [.. result];
+        }
+
+        public string[]? GetRandomWords(int count, int length)
+        {
+            List<string> result = [];
+
+            for (int i = 0; i < count; i++)
+            {
+                string? randomWord = GetRandomWord(length);
+
+                if (randomWord == null) return null;
+
+                result.Add(randomWord);
+            }
+
+            return [.. result];
         }
     }
 }
