@@ -4,14 +4,10 @@ using WordSearch.Server.Services.WordGenerator;
 
 namespace WordSearch.Server.Services
 {
-    public class WordsearchGameService : IGameService
+    public class WordsearchGameService(IWordGenerator generator, ILogger<WordsearchGameService> logger) : IGameService
     {
-        private readonly IWordGenerator _generator;
-
-        public WordsearchGameService(IWordGenerator generator)
-        {
-            _generator = generator;
-        }
+        private readonly IWordGenerator _generator = generator;
+        private readonly ILogger _logger = logger;
 
         public FindWordResults? FindWord(GameBoard gameBoard, (int, int) position, (int, int) direction, int count)
         {
@@ -32,10 +28,10 @@ namespace WordSearch.Server.Services
         /// <param name="wordCount"></param>
         private void GetWordsearchParams(Difficulty difficulty, out int boardSize, out int wordSize, out int wordCount)
         {
-            Double difficultyLevel = difficulty.Level;
-            boardSize = (int)Math.Round(5d * Math.Log(0.9d * (difficultyLevel) + 1d) + 7.4);
-            wordSize = (int)Math.Round(-8d * Math.Log(0.1d * (difficultyLevel) + 0.5) + 5d);
-            wordCount = (int)Math.Round(7d * Math.Log(0.07d * (difficultyLevel) + 0.1) + 11d);
+            Double difficultyLevel = difficulty.Level - 1;
+            boardSize = (int)Math.Round(5 * Math.Log10(0.9 * (difficultyLevel) + 1) + 7.4);
+            wordSize = (int)Math.Round(-8 * Math.Log10(0.1 * (difficultyLevel) + 0.5) + 5);
+            wordCount = (int)Math.Round(7 * Math.Log10(0.07 * (difficultyLevel) + 0.1) + 11);
         }
 
         /// <summary>
@@ -86,6 +82,7 @@ namespace WordSearch.Server.Services
                 lengths[randomNum] = defaultValue+1;
             }
 
+            this._logger.LogInformation("WordLengths: {lengths}", lengths);
             return this._generator.GetRandomWords([.. lengths]);
         }
 
@@ -96,14 +93,20 @@ namespace WordSearch.Server.Services
         /// <returns></returns>
         public GameBoard generateGameBoard(Difficulty difficulty)
         {
+            this._logger.LogInformation("Difficulty level: {difficulty}", difficulty.Level);
             GetWordsearchParams(difficulty, out int boardSize, out int wordSize, out int wordCount);
+            this._logger.LogInformation("Boardsize: {boardSize}, wordSize: {wordSize}, wordCount: {wordCount}", boardSize, wordSize, wordCount);
             string[] words = GetWords(boardSize, wordSize, wordCount);
+
+            var tempFindable = words
+                .Select(word => new WordType() { Position = new Vector2D(), Rotation = new Vector2D(), Word = word })
+                .ToDictionary(word => word.Word, word => word);
 
             return new GameBoard()
             {
                 Difficulty = difficulty,
                 BoardCharacters = [],
-                Findable = new WordDictionary(),
+                Findable = tempFindable,
                 Found = [],
                 Started = (new DateTimeOffset(DateTime.UtcNow)).ToUnixTimeMilliseconds()
             };

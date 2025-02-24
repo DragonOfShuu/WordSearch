@@ -24,8 +24,9 @@ namespace WordSearch.Server
             builder.Services.AddSwaggerGen();
             builder.Services.AddSignalR();
 
-            builder.Services.AddTransient<ISingleplayerGame, SingleplayerGameService>();
             builder.Services.AddSingleton<IWordGenerator, WordGeneratorService>();
+            builder.Services.AddScoped<IGameService, WordsearchGameService>();
+            builder.Services.AddScoped<ISingleplayerGame, SingleplayerGameService>();
 
             var app = builder.Build();
 

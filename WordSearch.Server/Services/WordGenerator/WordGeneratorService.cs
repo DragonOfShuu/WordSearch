@@ -36,13 +36,19 @@ namespace WordSearch.Server.Services.WordSelector
             return words[randomIndex];
         }
 
+        /// <summary>
+        /// Get random words depending on a KeyValuePair
+        /// list of length,count.
+        /// </summary>
+        /// <param name="wordParameters"></param>
+        /// <returns></returns>
         public string[] GetRandomWords(KeyValuePair<int, int>[] wordParameters)
         {
             List<string> result = [];
             
             foreach (var item in wordParameters)
             {
-                (int count, int length) = item;
+                (int length, int count) = item;
 
                 string[]? words = GetRandomWords(count, length);
 

@@ -4,14 +4,9 @@ using WordSearch.Server.Services.WordGenerator;
 
 namespace WordSearch.Server.Services
 {
-    public class SingleplayerGameService : WordsearchGameService, ISingleplayerGame
+    public class SingleplayerGameService(IGameService wordSearch) : ISingleplayerGame
     {
-        private readonly IWordGenerator _wordGenerator;
-
-        public SingleplayerGameService(IWordGenerator wordGenerator)
-        {
-            _wordGenerator = wordGenerator;
-        }
+        private readonly IGameService _wordsearch = wordSearch;
 
         public FindWordResultsForClient? FindWord(GameBoard gameBoard, (int, int) start, (int, int) direction, int count, string? userIdentifier)
         {
@@ -20,7 +15,7 @@ namespace WordSearch.Server.Services
 
         public GameBoard NewGame(Difficulty difficulty, string? userIdentifier)
         {
-            return generateGameBoard(difficulty);
+            return this._wordsearch.generateGameBoard(difficulty);
         }
     }
 }

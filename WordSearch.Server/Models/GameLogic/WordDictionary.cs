@@ -2,7 +2,7 @@
 {
     public class WordDictionary : Dictionary<string, WordType>
     {
-
+        
     }
 
     public class WordType

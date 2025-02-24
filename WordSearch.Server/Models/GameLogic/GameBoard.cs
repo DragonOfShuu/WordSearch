@@ -9,13 +9,22 @@
     {
         public Difficulty Difficulty { get; set; } = Difficulty.Empty;
         public string[][] BoardCharacters { get; set; } = [];
-        public WordDictionary Findable { get; set; } = [];
+        public Dictionary<string, WordType> Findable { get; set; } = [];
         public string[] Found { get; set; } = [];
         public long Started { get; set; } // milliseconds
 
         public Board ToBoard()
         {
-            throw new NotImplementedException();
+            var newFound = Found.Select(foundWord => Findable[foundWord]).ToDictionary(dict => dict.Word, dict => dict);
+
+            return new Board()
+            {
+                Difficulty = Difficulty,
+                BoardCharacters = BoardCharacters,
+                Findable = [.. Findable.Keys],
+                Found = newFound,
+                Started = Started
+            };
         }
     }
 
@@ -29,7 +38,7 @@
         public Difficulty Difficulty { get; set; } = Difficulty.Empty;
         public string[][] BoardCharacters { get; set; } = [];
         public string[] Findable { get; set; } = [];
-        public WordDictionary Found { get; set; } = [];
+        public Dictionary<string, WordType> Found { get; set; } = [];
         public long Started { get; set; } // milliseconds
     }
 }

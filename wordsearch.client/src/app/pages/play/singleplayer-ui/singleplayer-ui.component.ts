@@ -20,7 +20,7 @@ export class SingleplayerUiComponent implements OnInit {
     const betterThis = this; 
     this.singleplayerService.connectionObservaboo.subscribe({
       complete() {
-        betterThis.singleplayerService.newGame({intensity: 'medium', level: 1, size: {x: 5, y: 5}, time: 300})
+        betterThis.singleplayerService.newGame({intensity: 'medium', level: 1, time: 300})
       },
     })
   }
