@@ -25,7 +25,7 @@ namespace WordSearch.Server.Controllers.Hubs
             throw new NotImplementedException();
         }
 
-        public async Task<WordDictionary> GetFoundWords()
+        public async Task<Dictionary<string, WordType>> GetFoundWords()
         {
             string? indentifier = Context.UserIdentifier;
             throw new NotImplementedException();

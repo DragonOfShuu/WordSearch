@@ -47,16 +47,20 @@ namespace WordSearch.Server.Services
         private IWeightedRandomizer<int> SetupRandomizer(int minCount, int maxCount, int favoredIndex)
         {
             IWeightedRandomizer<int> randomizer = new StaticWeightedRandomizer<int>();
+            List<int> weights = [];
             for (int i = minCount; i < maxCount+1; i++)
             {
-                int weight = (int) Math.Round(-0.25 * Math.Pow(i - favoredIndex, 2) + 4);
+                int weight = (int) -Math.Abs(i - favoredIndex) + 4;
                 if (weight < 1)
                 {
                     weight = 1;
                 }
                 randomizer.Add(i, weight);
+                weights.Add(weight);
             }
 
+            this._logger.LogDebug("Randomized indexes: {indexes}", randomizer);
+            this._logger.LogDebug("Randomized weights: {weights}", weights);
             return randomizer;
         }
 
@@ -64,16 +68,16 @@ namespace WordSearch.Server.Services
         /// Get a list of random words, dependent on the provided
         /// parameters.
         /// </summary>
-        /// <param name="BoardSize"></param>
-        /// <param name="WordCount"></param>
-        /// <param name="WordSize"></param>
+        /// <param name="boardSize"></param>
+        /// <param name="wordCount"></param>
+        /// <param name="wordSize"></param>
         /// <returns></returns>
-        private string[] GetWords(int BoardSize, int WordCount, int WordSize)
+        private string[] GetWords(int boardSize, int wordSize, int wordCount)
         {
             Dictionary<int, int> lengths = [];
-            var randomizer = SetupRandomizer(3, BoardSize, WordSize);
+            var randomizer = SetupRandomizer(3, boardSize, wordSize);
 
-            for (int i = 0; i < WordCount; i++)
+            for (int i = 0; i < wordCount; i++)
             {
                 int randomNum = randomizer.NextWithReplacement();
                 //int defaultValue = 0;
@@ -82,7 +86,7 @@ namespace WordSearch.Server.Services
                 lengths[randomNum] = defaultValue+1;
             }
 
-            this._logger.LogInformation("WordLengths: {lengths}", lengths);
+            this._logger.LogDebug("WordLengths: {lengths}", lengths);
             return this._generator.GetRandomWords([.. lengths]);
         }
 
@@ -93,11 +97,11 @@ namespace WordSearch.Server.Services
         /// <returns></returns>
         public GameBoard generateGameBoard(Difficulty difficulty)
         {
-            this._logger.LogInformation("Difficulty level: {difficulty}", difficulty.Level);
+            this._logger.LogDebug("Difficulty level: {difficulty}", difficulty.Level);
             GetWordsearchParams(difficulty, out int boardSize, out int wordSize, out int wordCount);
-            this._logger.LogInformation("Boardsize: {boardSize}, wordSize: {wordSize}, wordCount: {wordCount}", boardSize, wordSize, wordCount);
+            this._logger.LogDebug("Boardsize: {boardSize}, wordSize: {wordSize}, wordCount: {wordCount}", boardSize, wordSize, wordCount);
             string[] words = GetWords(boardSize, wordSize, wordCount);
-
+            
             var tempFindable = words
                 .Select(word => new WordType() { Position = new Vector2D(), Rotation = new Vector2D(), Word = word })
                 .ToDictionary(word => word.Word, word => word);
@@ -105,7 +109,7 @@ namespace WordSearch.Server.Services
             return new GameBoard()
             {
                 Difficulty = difficulty,
-                BoardCharacters = [],
+                BoardCharacters = [["a", "a"], ["a", "a"]],
                 Findable = tempFindable,
                 Found = [],
                 Started = (new DateTimeOffset(DateTime.UtcNow)).ToUnixTimeMilliseconds()

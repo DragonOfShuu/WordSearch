@@ -1,10 +1,5 @@
 ﻿namespace WordSearch.Server.Models.GameLogic
 {
-    public class WordDictionary : Dictionary<string, WordType>
-    {
-        
-    }
-
     public class WordType
     {
         public string Word { get; set; } = string.Empty;

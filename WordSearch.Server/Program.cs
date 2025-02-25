@@ -13,9 +13,7 @@ namespace WordSearch.Server
             var builder = WebApplication.CreateBuilder(args);
 
             // Add logging providers
-            builder.Logging.ClearProviders();
-            builder.Logging.AddConsole();
-            builder.Logging.SetMinimumLevel(LogLevel.Debug);
+            //builder.Logging.AddConsole();
 
             // Add services to the container.
             builder.Services.AddControllers();
