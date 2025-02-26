@@ -154,5 +154,10 @@
                 Rotation = randomRot
             };
         }
+
+        public bool IsEmpty()
+        {
+            return Table.Count == 0;
+        }
     }
 }
