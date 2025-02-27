@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.SignalR;
+using WordSearch.Server.Models.API;
 using WordSearch.Server.Models.GameLogic;
 using WordSearch.Server.Services;
 
@@ -17,7 +18,10 @@ namespace WordSearch.Server.Controllers.Hubs
 
         public async Task<Board> NewGame(Difficulty difficulty)
         {
-            return this._singleplayerService.NewGame(difficulty).ToBoard();
+            Result<GameBoard, APIError> result = this._singleplayerService.NewGame(difficulty);
+            return result.Match(
+                gameboard => gameboard.ToBoard(),
+                error => throw new HubException(error.Error));
         }
 
         public async Task<Board> GetBoard()

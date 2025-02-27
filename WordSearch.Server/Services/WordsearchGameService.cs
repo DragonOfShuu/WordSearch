@@ -1,4 +1,5 @@
 ﻿using Weighted_Randomizer;
+using WordSearch.Server.Models.API;
 using WordSearch.Server.Models.GameLogic;
 using WordSearch.Server.Services.WordGenerator;
 
@@ -9,7 +10,7 @@ namespace WordSearch.Server.Services
         private readonly IWordGenerator _generator = generator;
         private readonly ILogger _logger = logger;
 
-        public FindWordResults? FindWord(GameBoard gameBoard, (int, int) position, (int, int) direction, int count)
+        public Result<FindWordResults, APIError> FindWord(GameBoard gameBoard, (int, int) position, (int, int) direction, int count)
         {
             throw new NotImplementedException();
         }
@@ -60,8 +61,6 @@ namespace WordSearch.Server.Services
                 weights.Add(weight);
             }
 
-            _logger.LogDebug("Randomized indexes: {indexes}", randomizer);
-            _logger.LogDebug("Randomized weights: {weights}", weights);
             return randomizer;
         }
 
@@ -87,7 +86,6 @@ namespace WordSearch.Server.Services
                 lengths[randomNum] = defaultValue+1;
             }
 
-            _logger.LogDebug("WordLengths: {lengths}", lengths);
             return _generator.GetRandomWords([.. lengths]);
         }
 
@@ -99,6 +97,7 @@ namespace WordSearch.Server.Services
                 int xPos = trans.Position.X + (alongWord * trans.Rotation.X);
                 int yPos = trans.Position.Y + (alongWord * trans.Rotation.Y);
 
+                _logger.LogError("Coords: {x},{y}", xPos, yPos);
                 if (wordsearch[yPos, xPos] == null) continue;
 
                 if (wordsearch[yPos, xPos] == word[alongWord].ToString()) continue;
@@ -134,6 +133,7 @@ namespace WordSearch.Server.Services
             }
 
             PositionTable posTable = new(boardX, boardY);
+            _logger.LogDebug("posTable: {table}", posTable.Table);
             string newWord = remainingWords[0];
             while (!posTable.IsEmpty())
             {
@@ -141,13 +141,27 @@ namespace WordSearch.Server.Services
                 if (trans == null) return null;
 
                 Vector2D[]? placeWordCoords = TestWordPlaceability(newWord, trans, wordsearch);
-                if (placedWords == null) continue;
+                if (placeWordCoords == null) continue;
 
-                // TODO: Place words in wordsearch, and then run recursive,
-                // making sure to create a new "remainingWords" array,
-                // and adding this word to "placed words". Make sure tho
-                // that if the recursive call fails, remove this word
-                // from the "placed words"
+                string[,] newWordsearch = (string[,]) wordsearch.Clone();
+
+                for (int i = 0; i < placeWordCoords.Length; i++)
+                {
+                    var coord = placeWordCoords[i];
+                    newWordsearch[coord.Y, coord.X] = newWord[i].ToString();
+                }
+
+                placedWords.Add(newWord, new WordType()
+                {
+                    Position = trans.Position,
+                    Rotation = trans.Rotation,
+                    Word = newWord
+                });
+                PlaceWordsResult? placeResults = PlaceWordsearchWords(remainingWords.Skip(1).ToArray(), placedWords, newWordsearch, boardX, boardY);
+                if (placeResults != null) return placeResults;
+                
+                // Remove the word, since it does not work
+                placedWords.Remove(newWord);
             }
 
             return null;
@@ -158,24 +172,30 @@ namespace WordSearch.Server.Services
         /// </summary>
         /// <param name="difficulty"></param>
         /// <returns></returns>
-        public GameBoard generateGameBoard(Difficulty difficulty)
+        public Result<GameBoard, APIError> generateGameBoard(Difficulty difficulty)
         {
-            _logger.LogDebug("Difficulty level: {difficulty}", difficulty.Level);
             GetWordsearchParams(difficulty, out int sizeX, out int sizeY, out int wordSize, out int wordCount);
             _logger.LogDebug("BoardSize: {size}, wordSize: {wordSize}, wordCount: {wordCount}", (sizeX, sizeY), wordSize, wordCount);
-            string[] words = GetWords(Math.Min(sizeX, sizeY), wordSize, wordCount);
-            //Dictionary<string, PositionTable> tablifiedWords = CreateWordPositionTables(words, sizeX, sizeY);
 
+            int attempts = 0;
+            PlaceWordsResult? placeResults = null;
+            while (attempts < 100 && placeResults == null)
+            {
+                if (attempts % 5 == 0 && attempts != 0)
+                {
+                    _logger.LogWarning("Attempted setting up a board {attempts} times!", attempts);
+                }
+                string[] words = GetWords(Math.Min(sizeX, sizeY), wordSize, wordCount);
+                placeResults = PlaceWordsearchWords(words, [], new string[sizeY, sizeX], sizeX, sizeY);
+            }
+
+            if (placeResults == null) return new APIError("Attempt limit reached on wordsearch generation.");
             
-            var tempFindable = words
-                .Select(word => new WordType() { Position = new Vector2D(), Rotation = new Vector2D(), Word = word })
-                .ToDictionary(word => word.Word, word => word);
-
             return new GameBoard()
             {
                 Difficulty = difficulty,
-                BoardCharacters = [["a", "a"], ["a", "a"]],
-                Findable = tempFindable,
+                BoardCharacters = placeResults.wordsearch,
+                Findable = placeResults.findable,
                 Found = [],
                 Started = (new DateTimeOffset(DateTime.UtcNow)).ToUnixTimeMilliseconds()
             };
