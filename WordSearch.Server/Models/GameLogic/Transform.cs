@@ -4,5 +4,10 @@
     {
         public Vector2D Position { get; set; } = new Vector2D();
         public Vector2D Rotation { get; set; } = new Vector2D();
+
+        public override string ToString()
+        {
+            return $"[Transform={Position}:{Rotation}]";
+        }
     }
 }

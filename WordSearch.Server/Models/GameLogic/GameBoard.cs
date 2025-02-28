@@ -8,7 +8,7 @@
     public class GameBoard
     {
         public Difficulty Difficulty { get; set; } = Difficulty.Empty;
-        public string[,] BoardCharacters { get; set; } = new string[0,0];
+        public string[][] BoardCharacters { get; set; } = [];
         public Dictionary<string, WordType> Findable { get; set; } = [];
         public string[] Found { get; set; } = [];
         public long Started { get; set; } // milliseconds
@@ -36,7 +36,7 @@
         /// list does not include coordinates.
         /// </summary>
         public Difficulty Difficulty { get; set; } = Difficulty.Empty;
-        public string[,] BoardCharacters { get; set; } = new string[0, 0];
+        public string[][] BoardCharacters { get; set; } = [];
         public string[] Findable { get; set; } = [];
         public Dictionary<string, WordType> Found { get; set; } = [];
         public long Started { get; set; } // milliseconds

@@ -1,7 +1,6 @@
 ﻿namespace WordSearch.Server.Models.GameLogic
 {
     using System.Text.Json;
-    using TableList = List<List<List<Vector2D>>>;
 
     /// <summary>
     /// Stores all potential locations
@@ -11,7 +10,8 @@
     {
         public int BoardSizeX { get; }
         public int BoardSizeY { get; }
-        public TableList Table { get; }
+        public int WordSize { get; }
+        public List<LetterTile> Table { get; }
 
         private static readonly Random Rand = new();
 
@@ -21,21 +21,23 @@
         /// </summary>
         /// <param name="boardSizeX"></param>
         /// <param name="boardSizeY"></param>
-        public PositionTable(int boardSizeX, int boardSizeY)
+        public PositionTable(int boardSizeX, int boardSizeY, int wordSize)
         {
             BoardSizeX = boardSizeX;
             BoardSizeY = boardSizeY;
+            WordSize = wordSize;
 
-            TableList positionTables = [];
+            List<LetterTile> positionTables = [];
 
             for (int y = 0; y < BoardSizeY; y++)
             {
-                List<List<Vector2D>> yList = [];
                 for (int x = 0; x < BoardSizeX; x++)
                 {
-                    yList.Add(CreateRotationArray(x, y, boardSizeX, boardSizeY));
+                    var rotations = CreateRotationArray(x, y, boardSizeX, boardSizeY, wordSize);
+                    if (rotations.Count == 0) continue;
+                    var position = new Vector2D() { X = x, Y = y };
+                    positionTables.Add(new LetterTile() { Position = position, Rotations = rotations });
                 }
-                positionTables.Add(yList);
             }
 
             Table = positionTables;
@@ -51,7 +53,7 @@
         /// <param name="boardSizeX"></param>
         /// <param name="boardSizeY"></param>
         /// <param name="table"></param>
-        public PositionTable(int boardSizeX, int boardSizeY, TableList table)
+        public PositionTable(int boardSizeX, int boardSizeY, List<LetterTile> table)
         {
             BoardSizeX = boardSizeX;
             BoardSizeY = boardSizeY;
@@ -67,7 +69,7 @@
         /// <param name="sizeX">The width of the board</param>
         /// <param name="sizeY">The height of the board</param>
         /// <returns></returns>
-        private List<Vector2D> CreateRotationArray(int x, int y, int sizeX, int sizeY)
+        private List<Vector2D> CreateRotationArray(int x, int y, int sizeX, int sizeY, int wordSize)
         {
             List<Vector2D> result = [];
 
@@ -83,6 +85,13 @@
                     if (testX < 0 || testY < 0) continue;
                     if (testX >= sizeX || testY >= sizeY) continue;
 
+                    var destinationX = (wordSize * rotX + x);
+                    var destinationY = (wordSize * rotY + y);
+                    // If the potential ending letter is outside
+                    // of the grid, this rotation is not valid
+                    if (destinationX >= sizeX || destinationX < 0) continue;
+                    if (destinationY >= sizeY || destinationY < 0) continue;
+
                     result.Add(new Vector2D() { X = rotX, Y = rotY });
                 }
             }
@@ -97,7 +106,7 @@
         /// <returns></returns>
         public PositionTable Clone()
         {
-            var newTable = JsonSerializer.Deserialize<TableList>(JsonSerializer.Serialize(Table))!;
+            var newTable = JsonSerializer.Deserialize<List<LetterTile>>(JsonSerializer.Serialize(Table))!;
 
             return new PositionTable(BoardSizeX, BoardSizeY, newTable);
         }
@@ -130,28 +139,21 @@
         {
             if (Table.Count == 0) return null;
 
-            int randY = Rand.Next(0, Table.Count);
-            var listOfX = Table[randY];
-            int randX = Rand.Next(0, listOfX.Count);
-            var listOfRot = listOfX[randX];
-            int randRotIndex = Rand.Next(0, listOfRot.Count);
+            int randTileIndex = Rand.Next(0, Table.Count);
+            LetterTile randTile = Table[randTileIndex];
 
-            Vector2D randomRot = listOfRot[randRotIndex];
-            listOfRot.RemoveAt(randRotIndex);
-            if (listOfRot.Count == 0)
+            int randRotIndex = Rand.Next(0, randTile.Rotations.Count);
+            Vector2D randRot = randTile.Rotations[randRotIndex];
+            randTile.Rotations.RemoveAt(randRotIndex);
+            if (randTile.Rotations.Count == 0)
             {
-                listOfX.RemoveAt(randX);
-            }
-
-            if (listOfX.Count == 0)
-            {
-                Table.RemoveAt(randY);
+                Table.RemoveAt(randTileIndex);
             }
 
             return new Transform()
             {
-                Position = new Vector2D() { X = randX, Y = randY },
-                Rotation = randomRot
+                Position = randTile.Position,
+                Rotation = randRot
             };
         }
 
@@ -159,5 +161,11 @@
         {
             return Table.Count == 0;
         }
+    }
+
+    public class LetterTile
+    {
+        public Vector2D Position { get; set; } = new Vector2D();
+        public List<Vector2D> Rotations { get; set; } = [];
     }
 }
