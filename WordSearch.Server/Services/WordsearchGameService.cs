@@ -98,14 +98,10 @@ namespace WordSearch.Server.Services
                 int xPos = trans.Position.X + (alongWord * trans.Rotation.X);
                 int yPos = trans.Position.Y + (alongWord * trans.Rotation.Y);
 
-                //_logger.LogError("Coords: {x},{y}", xPos, yPos);
-                if (wordsearch[yPos][xPos] == null) continue;
+                if (wordsearch[yPos][xPos] != null && wordsearch[yPos][xPos] != word[alongWord].ToString()) 
+                    return null;
 
-                if (wordsearch[yPos][xPos] == word[alongWord].ToString()) continue;
-
-                // The letter cannot be placed here,
-                // thus the word cannot be placed
-                return null;
+                wordCoords.Add(new Vector2D() { X = xPos, Y = yPos });
             }
 
             return [.. wordCoords];
@@ -135,7 +131,6 @@ namespace WordSearch.Server.Services
 
             string newWord = remainingWords[0];
             PositionTable posTable = new(boardX, boardY, newWord.Length);
-            //_logger.LogDebug("posTable: {table}", posTable.Table);
             while (!posTable.IsEmpty())
             {
                 var trans = posTable.RandomEject();
@@ -144,7 +139,7 @@ namespace WordSearch.Server.Services
                 Vector2D[]? placeWordCoords = TestWordPlaceability(newWord, trans, wordsearch);
                 if (placeWordCoords == null) continue;
 
-                string[][] newWordsearch = (string[][]) wordsearch.Clone();
+                string[][] newWordsearch = wordsearch.Select(inner => (string[]) inner.Clone()).ToArray();
 
                 for (int i = 0; i < placeWordCoords.Length; i++)
                 {
@@ -158,7 +153,6 @@ namespace WordSearch.Server.Services
                     Rotation = trans.Rotation,
                     Word = newWord
                 });
-                _logger.LogDebug(JsonSerializer.Serialize(newWordsearch));
                 PlaceWordsResult? placeResults = PlaceWordsearchWords(remainingWords.Skip(1).ToArray(), placedWords, newWordsearch, boardX, boardY);
                 if (placeResults != null) return placeResults;
                 
@@ -187,7 +181,6 @@ namespace WordSearch.Server.Services
         public Result<GameBoard, APIError> generateGameBoard(Difficulty difficulty)
         {
             GetWordsearchParams(difficulty, out int sizeX, out int sizeY, out int wordSize, out int wordCount);
-            _logger.LogDebug("BoardSize: {size}, wordSize: {wordSize}, wordCount: {wordCount}", (sizeX, sizeY), wordSize, wordCount);
 
             int attempts = 0;
             PlaceWordsResult? placeResults = null;
@@ -198,6 +191,7 @@ namespace WordSearch.Server.Services
                     _logger.LogWarning("Attempted setting up a board {attempts} times!", attempts);
                 }
                 string[] words = GetWords(Math.Min(sizeX, sizeY), wordSize, wordCount);
+                //_logger.LogDebug("Words {words}\nWordCount {wordCount}", words, wordCount);
                 placeResults = PlaceWordsearchWords(words, [], CreateWordsearchBoard(sizeX, sizeY), sizeX, sizeY);
                 attempts++;
             }

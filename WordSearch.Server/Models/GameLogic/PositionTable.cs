@@ -79,14 +79,8 @@
                 {
                     if (rotY == 0 && rotX == 0) continue;
 
-                    int testX = x + rotX;
-                    int testY = y + rotY;
-
-                    if (testX < 0 || testY < 0) continue;
-                    if (testX >= sizeX || testY >= sizeY) continue;
-
-                    var destinationX = (wordSize * rotX + x);
-                    var destinationY = (wordSize * rotY + y);
+                    var destinationX = ((wordSize-1) * rotX + x);
+                    var destinationY = ((wordSize-1) * rotY + y);
                     // If the potential ending letter is outside
                     // of the grid, this rotation is not valid
                     if (destinationX >= sizeX || destinationX < 0) continue;
