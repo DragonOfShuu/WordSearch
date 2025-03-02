@@ -1,6 +1,7 @@
 
 using WordSearch.Server.Controllers.Hubs;
 using WordSearch.Server.Services;
+using WordSearch.Server.Services.Utils;
 using WordSearch.Server.Services.WordGenerator;
 using WordSearch.Server.Services.WordSelector;
 
@@ -18,6 +19,9 @@ namespace WordSearch.Server
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
             builder.Services.AddSignalR();
+
+            // Utils
+            builder.Services.AddSingleton<IRandomService, RandomService>();
 
             builder.Services.AddSingleton<IWordGenerator, WordGeneratorService>();
             builder.Services.AddScoped<IGameService, WordsearchGameService>();

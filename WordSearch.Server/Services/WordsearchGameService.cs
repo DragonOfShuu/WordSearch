@@ -2,14 +2,16 @@
 using Weighted_Randomizer;
 using WordSearch.Server.Models.API;
 using WordSearch.Server.Models.GameLogic;
+using WordSearch.Server.Services.Utils;
 using WordSearch.Server.Services.WordGenerator;
 
 namespace WordSearch.Server.Services
 {
-    public class WordsearchGameService(IWordGenerator generator, ILogger<WordsearchGameService> logger) : IGameService
+    public class WordsearchGameService(IWordGenerator generator, ILogger<WordsearchGameService> logger, IRandomService random) : IGameService
     {
         private readonly IWordGenerator _generator = generator;
         private readonly ILogger _logger = logger;
+        private readonly IRandomService _random = random;
 
         public Result<FindWordResults, APIError> FindWord(GameBoard gameBoard, (int, int) position, (int, int) direction, int count)
         {
@@ -163,6 +165,16 @@ namespace WordSearch.Server.Services
             return null;
         }
 
+        private string[][] FillWithTrash(string[][] wordsearch)
+        {
+            string chars = "abcdefghijklmnopqrstuvwxyz";
+            return wordsearch.Select(row => row.Select(potChar =>
+            {
+                if (potChar != null) return potChar;
+                return chars[_random.Rand.Next(chars.Length)].ToString();
+            }).ToArray()).ToArray();
+        }
+
         private string[][] CreateWordsearchBoard(int sizeX, int sizeY)
         {
             string[][] table = new string[sizeY][];
@@ -184,8 +196,9 @@ namespace WordSearch.Server.Services
 
             int attempts = 0;
             PlaceWordsResult? placeResults = null;
-            while (attempts < 100 && placeResults == null)
+            while (attempts < 10 && placeResults == null)
             {
+                attempts++;
                 if (attempts % 5 == 0 && attempts != 0)
                 {
                     _logger.LogWarning("Attempted setting up a board {attempts} times!", attempts);
@@ -193,7 +206,6 @@ namespace WordSearch.Server.Services
                 string[] words = GetWords(Math.Min(sizeX, sizeY), wordSize, wordCount);
                 //_logger.LogDebug("Words {words}\nWordCount {wordCount}", words, wordCount);
                 placeResults = PlaceWordsearchWords(words, [], CreateWordsearchBoard(sizeX, sizeY), sizeX, sizeY);
-                attempts++;
             }
 
             if (placeResults == null) return new APIError("Attempt limit reached on wordsearch generation.");
@@ -201,7 +213,7 @@ namespace WordSearch.Server.Services
             return new GameBoard()
             {
                 Difficulty = difficulty,
-                BoardCharacters = placeResults.wordsearch,
+                BoardCharacters = FillWithTrash(placeResults.wordsearch),
                 Findable = placeResults.findable,
                 Found = [],
                 Started = (new DateTimeOffset(DateTime.UtcNow)).ToUnixTimeMilliseconds()

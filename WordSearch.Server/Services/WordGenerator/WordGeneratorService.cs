@@ -1,4 +1,5 @@
-﻿using WordSearch.Server.Services.WordGenerator;
+﻿using WordSearch.Server.Services.Utils;
+using WordSearch.Server.Services.WordGenerator;
 using WordSearch.Server.Shared.JSONFileReader;
 
 namespace WordSearch.Server.Services.WordSelector
@@ -8,11 +9,12 @@ namespace WordSearch.Server.Services.WordSelector
         private readonly ILogger<WordGeneratorService> _logger;
         public Dictionary<int, string[]> AllWords { get; set; }
         
-        private readonly Random random = new Random();
+        private readonly IRandomService _random;
 
-        public WordGeneratorService(ILogger<WordGeneratorService> logger)
+        public WordGeneratorService(ILogger<WordGeneratorService> logger, IRandomService random)
         {
             _logger = logger;
+            _random = random;
 
             // Hard coded for now, but I will most likely provide
             // some sort of language filter in the future if 
@@ -32,7 +34,7 @@ namespace WordSearch.Server.Services.WordSelector
             var words = AllWords[length];
             if (words == null) return null;
 
-            var randomIndex = this.random.Next(words.Length);
+            var randomIndex = _random.Rand.Next(words.Length);
             return words[randomIndex];
         }
 
