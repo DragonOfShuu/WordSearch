@@ -32,8 +32,8 @@ class SignalRSocket {
     });
 
     const replayableSubject = new ReplaySubject<void>();
-    connectionObserver.subscribe(replayableSubject)
-    return replayableSubject
+    connectionObserver.subscribe(replayableSubject);
+    return replayableSubject;
   }
 
   registerOnMethod<T extends Array<any>>(

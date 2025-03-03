@@ -1,11 +1,18 @@
-<div class="grid aspect-square grid-element" style="grid-template-columns: repeat({{searchableText().length}}, minmax(0, 1fr));" >
-    @for (row of searchableText(); track $index; let y = $index) {
-        @for (char of row; track $index; let x = $index) {
-            <div class="m-1 select-none">
-                <div class="bg-primary-200/20 dark:bg-primary-800 dark:hover:bg-primary-700 border-2 dark:border-l-primary-700 dark:border-t-primary-700 dark:border-r-secondary-900 dark:border-b-secondary-900 text-size-adjust flex justify-center items-center uppercase size-full rounded-md">
-                    {{char}}
-                </div>
-            </div>
-        }
+<div
+  class="grid-element grid aspect-square"
+  style="grid-template-columns: repeat({{
+    searchableText().length
+  }}, minmax(0, 1fr));"
+>
+  @for (row of searchableText(); track $index; let y = $index) {
+    @for (char of row; track $index; let x = $index) {
+      <div class="m-1 select-none">
+        <div
+          class="text-size-adjust flex size-full items-center justify-center rounded-md border-2 bg-primary-200/20 uppercase dark:border-b-secondary-900 dark:border-l-primary-700 dark:border-r-secondary-900 dark:border-t-primary-700 dark:bg-primary-800 dark:hover:bg-primary-700"
+        >
+          {{ char }}
+        </div>
+      </div>
     }
+  }
 </div>

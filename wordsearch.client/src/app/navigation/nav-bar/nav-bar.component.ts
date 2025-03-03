@@ -7,10 +7,10 @@ type NavLink = {
 };
 
 @Component({
-    selector: 'shuu-nav-bar',
-    templateUrl: './nav-bar.component.html',
-    styleUrl: './nav-bar.component.sass',
-    imports: [ThemeToggleComponent],
+  selector: 'shuu-nav-bar',
+  templateUrl: './nav-bar.component.html',
+  styleUrl: './nav-bar.component.sass',
+  imports: [ThemeToggleComponent],
 })
 export class NavBarComponent {
   navLinks: NavLink[] = [

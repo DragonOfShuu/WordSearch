@@ -15,7 +15,7 @@ export class SingleplayerService {
 
   constructor() {
     this.socket = new SignalRSocket('/hubs/singleplayer');
-    this.connectionObservaboo = this.socket.startConnection()
+    this.connectionObservaboo = this.socket.startConnection();
 
     this.connectionObservaboo.subscribe({
       complete() {
@@ -35,7 +35,7 @@ export class SingleplayerService {
   }
 
   getConnectionState(): signalR.HubConnectionState {
-    return this.socket.getConnectionState()
+    return this.socket.getConnectionState();
   }
 
   getDifficulty() {

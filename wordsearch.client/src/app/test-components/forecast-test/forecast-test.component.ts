@@ -10,10 +10,10 @@ interface WeatherForecast {
 }
 
 @Component({
-    selector: 'shuu-forecast-test',
-    templateUrl: './forecast-test.component.html',
-    styleUrl: './forecast-test.component.sass',
-    imports: [NgFor],
+  selector: 'shuu-forecast-test',
+  templateUrl: './forecast-test.component.html',
+  styleUrl: './forecast-test.component.sass',
+  imports: [NgFor],
 })
 export class ForecastTestComponent implements OnInit {
   public forecasts: WeatherForecast[] = [];

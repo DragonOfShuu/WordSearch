@@ -1,24 +1,20 @@
 <div class="size-full md:p-4">
   <div class="grid grid-cols-3 grid-rows-1 gap-3">
-    <div class="flex justify-end items-start">
-        <div class="frame p-3">
-            <h1>
-              Words to Find
-            </h1>
-            <ul>
-              @for (word of currentBoard()?.findable; track $index) {
-                <li>
-                  {{word}}
-                </li>
-              }
-            </ul>
-        </div>
+    <div class="flex items-start justify-end">
+      <div class="frame p-3">
+        <h1>Words to Find</h1>
+        <ul>
+          @for (word of currentBoard()?.findable; track $index) {
+            <li>
+              {{ word }}
+            </li>
+          }
+        </ul>
+      </div>
     </div>
     <div class="">
-        <shuu-wordsearch [searchableText]="boardCharacters()" />
+      <shuu-wordsearch [searchableText]="boardCharacters()" />
     </div>
-    <div class="">
-        
-    </div>
+    <div class=""></div>
   </div>
 </div>

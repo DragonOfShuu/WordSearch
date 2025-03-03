@@ -10,9 +10,9 @@ import { MultiplayerService } from '../../core/multiplayer/multiplayer.service';
 type LoadingState = 'AwaitConnection' | 'Connected' | 'Failed';
 
 @Component({
-    selector: 'shuu-multiplayer-messager',
-    templateUrl: './multiplayer-messager.component.html',
-    styleUrl: './multiplayer-messager.component.sass',
+  selector: 'shuu-multiplayer-messager',
+  templateUrl: './multiplayer-messager.component.html',
+  styleUrl: './multiplayer-messager.component.sass',
 })
 export class MultiplayerMessagerComponent implements OnInit {
   private multiplayerService = inject(MultiplayerService);
