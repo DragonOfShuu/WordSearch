@@ -14,7 +14,7 @@ const createMultiColor = (name: string) => {
     const varIndex = getCorrespondingNumber(i);
     varProperties = {
       ...varProperties,
-      [varIndex]: `var(--color-${name}-${varIndex})`,
+      [varIndex]: `rgb(var(--color-${name}-${varIndex}))`,
     };
   }
 

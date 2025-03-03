@@ -129,20 +129,24 @@
         /// from the table.
         /// </summary>
         /// <returns></returns>
-        public Transform? RandomEject()
+        public Transform? RandomEject(Vector2D[] avoid)
         {
-            if (Table.Count == 0) return null;
-
-            int randTileIndex = Rand.Next(0, Table.Count);
-            LetterTile randTile = Table[randTileIndex];
-
-            int randRotIndex = Rand.Next(0, randTile.Rotations.Count);
-            Vector2D randRot = randTile.Rotations[randRotIndex];
-            randTile.Rotations.RemoveAt(randRotIndex);
-            if (randTile.Rotations.Count == 0)
+            Vector2D randRot;
+            LetterTile randTile;
+            do
             {
-                Table.RemoveAt(randTileIndex);
-            }
+                if (Table.Count == 0) return null;
+                int randTileIndex = Rand.Next(0, Table.Count);
+                randTile = Table[randTileIndex];
+
+                int randRotIndex = Rand.Next(0, randTile.Rotations.Count);
+                randRot = randTile.Rotations[randRotIndex];
+                randTile.Rotations.RemoveAt(randRotIndex);
+                if (randTile.Rotations.Count == 0)
+                {
+                    Table.RemoveAt(randTileIndex);
+                }
+            } while (avoid.Contains(randRot));
 
             return new Transform()
             {

@@ -111,13 +111,13 @@ namespace WordSearch.Server.Services
 
         private class PlaceWordsResult
         {
-            public Dictionary<string, WordType> findable = [];
+            public SortedDictionary<string, WordType> findable = [];
             public string[][] wordsearch = new string[0][];
         }
 
         private PlaceWordsResult? PlaceWordsearchWords(
             string[] remainingWords,
-            Dictionary<string, WordType> placedWords, 
+            SortedDictionary<string, WordType> placedWords, 
             string[][] wordsearch,
             int boardX,
             int boardY
@@ -135,7 +135,8 @@ namespace WordSearch.Server.Services
             PositionTable posTable = new(boardX, boardY, newWord.Length);
             while (!posTable.IsEmpty())
             {
-                var trans = posTable.RandomEject();
+                var lastRotation = placedWords.Count > 0 ? placedWords.Last().Value.Rotation : null;
+                var trans = posTable.RandomEject(lastRotation == null ? [] : [lastRotation, lastRotation.Change(v=> v*-1)]);
                 if (trans == null) return null;
 
                 Vector2D[]? placeWordCoords = TestWordPlaceability(newWord, trans, wordsearch);
@@ -213,8 +214,9 @@ namespace WordSearch.Server.Services
             return new GameBoard()
             {
                 Difficulty = difficulty,
-                BoardCharacters = FillWithTrash(placeResults.wordsearch),
-                Findable = placeResults.findable,
+                //BoardCharacters = FillWithTrash(placeResults.wordsearch),
+                BoardCharacters = placeResults.wordsearch,
+                Findable = placeResults.findable.ToDictionary(),
                 Found = [],
                 Started = (new DateTimeOffset(DateTime.UtcNow)).ToUnixTimeMilliseconds()
             };
