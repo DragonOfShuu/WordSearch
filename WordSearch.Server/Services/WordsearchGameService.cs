@@ -4,6 +4,7 @@ using WordSearch.Server.Models.API;
 using WordSearch.Server.Models.GameLogic;
 using WordSearch.Server.Services.Utils;
 using WordSearch.Server.Services.WordGenerator;
+using WordSearch.Server.Shared.PerfTimer;
 
 namespace WordSearch.Server.Services
 {
@@ -78,7 +79,9 @@ namespace WordSearch.Server.Services
         private string[] GetWords(int maxSize, int wordSize, int wordCount)
         {
             Dictionary<int, int> lengths = [];
-            var randomizer = SetupRandomizer(3, maxSize, wordSize);
+
+            var adjustedWordSize = wordSize < 3 ? 3 : (wordSize > maxSize ? maxSize : wordSize);
+            var randomizer = SetupRandomizer(3, maxSize, adjustedWordSize);
 
             for (int i = 0; i < wordCount; i++)
             {
@@ -109,35 +112,41 @@ namespace WordSearch.Server.Services
             return [.. wordCoords];
         }
 
-        private class PlaceWordsResult
+        private class PlaceWordsSuccess
         {
-            public SortedDictionary<string, WordType> findable = [];
-            public string[][] wordsearch = new string[0][];
+            public SortedDictionary<string, WordType> Findable { get; set; } = [];
+            public string[][] Wordsearch { get; set; } = [];
         }
 
-        private PlaceWordsResult? PlaceWordsearchWords(
+        private class PlaceWordsFail
+        {
+            public string Reason { get; set; } = string.Empty;
+        }
+
+        private Result<PlaceWordsSuccess, PlaceWordsFail> PlaceWordsearchWords(
             string[] remainingWords,
             SortedDictionary<string, WordType> placedWords, 
             string[][] wordsearch,
             int boardX,
-            int boardY
+            int boardY,
+            IPerfTimer timer
         )
         {
             if (remainingWords.Length == 0)
             {
-                return new PlaceWordsResult() { 
-                    findable = placedWords, 
-                    wordsearch = wordsearch 
+                return new PlaceWordsSuccess() { 
+                    Findable = placedWords, 
+                    Wordsearch = wordsearch 
                 };
             }
 
             string newWord = remainingWords[0];
             PositionTable posTable = new(boardX, boardY, newWord.Length);
-            while (!posTable.IsEmpty())
+            while (!posTable.IsEmpty() && timer.IsValid())
             {
                 var lastRotation = placedWords.Count > 0 ? placedWords.Last().Value.Rotation : null;
                 var trans = posTable.RandomEject(lastRotation == null ? [] : [lastRotation, lastRotation.Change(v=> v*-1)]);
-                if (trans == null) return null;
+                if (trans == null) return new PlaceWordsFail() { Reason = "Cannot place" };
 
                 Vector2D[]? placeWordCoords = TestWordPlaceability(newWord, trans, wordsearch);
                 if (placeWordCoords == null) continue;
@@ -150,20 +159,22 @@ namespace WordSearch.Server.Services
                     newWordsearch[coord.Y][coord.X] = newWord[i].ToString();
                 }
 
-                placedWords.Add(newWord, new WordType()
+                placedWords.TryAdd(newWord, new WordType()
                 {
                     Position = trans.Position,
                     Rotation = trans.Rotation,
                     Word = newWord
                 });
-                PlaceWordsResult? placeResults = PlaceWordsearchWords(remainingWords.Skip(1).ToArray(), placedWords, newWordsearch, boardX, boardY);
-                if (placeResults != null) return placeResults;
+                Result<PlaceWordsSuccess, PlaceWordsFail> placeResults = PlaceWordsearchWords(remainingWords.Skip(1).ToArray(), placedWords, newWordsearch, boardX, boardY, timer);
+
+                if (placeResults.IsOk)
+                    return placeResults;
                 
                 // Remove the word, since it does not work
                 placedWords.Remove(newWord);
             }
 
-            return null;
+            return new PlaceWordsFail() { Reason = timer.IsValid() ? "Cannot place" : "Ran out of time" };
         }
 
         private string[][] FillWithTrash(string[][] wordsearch)
@@ -196,8 +207,8 @@ namespace WordSearch.Server.Services
             GetWordsearchParams(difficulty, out int sizeX, out int sizeY, out int wordSize, out int wordCount);
 
             int attempts = 0;
-            PlaceWordsResult? placeResults = null;
-            while (attempts < 10 && placeResults == null)
+            PlaceWordsSuccess? placeResults = null;
+            while (attempts < 5 && placeResults == null)
             {
                 attempts++;
                 if (attempts % 5 == 0 && attempts != 0)
@@ -206,7 +217,15 @@ namespace WordSearch.Server.Services
                 }
                 string[] words = GetWords(Math.Min(sizeX, sizeY), wordSize, wordCount);
                 //_logger.LogDebug("Words {words}\nWordCount {wordCount}", words, wordCount);
-                placeResults = PlaceWordsearchWords(words, [], CreateWordsearchBoard(sizeX, sizeY), sizeX, sizeY);
+                PerfTimer timer = new(500);
+                timer.Start();
+                var potentialResults = PlaceWordsearchWords(words, [], CreateWordsearchBoard(sizeX, sizeY), sizeX, sizeY, timer);
+                timer.Reset();
+
+                placeResults = potentialResults.Match<PlaceWordsSuccess?>(
+                    success => success,
+                    failure => null
+                );
             }
 
             if (placeResults == null) return new APIError("Attempt limit reached on wordsearch generation.");
@@ -215,8 +234,8 @@ namespace WordSearch.Server.Services
             {
                 Difficulty = difficulty,
                 //BoardCharacters = FillWithTrash(placeResults.wordsearch),
-                BoardCharacters = placeResults.wordsearch,
-                Findable = placeResults.findable.ToDictionary(),
+                BoardCharacters = placeResults.Wordsearch,
+                Findable = placeResults.Findable.ToDictionary(),
                 Found = [],
                 Started = (new DateTimeOffset(DateTime.UtcNow)).ToUnixTimeMilliseconds()
             };

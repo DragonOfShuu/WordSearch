@@ -25,7 +25,7 @@ export class SingleplayerUiComponent implements OnInit {
       complete() {
         betterThis.singleplayerService.newGame({
           intensity: 'medium',
-          level: 1,
+          level: 3,
           time: 300,
         });
       },

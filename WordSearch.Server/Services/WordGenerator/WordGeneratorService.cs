@@ -8,6 +8,7 @@ namespace WordSearch.Server.Services.WordSelector
     {
         private readonly ILogger<WordGeneratorService> _logger;
         public Dictionary<int, string[]> AllWords { get; set; }
+        public int[] WordSizes { get; set; }
         
         private readonly IRandomService _random;
 
@@ -25,14 +26,16 @@ namespace WordSearch.Server.Services.WordSelector
                 throw new InvalidOperationException("Words.json is inaccessible; cannot generate words.");
             }
             AllWords = words;
+            WordSizes = [.. words.Keys];
 
             _logger.LogInformation("Successfully digested words.");
         }
 
         public string? GetRandomWord(int length)
         {
-            var words = AllWords[length];
-            if (words == null) return null;
+            int adjustedLength = WordSizes.Contains(length) ? length : Array.FindLast(WordSizes, x=> x < length);
+            string[] words = AllWords.GetValueOrDefault(length, []);
+            if (words.Length == 0) return null;
 
             var randomIndex = _random.Rand.Next(words.Length);
             return words[randomIndex];
