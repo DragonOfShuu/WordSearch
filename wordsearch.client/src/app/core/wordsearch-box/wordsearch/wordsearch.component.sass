@@ -1,7 +1,12 @@
 .grid-element
     @apply rounded-md border-secondary-600 border-4
 
+.letter-element
+    container: letter / size
+
 .text-size-adjust
-    container-type: size
-    font-size: 2cqw
-    
+    font-size: 90cqw
+
+@container letter ( min-width: 50px )
+    .text-size-adjust
+        font-size: 75cqw

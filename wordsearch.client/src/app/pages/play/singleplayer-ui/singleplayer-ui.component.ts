@@ -17,6 +17,7 @@ export class SingleplayerUiComponent implements OnInit {
     () =>
       this.currentBoard()?.boardCharacters ?? Array(5).fill(Array(5).fill('A')),
   );
+  foundWords = computed(() => this.currentBoard()?.found ?? {});
 
   ngOnInit(): void {
     // Cause ✨ JavaScript ✨

@@ -4,6 +4,9 @@
 
 :root
     box-sizing: border-box
+
+    --nav-margin: 3.8rem
+
     /** Majority colors, like the background **/
     --color-primary-50: 234 232 246
     --color-primary-100: 214 210 238
@@ -55,3 +58,11 @@
 
     .frame
         @apply dark:bg-primary-800 bg-primary-200 rounded-lg
+
+@layer utils
+    .h-screen-no-margin
+        height: calc( 100vh - var(--nav-margin) )
+
+    .w-screen-no-margin
+        width: calc( 100vw - var(--nav-margin) )
+        

@@ -1,12 +1,12 @@
 <div
-  class="grid-element grid aspect-square"
+  class="grid-element m-auto grid aspect-square max-h-full max-w-full"
   style="grid-template-columns: repeat({{
     searchableText().length
   }}, minmax(0, 1fr));"
 >
   @for (row of searchableText(); track $index; let y = $index) {
     @for (char of row; track $index; let x = $index) {
-      <div class="m-1 select-none">
+      <div class="letter-element m-1 select-none" (click)="tileClicked(x, y)">
         <div
           class="text-size-adjust flex size-full items-center justify-center rounded-md border-2 bg-primary-200/20 uppercase dark:border-b-secondary-900 dark:border-l-primary-700 dark:border-r-secondary-900 dark:border-t-primary-700 dark:bg-primary-800 dark:hover:bg-primary-700"
         >

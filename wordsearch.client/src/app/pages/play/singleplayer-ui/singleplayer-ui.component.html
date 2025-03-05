@@ -1,6 +1,8 @@
-<div class="size-full md:p-4">
-  <div class="grid grid-cols-3 grid-rows-1 gap-3">
-    <div class="flex items-start justify-end">
+<div class="size-full md:px-4">
+  <div
+    class="flex grid-cols-3 grid-rows-1 flex-col gap-3 max-lg:items-stretch lg:grid"
+  >
+    <div class="flex items-start justify-end max-lg:order-1">
       <div class="frame p-3">
         <h1>Words to Find</h1>
         <ul>
@@ -12,9 +14,11 @@
         </ul>
       </div>
     </div>
-    <div class="">
-      <shuu-wordsearch [searchableText]="boardCharacters()" />
-    </div>
-    <div class=""></div>
+    <shuu-wordsearch
+      [searchableText]="boardCharacters()"
+      [foundText]="foundWords()"
+      class="h-screen-no-margin w-full overflow-hidden max-lg:py-2"
+    />
+    <div class="max-lg:order-2"></div>
   </div>
 </div>

@@ -1,4 +1,8 @@
-import { Component, input } from '@angular/core';
+import { Component, input, output } from '@angular/core';
+import {
+  WordDictionary,
+  WordType,
+} from '../../../shared/types/word-dictionary.types';
 
 @Component({
   selector: 'shuu-wordsearch',
@@ -7,4 +11,9 @@ import { Component, input } from '@angular/core';
 })
 export class WordsearchComponent {
   searchableText = input.required<string[][]>();
+  foundText = input.required<WordDictionary>();
+
+  selectedText = output<WordType>();
+
+  tileClicked(x: number, y: number) {}
 }

@@ -35,7 +35,7 @@ namespace WordSearch.Server.Services
         private void GetWordsearchParams(Difficulty difficulty, out int sizeX, out int sizeY, out int wordSize, out int wordCount)
         {
             Double difficultyLevel = difficulty.Level - 1;
-            sizeX = sizeY = (int)Math.Round(5 * Math.Log10(0.9 * (difficultyLevel) + 1) + 7.4);
+            sizeX = sizeY = (int)Math.Round(5 * Math.Log10(0.5 * (difficultyLevel) + 1) + 7.4);
             wordSize = (int)Math.Round(-8 * Math.Log10(0.1 * (difficultyLevel) + 0.5) + 5);
             wordCount = (int)Math.Round(7 * Math.Log10(0.07 * (difficultyLevel) + 0.1) + 11);
         }
@@ -233,8 +233,8 @@ namespace WordSearch.Server.Services
             return new GameBoard()
             {
                 Difficulty = difficulty,
-                //BoardCharacters = FillWithTrash(placeResults.wordsearch),
-                BoardCharacters = placeResults.Wordsearch,
+                BoardCharacters = FillWithTrash(placeResults.Wordsearch),
+                //BoardCharacters = placeResults.Wordsearch,
                 Findable = placeResults.Findable.ToDictionary(),
                 Found = [],
                 Started = (new DateTimeOffset(DateTime.UtcNow)).ToUnixTimeMilliseconds()

@@ -27,7 +27,7 @@ module.exports = {
   theme: {
     extend: {
       spacing: {
-        'nav-margin': '3.8rem',
+        'nav-margin': 'var(--nav-margin)',
       },
       colors: {
         primary: createMultiColor('primary'),
