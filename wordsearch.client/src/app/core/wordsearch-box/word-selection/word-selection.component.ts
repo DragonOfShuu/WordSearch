@@ -7,17 +7,16 @@ import { WordType } from '../../../shared/types/word-dictionary.types';
   selector: 'shuu-word-selection',
   imports: [],
   templateUrl: './word-selection.component.html',
-  styleUrl: './word-selection.component.sass'
+  styleUrl: './word-selection.component.sass',
 })
 export class WordSelectionComponent {
   r = input(this.randomColorValue());
   g = input(this.randomColorValue());
   b = input(this.randomColorValue());
 
-  position = input.required<Vector2D>()
-  foundCoords = input.required<{[x: string]: WordType[]}>()
-  selected = input.required<null|Vector2D>()
-  hover = input.required<null|Vector2D>()
+  position = input.required<Vector2D>();
+  rotation = input.required<Vector2D | null>();
+  length = input.required<number | null>();
 
   randomColorValue() {
     return randomInt(50, 240);

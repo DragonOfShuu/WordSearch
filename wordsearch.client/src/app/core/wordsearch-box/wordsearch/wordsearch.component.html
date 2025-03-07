@@ -8,19 +8,31 @@
     @for (char of row; track $index; let x = $index) {
       <div class="letter-element m-1 select-none" (click)="tileClicked(x, y)">
         <div
-        class="text-size-adjust flex size-full items-center justify-center rounded-md border-2 bg-primary-200/20 uppercase dark:border-b-secondary-900 dark:border-l-primary-700 dark:border-r-secondary-900 dark:border-t-primary-700 dark:bg-primary-800 dark:hover:bg-primary-700"
+          class="text-size-adjust flex size-full items-center justify-center rounded-md border-2 bg-primary-200/20 uppercase dark:border-b-secondary-900 dark:border-l-primary-700 dark:border-r-secondary-900 dark:border-t-primary-700 dark:bg-primary-800 dark:hover:bg-primary-700"
         >
-          <shuu-word-selection 
-            class="absolute z-0"
-            [position]="{x, y}"
-            [foundCoords]="foundCoords()"
-            [hover]="null"
-            [selected]="selectedTile()" />
           <p class="relative z-10">
             {{ char }}
           </p>
         </div>
       </div>
     }
+  }
+
+  @for (selection of foundText() | keyvalue; track selection.key) {
+    <shuu-word-selection
+      [position]="selection.value.position"
+      [rotation]="selection.value.rotation"
+      [length]="selection.value.word.length"
+    />
+  }
+
+  @let target = selectedTile();
+  @if (target) {
+    <shuu-word-selection
+      [position]="target"
+      [rotation]="snapToTileData()?.rotation ?? null"
+      [length]="snapToTileData()?.length ?? null"
+      style="grid-column: {{ target.x + 1 }}; grid-row: {{ target.y + 1 }}"
+    />
   }
 </div>
