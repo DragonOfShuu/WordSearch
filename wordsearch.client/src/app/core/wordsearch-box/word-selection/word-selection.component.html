@@ -1,6 +1,8 @@
-<div
-  class="size-full"
-  style="grid-column: {{ position().x + 1 }}; grid-row: {{ position().y + 1 }}"
->
-  <div class="main-selection rounded-full"></div>
+<div class="selection-container size-full">
+  <!-- class="size-full" -->
+  <!-- style="grid-column: {{ position().x + 1 }}; grid-row: {{ position().y + 1 }}" -->
+  <div
+    class="main-selection rounded-full"
+    [style.background-color]="rgb() | rgbify"
+  ></div>
 </div>

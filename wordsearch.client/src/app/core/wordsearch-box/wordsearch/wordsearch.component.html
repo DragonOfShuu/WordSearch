@@ -2,11 +2,18 @@
   class="grid-element m-auto grid aspect-square max-h-full max-w-full"
   style="grid-template-columns: repeat({{
     searchableText().length
-  }}, minmax(0, 1fr));"
+  }}, minmax(0, 1fr)); grid-template-rows: repeat({{
+    searchableText().length
+  }}, minmax(0, 1fr))"
 >
   @for (row of searchableText(); track $index; let y = $index) {
     @for (char of row; track $index; let x = $index) {
-      <div class="letter-element m-1 select-none" (click)="tileClicked(x, y)">
+      <div
+        class="letter-element m-1 select-none"
+        (click)="tileClicked(x, y)"
+        [style.grid-column]="x + 1"
+        [style.grid-row]="y + 1"
+      >
         <div
           class="text-size-adjust flex size-full items-center justify-center rounded-md border-2 bg-primary-200/20 uppercase dark:border-b-secondary-900 dark:border-l-primary-700 dark:border-r-secondary-900 dark:border-t-primary-700 dark:bg-primary-800 dark:hover:bg-primary-700"
         >
@@ -32,7 +39,9 @@
       [position]="target"
       [rotation]="snapToTileData()?.rotation ?? null"
       [length]="snapToTileData()?.length ?? null"
-      style="grid-column: {{ target.x + 1 }}; grid-row: {{ target.y + 1 }}"
+      class="self-stretch justify-self-stretch"
+      [style.grid-column]="target.x + 1"
+      [style.grid-row]="target.y + 1"
     />
   }
 </div>

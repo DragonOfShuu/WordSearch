@@ -79,6 +79,16 @@ export class WordsearchComponent {
       return;
     }
 
+    if (
+      // True if the selected tile is not horizontal or vertical
+      !(selected.x == x || selected.y == y) &&
+      // True if the selected tile is not diagonal
+      Math.abs(selected.x - x) !== Math.abs(selected.y - y)
+    ) {
+      console.log('Selection is not perpendicular nor diagonal');
+      return;
+    }
+
     const start: Vector2D = selected;
     const end: Vector2D = { x, y };
 
