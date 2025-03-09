@@ -103,4 +103,12 @@ export class WordsearchComponent {
     this.selectedTile.set(null);
     this.selectText.emit(wordInfo);
   }
+
+  unSnap() {
+    this.snapToTile.set(null);
+  }
+
+  snapTo(x: number, y: number) {
+    this.snapToTile.set({x, y})
+  }
 }

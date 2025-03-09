@@ -1,8 +1,16 @@
-<div class="selection-container size-full">
-  <!-- class="size-full" -->
-  <!-- style="grid-column: {{ position().x + 1 }}; grid-row: {{ position().y + 1 }}" -->
-  <div
-    class="main-selection rounded-full"
-    [style.background-color]="rgb() | rgbify"
-  ></div>
+<div class="selection-container size-full overflow-visible">
+  <div class="relative size-full flex justify-center items-center">
+    <div
+        class="main-blade grid grid-cols-2 grid-rows-1 absolute"
+        [style.width.cqw]="(90+(100*((length() ?? 1)-1))) * 2"
+        [style.height.cqh]="90"
+        [style.left.cqw]="-85-(100*((length() ?? 1)-1))"
+      >
+      <div></div>
+      <div
+        class="rounded-full"
+        [style.background-color]="rgb() | rgbify"
+      ></div>
+    </div>
+  </div>
 </div>
