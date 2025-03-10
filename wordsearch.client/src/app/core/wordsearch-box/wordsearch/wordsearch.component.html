@@ -1,17 +1,19 @@
 <div
-  class="grid-element m-auto grid aspect-square max-h-full max-w-full"
+  class="grid-element m-auto grid aspect-square max-h-full max-w-full overflow-hidden"
   style="grid-template-columns: repeat({{
     searchableText().length
   }}, minmax(0, 1fr)); grid-template-rows: repeat({{
     searchableText().length
   }}, minmax(0, 1fr))"
   (mouseleave)="unSnap()"
+  (contextmenu)="rightClickUnselect()"
+  (click)="searchClicked()"
 >
   @for (row of searchableText(); track $index; let y = $index) {
     @for (char of row; track $index; let x = $index) {
       <div
         class="letter-element m-1 select-none"
-        (click)="tileClicked(x, y)"
+        (click)="tileClicked($event, x, y)"
         (mouseenter)="snapTo(x, y)"
         [style.grid-column]="x + 1"
         [style.grid-row]="y + 1"

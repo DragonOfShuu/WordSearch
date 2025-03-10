@@ -2,10 +2,11 @@
   <div class="relative size-full flex justify-center items-center">
     <div
         class="main-blade grid grid-cols-2 grid-rows-1 absolute"
-        [style.width.cqw]="(90+(100*((length() ?? 1)-1))) * 2"
+        [style.width.cqw]="(90+determineWidth()) * 2"
         [style.height.cqh]="90"
-        [style.left.cqw]="-85-(100*((length() ?? 1)-1))"
-      >
+        [style.left.cqw]="-85-determineWidth()"
+        [style.transform]="rotationToTransform(rotation())"
+        >
       <div></div>
       <div
         class="rounded-full"
