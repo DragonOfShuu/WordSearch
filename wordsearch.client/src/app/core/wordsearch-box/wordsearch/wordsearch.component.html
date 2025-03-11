@@ -37,12 +37,12 @@
     />
   }
 
-  @let target = selectedTile();
+  @let target = wordsearchService.selectedTile();
   @if (target) {
     <shuu-word-selection
       [position]="target"
-      [rotation]="snapToTileData()?.rotation ?? null"
-      [length]="snapToTileData()?.length ?? null"
+      [rotation]="wordsearchService.snapToTileData()?.rotation ?? null"
+      [length]="wordsearchService.snapToTileData()?.length ?? null"
       class="self-stretch justify-self-stretch"
       [style.grid-column]="target.x + 1"
       [style.grid-row]="target.y + 1"
