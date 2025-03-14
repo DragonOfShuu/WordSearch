@@ -14,7 +14,7 @@ namespace WordSearch.Server.Services
         private readonly ILogger _logger = logger;
         private readonly IRandomService _random = random;
 
-        public Result<FindWordResults, APIError> FindWord(GameBoard gameBoard, (int, int) position, (int, int) direction, int count)
+        public Result<FindWordResults, APIError> FindWord(GameBoard gameBoard, Vector2D position, Vector2D direction, int count)
         {
             throw new NotImplementedException();
         }

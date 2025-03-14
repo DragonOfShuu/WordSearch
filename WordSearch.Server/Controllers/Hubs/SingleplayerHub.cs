@@ -47,9 +47,13 @@ namespace WordSearch.Server.Controllers.Hubs
             throw new NotImplementedException();
         }
 
-        public async Task<FindWordResultsForClient?> FindWord((int, int) position, (int, int) rotation, int count)
+        public async Task<FindWordResultsForClient?> FindWord(Vector2D position, Vector2D rotation, int count)
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
+            return new FindWordResultsForClient()
+            {
+                
+            }
         }
     }
 }

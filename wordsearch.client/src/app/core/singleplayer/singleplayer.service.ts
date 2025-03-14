@@ -4,6 +4,7 @@ import Difficulty from '../../shared/types/difficulty.type';
 import { Board } from '../../shared/types/boards.types';
 import { FindWordResults } from '../../shared/types/find-word-results.types';
 import { Observable, ReplaySubject } from 'rxjs';
+import { Vector2D } from '../../shared/types/vector.types';
 
 @Injectable({
   providedIn: 'root',
@@ -55,8 +56,8 @@ export class SingleplayerService {
   }
 
   async findWord(
-    start: [number, number],
-    direction: [number, number],
+    start: Vector2D,
+    direction: Vector2D,
     count: number,
   ): Promise<FindWordResults | null> {
     const results: null | FindWordResults = await this.socket.invoke(

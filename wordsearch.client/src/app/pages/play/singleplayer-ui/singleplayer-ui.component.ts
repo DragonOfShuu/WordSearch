@@ -1,6 +1,7 @@
 import { Component, computed, inject, input, OnInit } from '@angular/core';
 import { SingleplayerService } from '../../../core/singleplayer/singleplayer.service';
 import { WordsearchComponent } from '../../../core/wordsearch-box/wordsearch/wordsearch.component';
+import { WordType } from '../../../shared/types/word-dictionary.types';
 
 @Component({
   selector: 'shuu-singleplayer-ui',
@@ -31,5 +32,13 @@ export class SingleplayerUiComponent implements OnInit {
         });
       },
     });
+  }
+
+  findWord(word: WordType) {
+    this.singleplayerService.findWord(
+      word.position, 
+      word.rotation, 
+      word.word.length
+    )
   }
 }

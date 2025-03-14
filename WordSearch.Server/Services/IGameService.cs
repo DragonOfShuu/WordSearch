@@ -5,7 +5,7 @@ namespace WordSearch.Server.Services
 {
     public interface IGameService
     {
-        Result<FindWordResults, APIError> FindWord(GameBoard gameBoard, (int, int) position, (int, int) direction, int count);
+        Result<FindWordResults, APIError> FindWord(GameBoard gameBoard, Vector2D position, Vector2D direction, int count);
         Result<GameBoard, APIError> generateGameBoard(Difficulty difficulty);
     }
 }
