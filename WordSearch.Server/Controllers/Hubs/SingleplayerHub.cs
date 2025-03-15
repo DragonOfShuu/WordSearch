@@ -12,6 +12,21 @@ namespace WordSearch.Server.Controllers.Hubs
         private readonly ISingleplayerGame _singleplayerService;
         private const string ANON_GAMEBOARD_ID = "AnonGameboard";
 
+        private Board? SavedBoard 
+        {
+            get
+            {
+                object? outObject = null;
+                Context.Items.TryGetValue(ANON_GAMEBOARD_ID, out outObject);
+                if (outObject == null) return null;
+                return (Board) outObject;
+            }
+            set
+            {
+                Context.Items.Add(ANON_GAMEBOARD_ID, value);
+            }
+        }
+
         public SingleplayerHub(ILogger<SingleplayerHub> logger, ISingleplayerGame singleplayerGameService)
         {
             _logger = logger;
@@ -29,10 +44,7 @@ namespace WordSearch.Server.Controllers.Hubs
             // Removes one if there is one
             Context.Items.Remove(ANON_GAMEBOARD_ID);
             return result.Match(
-                gameboard => {
-                    Context.Items.Add(ANON_GAMEBOARD_ID, gameboard);
-                    return gameboard.ToBoard();
-                },
+                gameboard => SavedBoard = gameboard.ToBoard(),
                 error => throw new HubException(error.Error));
         }
 
@@ -49,11 +61,13 @@ namespace WordSearch.Server.Controllers.Hubs
 
         public async Task<FindWordResultsForClient?> FindWord(Vector2D position, Vector2D rotation, int count)
         {
-            //throw new NotImplementedException();
+            if (SavedBoard is null) throw new HubException("No boards are saved!");
             return new FindWordResultsForClient()
             {
-                
-            }
+                Board = SavedBoard,
+                WordsFound = ["word"],
+                XpGain = 5,
+            };
         }
     }
 }

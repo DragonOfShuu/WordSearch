@@ -66,6 +66,7 @@ export class SingleplayerService {
       direction,
       count,
     );
+    console.log("FindWordResults as: ", results)
     if (!results) return null;
 
     this.currentBoard.update(() => results.board);
