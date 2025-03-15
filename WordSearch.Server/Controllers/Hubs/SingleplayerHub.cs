@@ -12,14 +12,13 @@ namespace WordSearch.Server.Controllers.Hubs
         private readonly ISingleplayerGame _singleplayerService;
         private const string ANON_GAMEBOARD_ID = "AnonGameboard";
 
-        private Board? SavedBoard 
+        private GameBoard? SavedBoard 
         {
             get
             {
-                object? outObject = null;
-                Context.Items.TryGetValue(ANON_GAMEBOARD_ID, out outObject);
+                Context.Items.TryGetValue(ANON_GAMEBOARD_ID, out object? outObject);
                 if (outObject == null) return null;
-                return (Board) outObject;
+                return (GameBoard) outObject;
             }
             set
             {
@@ -44,27 +43,34 @@ namespace WordSearch.Server.Controllers.Hubs
             // Removes one if there is one
             Context.Items.Remove(ANON_GAMEBOARD_ID);
             return result.Match(
-                gameboard => SavedBoard = gameboard.ToBoard(),
+                gameboard => (SavedBoard = gameboard).ToBoard(),
                 error => throw new HubException(error.Error));
         }
 
         public async Task<Board> GetBoard()
         {
-            throw new NotImplementedException();
+            if (SavedBoard is null) throw new HubException("No boards are saved!");
+
+            return SavedBoard.ToBoard();
         }
 
         public async Task<Dictionary<string, WordType>> GetFoundWords()
         {
-            string? indentifier = Context.UserIdentifier;
-            throw new NotImplementedException();
+            if (SavedBoard is null) throw new HubException("No boards are saved!");
+
+            return SavedBoard.FoundAsWordType();
         }
 
         public async Task<FindWordResultsForClient?> FindWord(Vector2D position, Vector2D rotation, int count)
         {
             if (SavedBoard is null) throw new HubException("No boards are saved!");
+
+            Result<FindWordResultsForClient, APIError>? result = 
+                _singleplayerService.FindWord(SavedBoard, position, rotation, count, null);
+
             return new FindWordResultsForClient()
             {
-                Board = SavedBoard,
+                Board = SavedBoard.ToBoard(),
                 WordsFound = ["word"],
                 XpGain = 5,
             };

@@ -13,6 +13,11 @@
         public string[] Found { get; set; } = [];
         public long Started { get; set; } // milliseconds
 
+        public Dictionary<string, WordType> FoundAsWordType()
+        {
+            return Found.Select(foundWord => Findable[foundWord]).ToDictionary(dict => dict.Word, dict => dict);
+        }
+
         public Board ToBoard()
         {
             var newFound = Found.Select(foundWord => Findable[foundWord]).ToDictionary(dict => dict.Word, dict => dict);

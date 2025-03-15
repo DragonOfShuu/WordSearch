@@ -36,9 +36,9 @@ export class SingleplayerUiComponent implements OnInit {
 
   findWord(word: WordType) {
     this.singleplayerService.findWord(
-      word.position, 
-      word.rotation, 
-      word.word.length
-    )
+      word.position,
+      word.rotation,
+      word.word.length,
+    );
   }
 }

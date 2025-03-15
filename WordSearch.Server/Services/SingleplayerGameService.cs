@@ -9,14 +9,34 @@ namespace WordSearch.Server.Services
     {
         private readonly IGameService _wordsearch = wordSearch;
 
-        public Result<FindWordResultsForClient, APIError> FindWord(GameBoard gameBoard, (int, int) start, (int, int) direction, int count, string? userIdentifier)
+        public Result<FindWordResultsSingleplayer, APIError>? FindWord(
+            GameBoard gameBoard, 
+            Vector2D start, 
+            Vector2D direction, 
+            int count, 
+            string? userIdentifier)
         {
-            throw new NotImplementedException();
+            var endTime = gameBoard.Started + gameBoard.Difficulty.Time * 1000;
+            if (endTime < (new DateTimeOffset(DateTime.UtcNow)).ToUnixTimeMilliseconds())
+                return null;
+
+            var findResults = _wordsearch.FindWord(gameBoard, start, direction, count);
+
+            if (!findResults.IsOk) return findResults.Error;
+
+            int xpGain = findResults.Value.WordsFound.Length * 5;
+
+            return new FindWordResultsSingleplayer
+            {
+                WordsFound = findResults.Value.WordsFound,
+                Board = findResults.Value.GameBoard,
+                XpGain = xpGain,
+            };
         }
 
         public Result<GameBoard, APIError> NewGame(Difficulty difficulty, string? userIdentifier)
         {
-            return this._wordsearch.generateGameBoard(difficulty);
+            return _wordsearch.generateGameBoard(difficulty);
         }
     }
 }
