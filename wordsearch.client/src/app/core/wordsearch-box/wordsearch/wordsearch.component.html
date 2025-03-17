@@ -34,6 +34,9 @@
       [position]="selection.value.position"
       [rotation]="selection.value.rotation"
       [length]="selection.value.word.length"
+      class="self-stretch justify-self-stretch"
+      [style.grid-column]="selection.value.position.x + 1"
+      [style.grid-row]="selection.value.position.y + 1"
     />
   }
 
