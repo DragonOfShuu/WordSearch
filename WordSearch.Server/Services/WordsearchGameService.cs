@@ -1,4 +1,5 @@
-﻿using System.Text.Json;
+﻿using System.Text;
+using System.Text.Json;
 using Weighted_Randomizer;
 using WordSearch.Server.Models.API;
 using WordSearch.Server.Models.GameLogic;
@@ -14,9 +15,40 @@ namespace WordSearch.Server.Services
         private readonly ILogger _logger = logger;
         private readonly IRandomService _random = random;
 
+        private string DiscoverWord(string[][] boardCharacters, Vector2D position, Vector2D direction, int count)
+        {
+            var word = new StringBuilder(count);
+            for (int y = 0; y < count; y++)
+            {
+                for (int x = 0; x < count; x++)
+                {
+                    var newX = (x*direction.X) + position.X;
+                    var newY = (y*direction.Y) + position.Y;
+
+                    var letter = boardCharacters[newY][newX];
+                    word.Append(letter);
+                }
+            }
+            return word.ToString();
+        }
+
         public Result<FindWordResults, APIError> FindWord(GameBoard gameBoard, Vector2D position, Vector2D direction, int count)
         {
-            throw new NotImplementedException();
+            var word = DiscoverWord(gameBoard.BoardCharacters, position, direction, count);
+            gameBoard.Findable.TryGetValue(word, out var wordType);
+            if (wordType == null) return new FindWordResults()
+            {
+                GameBoard = gameBoard,
+                WordsFound = [],
+            };
+
+            gameBoard.Found.Append(word);
+
+            return new FindWordResults()
+            {
+                GameBoard = gameBoard,
+                WordsFound = [word]
+            };
         }
 
         /// <summary>

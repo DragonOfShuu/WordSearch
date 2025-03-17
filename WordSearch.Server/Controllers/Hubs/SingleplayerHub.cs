@@ -65,7 +65,7 @@ namespace WordSearch.Server.Controllers.Hubs
         {
             if (SavedBoard is null) throw new HubException("No boards are saved!");
 
-            Result<FindWordResultsForClient, APIError>? result = 
+            Result<FindWordResultsSingleplayer, APIError>? result = 
                 _singleplayerService.FindWord(SavedBoard, position, rotation, count, null);
 
             return new FindWordResultsForClient()
