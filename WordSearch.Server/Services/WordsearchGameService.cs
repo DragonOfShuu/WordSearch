@@ -18,16 +18,13 @@ namespace WordSearch.Server.Services
         private string DiscoverWord(string[][] boardCharacters, Vector2D position, Vector2D direction, int count)
         {
             var word = new StringBuilder(count);
-            for (int y = 0; y < count; y++)
+            for (int counter = 0; counter < count; counter++)
             {
-                for (int x = 0; x < count; x++)
-                {
-                    var newX = (x*direction.X) + position.X;
-                    var newY = (y*direction.Y) + position.Y;
+                var newX = (counter*direction.X) + position.X;
+                var newY = (counter*direction.Y) + position.Y;
 
-                    var letter = boardCharacters[newY][newX];
-                    word.Append(letter);
-                }
+                var letter = boardCharacters[newY][newX];
+                word.Append(letter);
             }
             return word.ToString();
         }
@@ -42,7 +39,7 @@ namespace WordSearch.Server.Services
                 WordsFound = [],
             };
 
-            gameBoard.Found.Append(word);
+            gameBoard.Found = [..gameBoard.Found, word];
 
             return new FindWordResults()
             {

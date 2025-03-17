@@ -22,7 +22,7 @@ namespace WordSearch.Server.Controllers.Hubs
             }
             set
             {
-                Context.Items.Add(ANON_GAMEBOARD_ID, value);
+                Context.Items[ANON_GAMEBOARD_ID] = value;
             }
         }
 
@@ -68,12 +68,23 @@ namespace WordSearch.Server.Controllers.Hubs
             Result<FindWordResultsSingleplayer, APIError>? result = 
                 _singleplayerService.FindWord(SavedBoard, position, rotation, count, null);
 
-            return new FindWordResultsForClient()
-            {
-                Board = SavedBoard.ToBoard(),
-                WordsFound = ["word"],
-                XpGain = 5,
-            };
+            if (result == null) return null;
+
+            var cleanResult = (Result<FindWordResultsSingleplayer, APIError>) result;
+
+            return cleanResult.Match(
+                findResults =>
+                {
+                    SavedBoard = findResults.Board;
+                    return new FindWordResultsForClient()
+                    {
+                        Board = SavedBoard.ToBoard(),
+                        WordsFound = findResults.WordsFound,
+                        XpGain = findResults.XpGain,
+                    };
+                },
+                error => throw new HubException(error.Error)
+            );
         }
     }
 }
