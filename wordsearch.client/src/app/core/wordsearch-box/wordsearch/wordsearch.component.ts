@@ -12,14 +12,14 @@ import {
 } from '../../../shared/types/word-dictionary.types';
 import { Vector2D } from '../../../shared/types/vector.types';
 import { WordSelectionComponent } from '../word-selection/word-selection.component';
-import { KeyValuePipe } from '@angular/common';
+import { KeyValuePipe, LowerCasePipe } from '@angular/common';
 import { WordsearchService } from '../wordsearch-service/wordsearch.service';
 
 @Component({
   selector: 'shuu-wordsearch',
   templateUrl: './wordsearch.component.html',
   styleUrl: './wordsearch.component.sass',
-  imports: [WordSelectionComponent, KeyValuePipe],
+  imports: [WordSelectionComponent, KeyValuePipe, LowerCasePipe],
   providers: [WordsearchService],
 })
 export class WordsearchComponent {

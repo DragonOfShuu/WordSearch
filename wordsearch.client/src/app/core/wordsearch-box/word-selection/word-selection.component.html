@@ -2,13 +2,13 @@
   <div class="relative flex size-full items-center justify-center">
     <div
       class="main-blade absolute grid grid-cols-2 grid-rows-1"
-      [style.width.cqw]="(90 + determineWidth()) * 2"
-      [style.height.cqh]="90"
-      [style.left.cqw]="-85 - determineWidth()"
+      [style.width.cqw]="(80 + determineWidth()) * 2"
+      [style.height.cqh]="80"
+      [style.left.cqw]="-71 - determineWidth()"
       [style.transform]="rotationToTransform(rotation())"
     >
       <div></div>
-      <div class="rounded-full" [style.background-color]="rgb() | rgbify"></div>
+      <div class="rounded-full opacity-80" [style.background-color]="rgb() | rgbify"></div>
     </div>
   </div>
 </div>

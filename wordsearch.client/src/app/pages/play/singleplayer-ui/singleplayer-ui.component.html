@@ -5,21 +5,31 @@
     <div class="flex items-start justify-end max-lg:order-1">
       <div class="frame p-3">
         <h1>Words to Find</h1>
-        <ul>
+        <ul class="flex flex-col">
           @for (word of currentBoard()?.findable; track $index) {
-            <li>
+            <li [class.word-found]="wordFound(word)">
               {{ word }}
             </li>
           }
         </ul>
       </div>
     </div>
-    <shuu-wordsearch
-      [searchableText]="boardCharacters()"
-      [foundText]="foundWords()"
-      (selectText)="findWord($event)"
-      class="h-screen-no-margin w-full overflow-hidden max-lg:py-2"
-    />
+    <div>
+        <shuu-wordsearch
+          [searchableText]="boardCharacters()"
+          [foundText]="foundWords()"
+          (selectText)="findWord($event)"
+          class="h-screen-no-margin w-full overflow-hidden max-lg:py-2"
+        />
+
+        @let remainingTime = timeRemaining();
+        @if (remainingTime !== null) {
+          @let remainingSeconds = remainingTime % 60 | round;
+          <p>
+            {{remainingTime / 60 | round:'floor' }}:{{remainingSeconds === 60 ? 0 : remainingSeconds | number:'2.0-0'}}
+          </p>
+        }
+    </div>
     <div class="max-lg:order-2"></div>
   </div>
 </div>
