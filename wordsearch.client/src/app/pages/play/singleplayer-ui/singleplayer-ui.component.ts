@@ -31,7 +31,7 @@ export class SingleplayerUiComponent implements OnInit {
       async complete() {
         const board = await betterThis.singleplayerService.newGame({
           intensity: 'medium',
-          level: 3,
+          level: 2,
           time: 300,
         });
 

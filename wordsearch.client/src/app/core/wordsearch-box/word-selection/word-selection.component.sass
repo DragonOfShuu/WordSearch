@@ -3,3 +3,22 @@
     
 .main-blade
     transform-origin: calc(50% + 40cqh) 50%
+
+@keyframes cascade-gradient
+    0%
+        transform: translateY(0)
+        filter: brightness(1)
+    50%
+        filter: brightness(1.2)
+    100%
+        // Gradient is 20px long, rotated 35 degs, thus 
+        // for the animation to repeat, this is the equation:
+        // 20px / cosine(35deg)
+        transform: translateY(24.4154px)
+        filter: brightness(1)
+
+.temp-selection
+    background: repeating-linear-gradient(35deg, theme('colors.secondary.700'), theme('colors.secondary.700') 10px, theme('colors.secondary.600') 11px, theme('colors.secondary.600') 20px)
+    height: 250%
+    width: 100%
+    animation: cascade-gradient both infinite linear 0.5s

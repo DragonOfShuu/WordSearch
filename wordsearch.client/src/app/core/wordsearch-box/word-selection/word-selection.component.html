@@ -7,8 +7,19 @@
       [style.left.cqw]="-71 - determineWidth()"
       [style.transform]="rotationToTransform(rotation())"
     >
-      <div></div>
-      <div class="rounded-full opacity-80" [style.background-color]="rgb() | rgbify"></div>
+      <!-- Blade one -->
+      <div></div> 
+      <!-- Blade two -->
+      <div 
+        class="rounded-full opacity-80 overflow-hidden flex items-center justify-center size-full" 
+        [style.background-color]="temporary()? false : rgb() | rgbify">
+
+        @if (temporary()) {
+          <div class="temp-selection">
+  
+          </div>
+        }
+      </div>
     </div>
   </div>
 </div>

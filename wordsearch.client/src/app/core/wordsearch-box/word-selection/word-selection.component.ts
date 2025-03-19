@@ -1,7 +1,6 @@
 import { Component, computed, input, OnInit } from '@angular/core';
 import { randomInt } from '../../../shared/random/random';
 import { Vector2D } from '../../../shared/types/vector.types';
-import { WordType } from '../../../shared/types/word-dictionary.types';
 import { RgbPipePipe as RgbifyPipe } from '../../../shared/rgb-pipe/rgbify.pipe';
 
 @Component({
@@ -21,6 +20,7 @@ export class WordSelectionComponent {
   position = input.required<Vector2D>();
   rotation = input.required<Vector2D | null>();
   length = input.required<number | null>();
+  temporary = input<boolean>(false);
 
   randomColorValue() {
     return randomInt(50, 240);

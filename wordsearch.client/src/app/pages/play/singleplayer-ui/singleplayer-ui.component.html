@@ -24,9 +24,9 @@
 
         @let remainingTime = timeRemaining();
         @if (remainingTime !== null) {
-          @let remainingSeconds = remainingTime % 60 | round;
+          @let remainingSeconds = (remainingTime|round:'floor') % 60;
           <p>
-            {{remainingTime / 60 | round:'floor' }}:{{remainingSeconds === 60 ? 0 : remainingSeconds | number:'2.0-0'}}
+            {{remainingTime / 60 | round:'floor' }}:{{remainingSeconds | number:'2.0-0'}}
           </p>
         }
     </div>
