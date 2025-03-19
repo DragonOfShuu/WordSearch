@@ -15,20 +15,22 @@
       </div>
     </div>
     <div>
-        <shuu-wordsearch
-          [searchableText]="boardCharacters()"
-          [foundText]="foundWords()"
-          (selectText)="findWord($event)"
-          class="h-screen-no-margin w-full overflow-hidden max-lg:py-2"
-        />
+      <shuu-wordsearch
+        [searchableText]="boardCharacters()"
+        [foundText]="foundWords()"
+        (selectText)="findWord($event)"
+        class="h-screen-no-margin w-full overflow-hidden max-lg:py-2"
+      />
 
-        @let remainingTime = timeRemaining();
-        @if (remainingTime !== null) {
-          @let remainingSeconds = (remainingTime|round:'floor') % 60;
-          <p>
-            {{remainingTime / 60 | round:'floor' }}:{{remainingSeconds | number:'2.0-0'}}
-          </p>
-        }
+      @let remainingTime = timeRemaining();
+      @if (remainingTime !== null) {
+        @let remainingSeconds = (remainingTime | round: "floor") % 60;
+        <p>
+          {{ remainingTime / 60 | round: "floor" }}:{{
+            remainingSeconds | number: "2.0-0"
+          }}
+        </p>
+      }
     </div>
     <div class="max-lg:order-2"></div>
   </div>

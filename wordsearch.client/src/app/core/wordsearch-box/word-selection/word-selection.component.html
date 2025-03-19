@@ -8,16 +8,14 @@
       [style.transform]="rotationToTransform(rotation())"
     >
       <!-- Blade one -->
-      <div></div> 
+      <div></div>
       <!-- Blade two -->
-      <div 
-        class="rounded-full opacity-80 overflow-hidden flex items-center justify-center size-full" 
-        [style.background-color]="temporary()? false : rgb() | rgbify">
-
+      <div
+        class="flex size-full items-center justify-center overflow-hidden rounded-full opacity-80"
+        [style.background-color]="temporary() ? false : (rgb() | rgbify)"
+      >
         @if (temporary()) {
-          <div class="temp-selection">
-  
-          </div>
+          <div class="temp-selection"></div>
         }
       </div>
     </div>

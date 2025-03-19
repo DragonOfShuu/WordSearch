@@ -1,9 +1,16 @@
-import { Component, computed, inject, input, OnInit, signal } from '@angular/core';
+import {
+  Component,
+  computed,
+  inject,
+  input,
+  OnInit,
+  signal,
+} from '@angular/core';
 import { SingleplayerService } from '../../../core/singleplayer/singleplayer.service';
 import { WordsearchComponent } from '../../../core/wordsearch-box/wordsearch/wordsearch.component';
 import { WordType } from '../../../shared/types/word-dictionary.types';
 import { DecimalPipe } from '@angular/common';
-import { RoundPipe } from "../../../shared/round/round.pipe";
+import { RoundPipe } from '../../../shared/round/round.pipe';
 
 @Component({
   selector: 'shuu-singleplayer-ui',
@@ -21,8 +28,8 @@ export class SingleplayerUiComponent implements OnInit {
       this.currentBoard()?.boardCharacters ?? Array(5).fill(Array(5).fill('A')),
   );
   foundWords = computed(() => this.currentBoard()?.found ?? {});
-  timeRemaining = signal<number|null>(300);
-  timeRemainingInterval: number|null = null;
+  timeRemaining = signal<number | null>(300);
+  timeRemainingInterval: number | null = null;
 
   ngOnInit(): void {
     // Cause ✨ JavaScript ✨
@@ -35,7 +42,11 @@ export class SingleplayerUiComponent implements OnInit {
           time: 300,
         });
 
-        betterThis.timeRemainingInterval = window.setInterval(betterThis.recalcTimeRemaining.bind(betterThis), 500, [300])
+        betterThis.timeRemainingInterval = window.setInterval(
+          betterThis.recalcTimeRemaining.bind(betterThis),
+          500,
+          [300],
+        );
       },
     });
   }
@@ -57,10 +68,11 @@ export class SingleplayerUiComponent implements OnInit {
     }
 
     /** In milliseconds */
-    const timeLeft = Math.max(totalSeconds*1000 - (Date.now() - board.started), 0);
-    this.timeRemaining.set(
-      timeLeft / 1000
-    )
+    const timeLeft = Math.max(
+      totalSeconds * 1000 - (Date.now() - board.started),
+      0,
+    );
+    this.timeRemaining.set(timeLeft / 1000);
   }
 
   wordFound(word: string) {
