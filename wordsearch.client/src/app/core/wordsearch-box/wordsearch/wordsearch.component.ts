@@ -27,6 +27,7 @@ export class WordsearchComponent {
 
   searchableText = input.required<string[][]>();
   foundText = input.required<WordDictionary>();
+  pending = input<boolean>(false);
 
   selectText = output<WordType>();
 

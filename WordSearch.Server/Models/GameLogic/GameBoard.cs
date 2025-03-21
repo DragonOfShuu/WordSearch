@@ -31,6 +31,11 @@
                 Started = Started
             };
         }
+
+        public bool AllWordsFound()
+        {
+            return Found.Length == Findable.Count;
+        }
     }
 
     public class Board
@@ -45,5 +50,13 @@
         public string[] Findable { get; set; } = [];
         public Dictionary<string, WordType> Found { get; set; } = [];
         public long Started { get; set; } // milliseconds
+    }
+
+    public class BoardUpdate
+    {
+        public GameBoard Board { get; set; } = new GameBoard();
+        public GameBoard? NewBoard { get; set; }
+        public string[] WordsFound { get; set; } = [];
+        public int XpGain { get; set; } = 0;
     }
 }

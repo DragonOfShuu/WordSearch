@@ -21,5 +21,15 @@
         public int Time { get; set; } // in seconds
 
         public static Difficulty Empty { get {  return new Difficulty(); } }
+
+        public Difficulty IncreaseDifficulty(int count = 1)
+        {
+            return new Difficulty() { 
+                Level = count,
+                Intensity = Intensity,
+                Size = Size,
+                Time = Time
+            };
+        } 
     }
 }

@@ -231,7 +231,7 @@ namespace WordSearch.Server.Services
         /// </summary>
         /// <param name="difficulty"></param>
         /// <returns></returns>
-        public Result<GameBoard, APIError> generateGameBoard(Difficulty difficulty)
+        public Result<GameBoard, APIError> generateGameBoard(Difficulty difficulty, long? started = null)
         {
             GetWordsearchParams(difficulty, out int sizeX, out int sizeY, out int wordSize, out int wordCount);
 
@@ -266,7 +266,7 @@ namespace WordSearch.Server.Services
                 //BoardCharacters = placeResults.Wordsearch,
                 Findable = placeResults.Findable.ToDictionary(),
                 Found = [],
-                Started = (new DateTimeOffset(DateTime.UtcNow)).ToUnixTimeMilliseconds()
+                Started = started==null ? (new DateTimeOffset(DateTime.UtcNow)).ToUnixTimeMilliseconds() : (long) started
             };
         }
     }

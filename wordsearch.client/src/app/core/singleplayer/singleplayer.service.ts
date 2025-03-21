@@ -2,9 +2,9 @@ import { Injectable, signal } from '@angular/core';
 import SignalRSocket from '../../shared/signal-r-socket/signal-r-socket.class';
 import Difficulty from '../../shared/types/difficulty.type';
 import { Board } from '../../shared/types/boards.types';
-import { FindWordResults } from '../../shared/types/find-word-results.types';
 import { Observable, ReplaySubject } from 'rxjs';
 import { Vector2D } from '../../shared/types/vector.types';
+import { BoardUpdateType } from '../../shared/types/board-update.type';
 
 @Injectable({
   providedIn: 'root',
@@ -26,6 +26,8 @@ export class SingleplayerService {
         console.log(`Connection failed because of ${err}`);
       },
     });
+
+    this.socket.registerOnMethod("boardUpdate", this.boardUpdate)
   }
 
   async newGame(difficulty: Difficulty) {
@@ -59,8 +61,8 @@ export class SingleplayerService {
     start: Vector2D,
     direction: Vector2D,
     count: number,
-  ): Promise<FindWordResults | null> {
-    const results: null | FindWordResults = await this.socket.invoke(
+  ): Promise<BoardUpdateType | null> {
+    const results: null | BoardUpdateType = await this.socket.invoke(
       'findWord',
       start,
       direction,
@@ -71,6 +73,10 @@ export class SingleplayerService {
 
     this.currentBoard.update(() => results.board);
     return results;
+  }
+
+  boardUpdate(args: [BoardUpdateType]) {
+    
   }
 
   $verifyBoard(board: Board | undefined | null): Board {

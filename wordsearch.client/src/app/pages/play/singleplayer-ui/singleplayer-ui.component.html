@@ -19,6 +19,7 @@
         [searchableText]="boardCharacters()"
         [foundText]="foundWords()"
         (selectText)="findWord($event)"
+        [pending]="loadingBoard()"
         class="h-screen-no-margin w-full overflow-hidden max-lg:py-2"
       />
 

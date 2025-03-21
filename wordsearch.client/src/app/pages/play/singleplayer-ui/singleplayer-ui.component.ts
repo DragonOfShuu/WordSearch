@@ -25,15 +25,17 @@ export class SingleplayerUiComponent implements OnInit {
   currentBoard = this.singleplayerService.currentBoard;
   boardCharacters = computed(
     () =>
-      this.currentBoard()?.boardCharacters ?? Array(5).fill(Array(5).fill('A')),
+      this.currentBoard()?.boardCharacters ?? [],
   );
   foundWords = computed(() => this.currentBoard()?.found ?? {});
   timeRemaining = signal<number | null>(300);
   timeRemainingInterval: number | null = null;
+  loadingBoard = signal(false);
 
   ngOnInit(): void {
     // Cause ✨ JavaScript ✨
     const betterThis = this;
+    betterThis.loadingBoard.set(true);
     this.singleplayerService.connectionObservaboo.subscribe({
       async complete() {
         const board = await betterThis.singleplayerService.newGame({
@@ -41,6 +43,7 @@ export class SingleplayerUiComponent implements OnInit {
           level: 2,
           time: 300,
         });
+        betterThis.loadingBoard.set(false);
 
         betterThis.timeRemainingInterval = window.setInterval(
           betterThis.recalcTimeRemaining.bind(betterThis),

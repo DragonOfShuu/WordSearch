@@ -1,5 +1,5 @@
 import * as signalR from '@microsoft/signalr';
-import { Observable, ReplaySubject } from 'rxjs';
+import { Observable, ReplaySubject, Subject } from 'rxjs';
 
 class SignalRSocket {
   private hubConnection: signalR.HubConnection;
@@ -49,10 +49,14 @@ class SignalRSocket {
       });
     });
 
+    const subject = new Subject<T>();
+    methodObserve.subscribe(subject)
+
     subscription.forEach((callback) => {
-      methodObserve.subscribe(callback);
+      subject.subscribe(callback);
     });
-    return methodObserve;
+    
+    return subject;
   }
 
   invoke(methodName: string, ...args: any[]) {

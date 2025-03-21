@@ -61,28 +61,19 @@ namespace WordSearch.Server.Controllers.Hubs
             return SavedBoard.FoundAsWordType();
         }
 
-        public async Task<FindWordResultsForClient?> FindWord(Vector2D position, Vector2D rotation, int count)
+        public async Task<bool> FindWord(Vector2D position, Vector2D rotation, int count)
         {
             if (SavedBoard is null) throw new HubException("No boards are saved!");
 
-            Result<FindWordResultsSingleplayer, APIError>? result = 
-                _singleplayerService.FindWord(SavedBoard, position, rotation, count, null);
-
-            if (result == null) return null;
-
-            var cleanResult = (Result<FindWordResultsSingleplayer, APIError>) result;
-
-            return cleanResult.Match(
-                findResults =>
+            Result<bool, APIError> result = 
+                _singleplayerService.FindWord(SavedBoard, position, rotation, count, update =>
                 {
-                    SavedBoard = findResults.Board;
-                    return new FindWordResultsForClient()
-                    {
-                        Board = SavedBoard.ToBoard(),
-                        WordsFound = findResults.WordsFound,
-                        XpGain = findResults.XpGain,
-                    };
-                },
+                    SavedBoard = update.NewBoard != null ? update.NewBoard : update.Board;
+                    Clients.Caller.SendAsync("BoardUpdate", update);
+                });
+
+            return result.Match(
+                findResults => findResults,
                 error => throw new HubException(error.Error)
             );
         }

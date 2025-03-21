@@ -11,9 +11,10 @@
       <div></div>
       <!-- Blade two -->
       <div
-        class="flex size-full items-center justify-center overflow-hidden rounded-full opacity-80"
-        [style.background-color]="temporary() ? false : (rgb() | rgbify)"
-      >
+        class="flex size-full items-center justify-center overflow-hidden rounded-full opacity-80 bg-secondary-400"
+        [style.filter]="filterString()"
+        >
+        <!-- [style.filter]="temporary() ? false : filterString()" -->
         @if (temporary()) {
           <div class="temp-selection"></div>
         }

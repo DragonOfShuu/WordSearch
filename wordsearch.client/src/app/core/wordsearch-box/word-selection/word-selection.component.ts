@@ -1,5 +1,5 @@
 import { Component, computed, input, OnInit } from '@angular/core';
-import { randomInt } from '../../../shared/random/random';
+import { randomFloat, randomInt } from '../../../shared/random/random';
 import { Vector2D } from '../../../shared/types/vector.types';
 import { RgbPipePipe as RgbifyPipe } from '../../../shared/rgb-pipe/rgbify.pipe';
 
@@ -10,11 +10,11 @@ import { RgbPipePipe as RgbifyPipe } from '../../../shared/rgb-pipe/rgbify.pipe'
   styleUrl: './word-selection.component.sass',
 })
 export class WordSelectionComponent {
-  r = input(this.randomColorValue());
-  g = input(this.randomColorValue());
-  b = input(this.randomColorValue());
-  rgb = computed(() => {
-    return { r: this.r(), g: this.g(), b: this.b() };
+  h = input(randomFloat(-30, 30));
+  s = input(randomFloat(80, 120));
+  v = input(randomFloat(0.8, 1.2));
+  filterString = computed(() => {
+    return `hue-rotate(${this.h()}deg) saturate(${this.s()}%) brightness(${this.v()})`;
   });
 
   position = input.required<Vector2D>();

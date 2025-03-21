@@ -1,5 +1,5 @@
 <div
-  class="grid-element m-auto grid aspect-square max-h-full max-w-full overflow-hidden"
+  class="grid-element m-auto grid aspect-square max-h-full max-w-full overflow-hidden relative"
   style="grid-template-columns: repeat({{
     searchableText().length
   }}, minmax(0, 1fr)); grid-template-rows: repeat({{
@@ -9,47 +9,61 @@
   (contextmenu)="rightClickUnselect()"
   (click)="searchClicked()"
 >
-  @for (row of searchableText(); track $index; let y = $index) {
-    @for (char of row; track $index; let x = $index) {
-      <div
-        class="letter-element m-1 select-none"
-        (click)="tileClicked($event, x, y)"
-        (mouseenter)="snapTo(x, y)"
-        [style.grid-column]="x + 1"
-        [style.grid-row]="y + 1"
-      >
+  <!-- <p>
+    {{pending()}}
+  </p> -->
+  @defer (when !pending()) {
+    @for (row of searchableText(); track $index; let y = $index) {
+      @for (char of row; track $index; let x = $index) {
         <div
-          class="text-size-adjust flex size-full items-center justify-center rounded-md border-2 bg-primary-200/20 uppercase dark:border-b-secondary-900 dark:border-l-primary-700 dark:border-r-secondary-900 dark:border-t-primary-700 dark:bg-primary-800 dark:hover:bg-primary-700"
+          class="letter-element m-1 select-none"
+          (click)="tileClicked($event, x, y)"
+          (mouseenter)="snapTo(x, y)"
+          [style.grid-column]="x + 1"
+          [style.grid-row]="y + 1"
         >
-          <p class="relative z-10">
-            {{ char | lowercase }}
-          </p>
+          <div
+            class="text-size-adjust flex size-full items-center justify-center rounded-md border-2 bg-primary-200/20 uppercase dark:border-b-secondary-900 dark:border-l-primary-700 dark:border-r-secondary-900 dark:border-t-primary-700 dark:bg-primary-800 dark:hover:bg-primary-700"
+          >
+            <p class="relative z-10">
+              {{ char | lowercase }}
+            </p>
+          </div>
         </div>
-      </div>
+      }
+    }
+  
+    @for (selection of foundText() | keyvalue; track selection.key) {
+      <shuu-word-selection
+        [position]="selection.value.position"
+        [rotation]="selection.value.rotation"
+        [length]="selection.value.word.length"
+        class="self-stretch justify-self-stretch"
+        [style.grid-column]="selection.value.position.x + 1"
+        [style.grid-row]="selection.value.position.y + 1"
+      />
+    }
+  
+    @let target = wordsearchService.selectedTile();
+    @if (target) {
+      <shuu-word-selection
+        [position]="target"
+        [rotation]="wordsearchService.snapToTileData()?.rotation ?? null"
+        [length]="wordsearchService.snapToTileData()?.length ?? null"
+        class="self-stretch justify-self-stretch"
+        [style.grid-column]="target.x + 1"
+        [style.grid-row]="target.y + 1"
+        [temporary]="true"
+      />
     }
   }
-
-  @for (selection of foundText() | keyvalue; track selection.key) {
-    <shuu-word-selection
-      [position]="selection.value.position"
-      [rotation]="selection.value.rotation"
-      [length]="selection.value.word.length"
-      class="self-stretch justify-self-stretch"
-      [style.grid-column]="selection.value.position.x + 1"
-      [style.grid-row]="selection.value.position.y + 1"
-    />
-  }
-
-  @let target = wordsearchService.selectedTile();
-  @if (target) {
-    <shuu-word-selection
-      [position]="target"
-      [rotation]="wordsearchService.snapToTileData()?.rotation ?? null"
-      [length]="wordsearchService.snapToTileData()?.length ?? null"
-      class="self-stretch justify-self-stretch"
-      [style.grid-column]="target.x + 1"
-      [style.grid-row]="target.y + 1"
-      [temporary]="true"
-    />
+  @placeholder {
+    <div class="absolute inset-2 bg-primary-800 bg-opacity-40 rounded-lg flex items-center justify-center">
+      <div class="bg-secondary-700 rounded-lg flex items-center justify-center gap-2 p-4">
+        <div class="circle circle-offset-1"></div>
+        <div class="circle circle-offset-2"></div>
+        <div class="circle circle-offset-3"></div>
+      </div>
+    </div>
   }
 </div>
