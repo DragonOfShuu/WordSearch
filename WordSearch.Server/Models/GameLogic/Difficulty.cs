@@ -25,7 +25,7 @@
         public Difficulty IncreaseDifficulty(int count = 1)
         {
             return new Difficulty() { 
-                Level = count,
+                Level = count + Level,
                 Intensity = Intensity,
                 Size = Size,
                 Time = Time

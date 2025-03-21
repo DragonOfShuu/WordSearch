@@ -58,5 +58,24 @@
         public GameBoard? NewBoard { get; set; }
         public string[] WordsFound { get; set; } = [];
         public int XpGain { get; set; } = 0;
+
+        public BoardUpdateClient ForClient()
+        {
+            return new BoardUpdateClient()
+            {
+                Board = Board.ToBoard(),
+                NewBoard = NewBoard == null ? null : NewBoard.ToBoard(),
+                WordsFound = WordsFound,
+                XpGain = XpGain
+            };
+        }
+    }
+
+    public class BoardUpdateClient
+    {
+        public Board Board { get; set; } = new Board();
+        public Board? NewBoard { get; set; }
+        public string[] WordsFound { get; set; } = [];
+        public int XpGain { get; set; } = 0;
     }
 }

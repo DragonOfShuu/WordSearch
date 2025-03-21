@@ -27,12 +27,13 @@ export class SingleplayerService {
       },
     });
 
-    this.socket.registerOnMethod("boardUpdate", this.boardUpdate)
+    this.socket.registerOnMethod("boardUpdate", (data) => this.boardUpdate(data as [BoardUpdateType]))
   }
 
   async newGame(difficulty: Difficulty) {
     const newBoard: Board = await this.socket.invoke('NewGame', difficulty);
     console.log(`Board received: ${JSON.stringify(newBoard)}`);
+    console.log(`Current board: ${this.currentBoard()}`)
     this.currentBoard.update(() => newBoard);
     return newBoard;
   }
@@ -61,8 +62,8 @@ export class SingleplayerService {
     start: Vector2D,
     direction: Vector2D,
     count: number,
-  ): Promise<BoardUpdateType | null> {
-    const results: null | BoardUpdateType = await this.socket.invoke(
+  ): Promise<boolean | null> {
+    const results: null | boolean = await this.socket.invoke(
       'findWord',
       start,
       direction,
@@ -71,12 +72,16 @@ export class SingleplayerService {
     console.log('FindWordResults as: ', results);
     if (!results) return null;
 
-    this.currentBoard.update(() => results.board);
     return results;
   }
 
   boardUpdate(args: [BoardUpdateType]) {
-    
+    const updates = args[0];
+    const newBoard = updates.newBoard ?? updates.board
+    console.log(`Current board: `, this.currentBoard())
+    console.log(`Board received: `, newBoard);
+    this.currentBoard.update(() => newBoard);
+    return newBoard;
   }
 
   $verifyBoard(board: Board | undefined | null): Board {

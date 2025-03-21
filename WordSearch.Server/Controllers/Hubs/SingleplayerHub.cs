@@ -69,7 +69,7 @@ namespace WordSearch.Server.Controllers.Hubs
                 _singleplayerService.FindWord(SavedBoard, position, rotation, count, update =>
                 {
                     SavedBoard = update.NewBoard != null ? update.NewBoard : update.Board;
-                    Clients.Caller.SendAsync("BoardUpdate", update);
+                    Clients.Caller.SendAsync("BoardUpdate", update.ForClient());
                 });
 
             return result.Match(

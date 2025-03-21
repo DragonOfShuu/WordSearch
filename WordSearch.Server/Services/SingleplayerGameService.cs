@@ -36,7 +36,7 @@ namespace WordSearch.Server.Services
                 _games.TryGetValue(adjustedGameboard.Difficulty.IncreaseDifficulty().Level, out newBoard);
                 if (newBoard == null)
                 {
-                    var boardResult = GenerateNext(2, adjustedGameboard.Difficulty.IncreaseDifficulty(), 1);
+                    var boardResult = GenerateNext(2, adjustedGameboard.Difficulty.IncreaseDifficulty(), adjustedGameboard.Started);
                     if (!boardResult.IsOk) return boardResult.Error;
                     needToCreateAnotherBoard = false;
                     newBoard = boardResult.Value;
@@ -55,7 +55,7 @@ namespace WordSearch.Server.Services
 
             if (needToCreateAnotherBoard && newBoard != null)
             {
-                GenerateNext(1, newBoard.Difficulty.IncreaseDifficulty());
+                GenerateNext(1, newBoard.Difficulty.IncreaseDifficulty(), newBoard.Started);
             }
 
             return true;
@@ -82,10 +82,10 @@ namespace WordSearch.Server.Services
             return newBoard;
         }
 
-        public Result<GameBoard, APIError> GenerateNext(int count, Difficulty startingDifficulty, int steps = 1)
+        public Result<GameBoard, APIError> GenerateNext(int count, Difficulty startingDifficulty, long? started=null, int steps = 1)
         {
             if (count < 1) return new APIError("Not generating any gameboards");
-            var firstResult = _wordsearch.generateGameBoard(startingDifficulty);
+            var firstResult = _wordsearch.generateGameBoard(startingDifficulty, started);
             if (!firstResult.IsOk) return firstResult;
 
             var firstGameboard = firstResult.Value;
@@ -93,7 +93,7 @@ namespace WordSearch.Server.Services
             Dictionary<int, GameBoard> gameByLevel = [];
             for (var i = 0; i < count - 1; i++)
             {
-                var result = _wordsearch.generateGameBoard(escalatedDifficulty);
+                var result = _wordsearch.generateGameBoard(escalatedDifficulty, started);
                 if (!result.IsOk) return result;
                 gameByLevel.Add(escalatedDifficulty.Level, result.Value);
             }
