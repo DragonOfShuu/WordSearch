@@ -11,13 +11,14 @@ import { WordsearchComponent } from '../../../core/wordsearch-box/wordsearch/wor
 import { WordType } from '../../../shared/types/word-dictionary.types';
 import { DecimalPipe } from '@angular/common';
 import { RoundPipe } from '../../../shared/round/round.pipe';
+import { WordsToFindComponent } from "./words-to-find/words-to-find.component";
 
 @Component({
   selector: 'shuu-singleplayer-ui',
   providers: [SingleplayerService],
   templateUrl: './singleplayer-ui.component.html',
   styleUrl: './singleplayer-ui.component.sass',
-  imports: [WordsearchComponent, DecimalPipe, RoundPipe],
+  imports: [WordsearchComponent, DecimalPipe, RoundPipe, WordsToFindComponent],
 })
 export class SingleplayerUiComponent implements OnInit {
   singleplayerService = inject(SingleplayerService);
@@ -38,7 +39,7 @@ export class SingleplayerUiComponent implements OnInit {
     betterThis.loadingBoard.set(true);
     this.singleplayerService.connectionObservaboo.subscribe({
       async complete() {
-        const board = await betterThis.singleplayerService.newGame({
+        await betterThis.singleplayerService.newGame({
           intensity: 'medium',
           level: 1,
           time: 300,
@@ -76,9 +77,5 @@ export class SingleplayerUiComponent implements OnInit {
       0,
     );
     this.timeRemaining.set(timeLeft / 1000);
-  }
-
-  wordFound(word: string) {
-    return Object.keys(this.foundWords()).includes(word);
   }
 }

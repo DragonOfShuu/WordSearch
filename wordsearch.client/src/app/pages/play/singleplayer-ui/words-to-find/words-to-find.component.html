@@ -1,0 +1,12 @@
+@if (wordsFound() && wordsToFind() && wordsToFind().length > 0) {
+  <div class="frame p-3">
+      <h1>Words to Find</h1>
+      <ul class="flex flex-col">
+        @for (word of wordsToFind(); track $index) {
+          <li [class.word-found]="isWordFound(word)">
+            {{ word }}
+          </li>
+        }
+      </ul>
+  </div>
+}

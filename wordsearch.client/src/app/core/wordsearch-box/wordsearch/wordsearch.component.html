@@ -9,9 +9,6 @@
   (contextmenu)="rightClickUnselect()"
   (click)="searchClicked()"
 >
-  <!-- <p>
-    {{pending()}}
-  </p> -->
   @defer (when !pending()) {
     @for (row of searchableText(); track $index; let y = $index) {
       @for (char of row; track $index; let x = $index) {
@@ -25,8 +22,8 @@
           <div
             class="text-size-adjust flex size-full items-center justify-center rounded-md border-2 bg-primary-200/20 uppercase dark:border-b-secondary-900 dark:border-l-primary-700 dark:border-r-secondary-900 dark:border-t-primary-700 dark:bg-primary-800 dark:hover:bg-primary-700"
           >
-            <p class="relative z-10">
-              {{ char | lowercase }}
+            <p class="with-text relative z-10">
+              <span [attr.data-content]=" char | lowercase "></span>
             </p>
           </div>
         </div>
@@ -59,7 +56,7 @@
   }
   @placeholder {
     <div class="absolute inset-2 bg-primary-800 bg-opacity-40 rounded-lg flex items-center justify-center">
-      <div class="bg-secondary-700 rounded-lg flex items-center justify-center gap-2 p-4">
+      <div class="bg-primary-700 rounded-lg flex items-center justify-center gap-2 p-4">
         <div class="circle circle-offset-1"></div>
         <div class="circle circle-offset-2"></div>
         <div class="circle circle-offset-3"></div>

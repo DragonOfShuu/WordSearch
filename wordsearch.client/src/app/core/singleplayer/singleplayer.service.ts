@@ -1,4 +1,4 @@
-import { Injectable, signal } from '@angular/core';
+import { Injectable, OnInit, signal } from '@angular/core';
 import SignalRSocket from '../../shared/signal-r-socket/signal-r-socket.class';
 import Difficulty from '../../shared/types/difficulty.type';
 import { Board } from '../../shared/types/boards.types';
@@ -11,13 +11,13 @@ import { BoardUpdateType } from '../../shared/types/board-update.type';
 })
 export class SingleplayerService {
   socket: SignalRSocket;
-  connectionObservaboo: ReplaySubject<void>;
+  connectionObservaboo!: ReplaySubject<void>;
   currentBoard = signal<Board | null>(null);
 
   constructor() {
     this.socket = new SignalRSocket('/hubs/singleplayer');
     this.connectionObservaboo = this.socket.startConnection();
-
+  
     this.connectionObservaboo.subscribe({
       complete() {
         console.log('Singleplayer connection success!');
@@ -26,7 +26,7 @@ export class SingleplayerService {
         console.log(`Connection failed because of ${err}`);
       },
     });
-
+  
     this.socket.registerOnMethod("boardUpdate", (data) => this.boardUpdate(data as [BoardUpdateType]))
   }
 
@@ -78,8 +78,10 @@ export class SingleplayerService {
   boardUpdate(args: [BoardUpdateType]) {
     const updates = args[0];
     const newBoard = updates.newBoard ?? updates.board
+
     console.log(`Current board: `, this.currentBoard())
     console.log(`Board received: `, newBoard);
+
     this.currentBoard.update(() => newBoard);
     return newBoard;
   }
@@ -89,3 +91,7 @@ export class SingleplayerService {
     return board;
   }
 }
+
+// Allow lower elements to register for events on the board changing so 
+// that they can play animations and create an animation before the 
+// board actually changes. 

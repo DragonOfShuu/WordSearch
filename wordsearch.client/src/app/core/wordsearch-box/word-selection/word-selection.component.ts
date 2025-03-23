@@ -5,7 +5,6 @@ import { RgbPipePipe as RgbifyPipe } from '../../../shared/rgb-pipe/rgbify.pipe'
 
 @Component({
   selector: 'shuu-word-selection',
-  imports: [RgbifyPipe],
   templateUrl: './word-selection.component.html',
   styleUrl: './word-selection.component.sass',
 })

@@ -3,16 +3,10 @@
     class="flex grid-cols-3 grid-rows-1 flex-col gap-3 max-lg:items-stretch lg:grid"
   >
     <div class="flex items-start justify-end max-lg:order-1">
-      <div class="frame p-3">
-        <h1>Words to Find</h1>
-        <ul class="flex flex-col">
-          @for (word of currentBoard()?.findable; track $index) {
-            <li [class.word-found]="wordFound(word)">
-              {{ word }}
-            </li>
-          }
-        </ul>
-      </div>
+      <shuu-words-to-find
+        [wordsToFind]="currentBoard()?.findable??[]"
+        [wordsFound]="foundWords()" />
+        
     </div>
     <div>
       <shuu-wordsearch
@@ -23,15 +17,27 @@
         class="h-screen-no-margin w-full overflow-hidden max-lg:py-2"
       />
 
-      @let remainingTime = timeRemaining();
-      @if (remainingTime !== null) {
-        @let remainingSeconds = (remainingTime | round: "floor") % 60;
-        <p>
-          {{ remainingTime / 60 | round: "floor" }}:{{
-            remainingSeconds | number: "2.0-0"
-          }}
-        </p>
+      @if (!loadingBoard()) {
+        <div class="flex">
+          @let remainingTime = timeRemaining();
+          @if (remainingTime !== null) {
+            @let remainingSeconds = (remainingTime | round: "floor") % 60;
+            <p>
+              {{ remainingTime / 60 | round: "floor" }}:{{
+                remainingSeconds | number: "2.0-0"
+              }}
+            </p>
+          }
+          <div class="grow"></div>
+          @let level = currentBoard()?.difficulty?.level;
+          @if (level !== null) {
+            <p>
+              Level {{level}}
+            </p>
+          }
+        </div>
       }
+
     </div>
     <div class="max-lg:order-2"></div>
   </div>
