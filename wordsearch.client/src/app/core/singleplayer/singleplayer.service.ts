@@ -91,7 +91,3 @@ export class SingleplayerService {
     return board;
   }
 }
-
-// Allow lower elements to register for events on the board changing so 
-// that they can play animations and create an animation before the 
-// board actually changes. 
