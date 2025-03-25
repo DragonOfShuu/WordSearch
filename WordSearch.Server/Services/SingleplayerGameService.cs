@@ -5,10 +5,11 @@ using WordSearch.Server.Services.WordGenerator;
 
 namespace WordSearch.Server.Services
 {
-    public class SingleplayerGameService(IGameService wordSearch) : ISingleplayerGame
+    public class SingleplayerGameService(ILogger<SingleplayerGameService> logger, IGameService wordSearch) : ISingleplayerGame
     {
         private readonly IGameService _wordsearch = wordSearch;
         private readonly Dictionary<int, GameBoard> _games = [];
+        private readonly ILogger _logger = logger;
 
         public Result<bool, APIError> FindWord(
             GameBoard gameBoard,
@@ -36,6 +37,7 @@ namespace WordSearch.Server.Services
                 _games.TryGetValue(adjustedGameboard.Difficulty.IncreaseDifficulty().Level, out newBoard);
                 if (newBoard == null)
                 {
+                    _logger.LogWarning("Had to generate extra wordsearches on the spot!! Can't keep up!!");
                     var boardResult = GenerateNext(2, adjustedGameboard.Difficulty.IncreaseDifficulty(), adjustedGameboard.Started);
                     if (!boardResult.IsOk) return boardResult.Error;
                     needToCreateAnotherBoard = false;

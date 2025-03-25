@@ -2,7 +2,7 @@ import { Injectable, OnInit, signal } from '@angular/core';
 import SignalRSocket from '../../shared/signal-r-socket/signal-r-socket.class';
 import Difficulty from '../../shared/types/difficulty.type';
 import { Board } from '../../shared/types/boards.types';
-import { Observable, ReplaySubject } from 'rxjs';
+import { ReplaySubject, Subject } from 'rxjs';
 import { Vector2D } from '../../shared/types/vector.types';
 import { BoardUpdateType } from '../../shared/types/board-update.type';
 
@@ -13,6 +13,7 @@ export class SingleplayerService {
   socket: SignalRSocket;
   connectionObservaboo!: ReplaySubject<void>;
   currentBoard = signal<Board | null>(null);
+  $boardUpdateEvent = new Subject<{update: Board, brandNewBoard: Board|null}>();
 
   constructor() {
     this.socket = new SignalRSocket('/hubs/singleplayer');
@@ -32,9 +33,9 @@ export class SingleplayerService {
 
   async newGame(difficulty: Difficulty) {
     const newBoard: Board = await this.socket.invoke('NewGame', difficulty);
-    console.log(`Board received: ${JSON.stringify(newBoard)}`);
-    console.log(`Current board: ${this.currentBoard()}`)
+    console.log(`New Game Received!: ${JSON.stringify(newBoard)}`);
     this.currentBoard.update(() => newBoard);
+    this.$boardUpdateEvent.next({update: newBoard, brandNewBoard: null})
     return newBoard;
   }
 
@@ -82,8 +83,14 @@ export class SingleplayerService {
     console.log(`Current board: `, this.currentBoard())
     console.log(`Board received: `, newBoard);
 
-    this.currentBoard.update(() => newBoard);
+    this.currentBoard.set(newBoard);
+    this.$boardUpdateEvent.next({update: updates.board, brandNewBoard: updates.newBoard??null})
     return newBoard;
+  }
+
+  registerBoardUpdate(func: (x: {update: Board, brandNewBoard: Board|null}) => void) {
+    console.log("Register updates....")
+    this.$boardUpdateEvent.subscribe(func);
   }
 
   $verifyBoard(board: Board | undefined | null): Board {
