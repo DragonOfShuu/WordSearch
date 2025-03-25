@@ -11,7 +11,7 @@ import { WordsearchComponent } from '../../../core/wordsearch-box/wordsearch/wor
 import { WordType } from '../../../shared/types/word-dictionary.types';
 import { DecimalPipe } from '@angular/common';
 import { RoundPipe } from '../../../shared/round/round.pipe';
-import { WordsToFindComponent } from "./words-to-find/words-to-find.component";
+import { WordsToFindComponent } from './words-to-find/words-to-find.component';
 import { Board } from '../../../shared/types/boards.types';
 import { toObservable } from '@angular/core/rxjs-interop';
 
@@ -26,21 +26,18 @@ export class SingleplayerUiComponent implements OnInit {
   singleplayerService = inject(SingleplayerService);
   leaveFunction = input<() => void>();
   board = this.singleplayerService.currentBoard;
-  boardChanged$ = toObservable(this.board)
-  currentBoard = signal<Board|null>(null);
-  boardCharacters = computed(
-    () =>
-      this.currentBoard()?.boardCharacters ?? [],
-  );
+  boardChanged$ = toObservable(this.board);
+  currentBoard = signal<Board | null>(null);
+  boardCharacters = computed(() => this.currentBoard()?.boardCharacters ?? []);
   foundWords = computed(() => this.currentBoard()?.found ?? {});
   timeRemaining = signal<number | null>(300);
   timeRemainingInterval: number | null = null;
   loadingBoard = signal(false);
-  boardTransition = signal(false)
+  boardTransition = signal(false);
 
   constructor() {
     this.singleplayerService.registerBoardUpdate((updateInfo) => {
-      console.log("Received from service: ", updateInfo)
+      console.log('Received from service: ', updateInfo);
       if (!updateInfo.brandNewBoard) {
         this.currentBoard.set(updateInfo.update);
         return;
@@ -51,10 +48,10 @@ export class SingleplayerUiComponent implements OnInit {
         this.boardTransition.set(true);
         setTimeout(() => {
           this.boardTransition.set(false);
-          this.currentBoard.set(updateInfo.brandNewBoard)
-        }, 300)
+          this.currentBoard.set(updateInfo.brandNewBoard);
+        }, 300);
       }, 700);
-    })
+    });
   }
 
   ngOnInit(): void {

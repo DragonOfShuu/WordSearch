@@ -1,5 +1,5 @@
 <div
-  class="grid-element m-auto grid aspect-square max-h-full max-w-full overflow-hidden relative"
+  class="grid-element relative m-auto grid aspect-square max-h-full max-w-full overflow-hidden"
   style="grid-template-columns: repeat({{
     searchableText().length
   }}, minmax(0, 1fr)); grid-template-rows: repeat({{
@@ -23,13 +23,13 @@
             class="text-size-adjust flex size-full items-center justify-center rounded-md border-2 bg-primary-200/20 uppercase dark:border-b-secondary-900 dark:border-l-primary-700 dark:border-r-secondary-900 dark:border-t-primary-700 dark:bg-primary-800 dark:hover:bg-primary-700"
           >
             <p class="with-text relative z-10">
-              <span [attr.data-content]=" char | lowercase "></span>
+              <span [attr.data-content]="char | lowercase"></span>
             </p>
           </div>
         </div>
       }
     }
-  
+
     @for (selection of foundText() | keyvalue; track selection.key) {
       <shuu-word-selection
         [position]="selection.value.position"
@@ -40,7 +40,7 @@
         [style.grid-row]="selection.value.position.y + 1"
       />
     }
-  
+
     @let target = wordsearchService.selectedTile();
     @if (target) {
       <shuu-word-selection
@@ -53,10 +53,13 @@
         [temporary]="true"
       />
     }
-  }
-  @placeholder {
-    <div class="absolute inset-2 bg-primary-200 dark:bg-primary-800 bg-opacity-40 rounded-lg flex items-center justify-center">
-      <div class="bg-primary-300 dark:bg-primary-700 rounded-lg flex items-center justify-center gap-2 p-4">
+  } @placeholder {
+    <div
+      class="absolute inset-2 flex items-center justify-center rounded-lg bg-primary-200 bg-opacity-40 dark:bg-primary-800"
+    >
+      <div
+        class="flex items-center justify-center gap-2 rounded-lg bg-primary-300 p-4 dark:bg-primary-700"
+      >
         <div class="circle circle-offset-1"></div>
         <div class="circle circle-offset-2"></div>
         <div class="circle circle-offset-3"></div>

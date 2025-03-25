@@ -1,8 +1,8 @@
-import { Board } from "./boards.types"
+import { Board } from './boards.types';
 
 export type BoardUpdateType = {
-    board: Board
-    newBoard?: Board
-    xpGain: number
-    wordsFound: string[]
-}
+  board: Board;
+  newBoard?: Board;
+  xpGain: number;
+  wordsFound: string[];
+};

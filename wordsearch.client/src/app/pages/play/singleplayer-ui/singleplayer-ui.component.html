@@ -4,13 +4,14 @@
   >
     <div class="flex items-start justify-end max-lg:order-1">
       <shuu-words-to-find
-        [wordsToFind]="currentBoard()?.findable??[]"
-        [wordsFound]="foundWords()" />
-        
+        [wordsToFind]="currentBoard()?.findable ?? []"
+        [wordsFound]="foundWords()"
+      />
     </div>
-    <div 
+    <div
       class="transition-opacity duration-300"
-      [class.opacity-0]="boardTransition()">
+      [class.opacity-0]="boardTransition()"
+    >
       <shuu-wordsearch
         [searchableText]="boardCharacters()"
         [foundText]="foundWords()"
@@ -33,13 +34,10 @@
           <div class="grow"></div>
           @let level = currentBoard()?.difficulty?.level;
           @if (level !== null) {
-            <p>
-              Level {{level}}
-            </p>
+            <p>Level {{ level }}</p>
           }
         </div>
       }
-
     </div>
     <div class="max-lg:order-2"></div>
   </div>

@@ -13,12 +13,15 @@ export class SingleplayerService {
   socket: SignalRSocket;
   connectionObservaboo!: ReplaySubject<void>;
   currentBoard = signal<Board | null>(null);
-  $boardUpdateEvent = new Subject<{update: Board, brandNewBoard: Board|null}>();
+  $boardUpdateEvent = new Subject<{
+    update: Board;
+    brandNewBoard: Board | null;
+  }>();
 
   constructor() {
     this.socket = new SignalRSocket('/hubs/singleplayer');
     this.connectionObservaboo = this.socket.startConnection();
-  
+
     this.connectionObservaboo.subscribe({
       complete() {
         console.log('Singleplayer connection success!');
@@ -27,15 +30,17 @@ export class SingleplayerService {
         console.log(`Connection failed because of ${err}`);
       },
     });
-  
-    this.socket.registerOnMethod("boardUpdate", (data) => this.boardUpdate(data as [BoardUpdateType]))
+
+    this.socket.registerOnMethod('boardUpdate', (data) =>
+      this.boardUpdate(data as [BoardUpdateType]),
+    );
   }
 
   async newGame(difficulty: Difficulty) {
     const newBoard: Board = await this.socket.invoke('NewGame', difficulty);
     console.log(`New Game Received!: ${JSON.stringify(newBoard)}`);
     this.currentBoard.update(() => newBoard);
-    this.$boardUpdateEvent.next({update: newBoard, brandNewBoard: null})
+    this.$boardUpdateEvent.next({ update: newBoard, brandNewBoard: null });
     return newBoard;
   }
 
@@ -78,18 +83,23 @@ export class SingleplayerService {
 
   boardUpdate(args: [BoardUpdateType]) {
     const updates = args[0];
-    const newBoard = updates.newBoard ?? updates.board
+    const newBoard = updates.newBoard ?? updates.board;
 
-    console.log(`Current board: `, this.currentBoard())
+    console.log(`Current board: `, this.currentBoard());
     console.log(`Board received: `, newBoard);
 
     this.currentBoard.set(newBoard);
-    this.$boardUpdateEvent.next({update: updates.board, brandNewBoard: updates.newBoard??null})
+    this.$boardUpdateEvent.next({
+      update: updates.board,
+      brandNewBoard: updates.newBoard ?? null,
+    });
     return newBoard;
   }
 
-  registerBoardUpdate(func: (x: {update: Board, brandNewBoard: Board|null}) => void) {
-    console.log("Register updates....")
+  registerBoardUpdate(
+    func: (x: { update: Board; brandNewBoard: Board | null }) => void,
+  ) {
+    console.log('Register updates....');
     this.$boardUpdateEvent.subscribe(func);
   }
 

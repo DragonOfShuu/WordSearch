@@ -50,12 +50,12 @@ class SignalRSocket {
     });
 
     const subject = new Subject<T>();
-    methodObserve.subscribe(subject)
+    methodObserve.subscribe(subject);
 
     subscription.forEach((callback) => {
       subject.subscribe(callback);
     });
-    
+
     return subject;
   }
 
